@@ -1,0 +1,40 @@
+---
+show_secret_diffs: no
+
+git_host: "git.ff.zone"
+git_addr: "ssh://git@git.ff.zone:22"
+
+reboot_on_kernelpanic: true
+
+dns_searchdomains: "ffac.zone"
+dns_recursive_allowed_private_rdns_zones:
+- "8.0.0.0.e.e.f.f.a.c.d.f.ip6.arpa."
+
+is_supernode: true
+is_exitnode: true
+iperf3_is_public_server: true
+
+mesh_prefix_len: "48"
+
+batman_version: "BATMAN_V"
+
+
+# vxlan ids may be generated using vx.py in scripts
+domains:
+- id: "10"
+  vxlanid: "3308601"
+- id: "11"
+  vxlanid: "14504941"
+- id: "12"
+  vxlanid: "16157778"
+- id: "20"
+  vxlanid: "2293484"
+- id: "99"
+  vxlanid: "9705333"
+domains_with_dom0:
+- id: "0"
+- id: "10"
+- id: "11"
+- id: "12"
+- id: "20"
+- id: "99"
