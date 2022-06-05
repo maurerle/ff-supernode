@@ -10,8 +10,8 @@
       tags: [always]
   roles:
     # General
-    #- { name: ff.mesh_batman, tags: mesh_batman, become: yes }
-    #- { name: ff.ipforward, tags: ipforward, become: yes }
+    - { name: ff.mesh_batman, tags: mesh_batman, become: yes }
+    - { name: ff.ipforward, tags: ipforward, become: yes }
     - { name: ff.wait_for, tags: wait_for, become: yes }
     - { name: ff.networkd, tags: networkd, become: yes }
     - { name: ff.mesh_wireguard, tags: mesh_wireguard, become: yes }

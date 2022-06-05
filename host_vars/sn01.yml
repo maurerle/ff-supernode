@@ -9,3 +9,5 @@ networkd_configures:
       - 192.168.0.159/24
       #- fdca::1/64
     gateway4: 192.168.0.1
+    dns_server:
+      - 9.9.9.9
