@@ -1,0 +1,10 @@
+---
+
+all:
+  hosts:
+    sn01:
+      ansible_host: ffac-test
+
+supernodes:
+  hosts:
+    sn01:

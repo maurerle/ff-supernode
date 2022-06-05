@@ -1,0 +1,11 @@
+---
+servername: sn01
+sn: 01
+
+# cloud-init config
+networkd_configures:
+  - iface: eth0
+    addresses:
+      - 192.168.0.159/24
+      #- fdca::1/64
+    gateway4: 192.168.0.1

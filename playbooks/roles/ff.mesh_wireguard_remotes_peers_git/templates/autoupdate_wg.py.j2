@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+
+import os
+import pwd
+import re
+import argparse
+import subprocess
+from hashlib import md5
+from ipaddress import ip_network
+from textwrap import wrap
+from pyroute2 import WireGuard
+
+wgintf_base="{{ mesh_wireguard_iface_prefix }}-"
+verbose=False
+
+REPO="/etc/wireguard/peers-wg"
+wg_domains=[{{ domains | map(attribute='id') | join(', '|safe) }}]
+
+regex = r"peer: ([a-zA-Z0-9+\/]{43}=)"
+
+def demote(user_uid, user_gid):
+    def result():
+        print("{}:{}".format(user_uid, user_gid))
+        os.setgid(user_gid)
+        os.setuid(user_uid)
+    return result
+
+def pull_repo(repo):
+    # WARNING this is NOT threadsafe.
+    autouser='auto'
+    pw_record = pwd.getpwnam(autouser)
+    homedir = pw_record.pw_dir
+    user_uid = pw_record.pw_uid
+    user_gid = pw_record.pw_gid
+    env = os.environ.copy()
+    env.update({'HOME': homedir, 'LOGNAME': autouser, 'USER': autouser})
+
+    s = subprocess.Popen(["git -C {} pull".format(REPO)], shell=True, env=env,
+                         preexec_fn=demote(user_uid, user_gid), stdout=subprocess.PIPE)
+
+def read_repo_keys():
+    repokeys=[]
+    directory = os.fsencode(REPO)
+
+    for file in os.scandir(directory):
+        if file.is_file():
+            filename = os.fsdecode(file)
+            with open(filename) as keyfile:
+                key = keyfile.readline().strip()
+                if not re.match('^[0-9a-zA-Z+/]{42}[AEIMQUYcgkosw480]=$', key):
+                    print(f"Warning: Skipping {filename}. Key is invalid!")
+                    continue
+                repokeys.append(key)
+    return repokeys
+
+def read_interface_keys(intf):
+    ignore_dummy_key="0"*43+"="
+
+    found_keys=[]
+    s = subprocess.check_output(["wg", "show", intf])
+
+    matches = re.finditer(regex, s.decode('utf8'), re.MULTILINE)
+
+    for match in matches:
+        found_keys.append(match.group(1))
+
+    try:
+        found_keys.remove(ignore_dummy_key)
+    except:
+        print("Warning: iface {} did not contain dummy key.".format(intf))
+
+    return found_keys
+
+def create_diff(repo_peers, iface_peers, iface):
+    to_remove=[]
+    s_repo_peers=set(repo_peers)
+    s_iface_peers=set(iface_peers)
+
+    if len(s_repo_peers) < len(repo_peers):
+        print("Warning: duplicate keys in repo")
+    if len(s_iface_peers) < len(iface_peers):
+        print("Warning: duplicate keys in iface {}".format(iface))
+
+    to_add=s_repo_peers-s_iface_peers
+    to_remove=s_iface_peers-s_repo_peers
+
+    if verbose:
+        print("Info: {} keys to add, {} keys to remove from {}.".format(len(to_add), len(to_remove), iface))
+    return to_add, to_remove
+
+def mac2eui64(mac, prefix=None):
+    """
+    Convert a MAC address to a EUI64 identifier
+    or, with prefix provided, a full IPv6 address
+    """
+    # http://tools.ietf.org/html/rfc4291#section-2.5.1
+    eui64 = re.sub(r"[.:-]", "", mac).lower()
+    eui64 = eui64[0:6] + "fffe" + eui64[6:]
+    eui64 = hex(int(eui64[0:2], 16) | 2)[2:].zfill(2) + eui64[2:]
+
+    if prefix is None:
+        return ":".join(re.findall(r".{4}", eui64))
+    else:
+        try:
+            net = ip_network(prefix, strict=False)
+            euil = int("0x{}".format(eui64), 16)
+            return "{}/{}".format(net[euil], net.prefixlen)
+        except Exception:  # pylint: disable=broad-except
+            return
+
+def calc_ll(pubkey) -> str:
+    m = md5()
+    m.update(pubkey.encode("ascii"))
+    hashed_key = m.hexdigest()
+    hash_as_list = wrap(hashed_key, 2)
+    temp_mac = ":".join(["02"] + hash_as_list[:5])
+    if verbose:
+        print(temp_mac)
+        print(mac2eui64(mac=temp_mac, prefix="fe80::/10"))
+    lladdr = re.sub(r"/\d+$", "/128", mac2eui64(mac=temp_mac, prefix="fe80::/10"))
+    return lladdr
+
+def wg_modify_peer(pubkey, iface, remove=False):
+    # this could become global
+    wg = WireGuard()
+    if remove:
+        peer = {'public_key': pubkey,
+                'remove': True}
+        wg.set(iface, peer=peer)
+    else:
+        allowed=calc_ll(pubkey)
+        peer = {'public_key': pubkey,
+                'persistent_keepalive': 25,
+                'allowed_ips': [allowed]}
+        wg.set(iface, peer=peer)
+        if verbose:
+            print("Info: Added key to {}.".format(iface))
+
+
+if "__main__" == __name__:
+    pull_repo( REPO )
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v', dest='verbose', action="store_true", default=False,
+                        help="verbose")
+
+    args = parser.parse_args()
+    verbose = args.verbose
+
+    l_repo_keys=read_repo_keys()
+    for dom in wg_domains:
+        iface="{}{}".format(wgintf_base, dom)
+        l_iface_keys=read_interface_keys(iface)
+        a, r = create_diff(l_repo_keys, l_iface_keys, iface)
+        for key in a:
+            wg_modify_peer(key, iface)
+        for key in r:
+            wg_modify_peer(key, iface, remove=True)
+

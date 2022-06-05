@@ -1,0 +1,69 @@
+[Match]
+Name={{ item.1.iface }}
+
+[Network]
+{% if item.1.addresses is defined %}
+{% for addr in item.1.addresses %}
+Address={{ addr }}
+{% endfor %}
+{% endif %}
+{% if item.1.gateway4 is defined %}
+Gateway={{ item.1.gateway4 }}
+{% endif %}
+{% if item.1.gateway6 is defined %}
+Gateway={{ item.1.gateway6 }}
+{% endif %}
+{% if item.1.dns_server is defined %}
+{% for dns_server in item.1.dns_server %}
+DNS={{ dns_server }}
+{% endfor %}
+{% endif %}
+Domains={{ dns_searchdomains | default('.local') }}
+{% if item.1.dhcp is defined and item.1.dhcp %}
+DHCP=ipv4
+{% endif %}
+{% if item.1.no_radv_accept is defined and item.1.no_radv_accept %}
+IPv6AcceptRouterAdvertisements=false
+{% endif %}
+{% if networkd_vlans is defined %}
+{% for vlan in networkd_vlans %}
+{% if vlan.iface == item.1.iface %}
+VLAN=vlan{{ vlan.id }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if item.1.dhcp is defined and item.1.dhcp %}
+[DHCPv4]
+UseDNS=true
+UseDomains=false
+{% endif %}
+
+{% if item.1.macaddress is defined %}
+[Link]
+MACAddress={{ item.1.macaddress }}
+{% endif %}
+
+{% for route in item.1.static_routes | default([]) %}
+[Route]
+{% if route.gw is defined %}
+Gateway={{ route.gw }}
+{% endif %}
+Destination={{ route.dest }}
+{% if route.src is defined %}
+Source={{ route.src }}
+{% endif %}
+{% if route.metric is defined %}
+Metric={{ route.metric }}
+{% endif %}
+{% if route.table is defined %}
+Table={{ route.table }}
+{% endif %}
+{% if route.pref_src is defined %}
+PreferredSource={{ route.pref_src }}
+{% endif %}
+{% endfor %}
+
+{% if item.1.additional_config is defined -%}
+{{ item.1.additional_config }}
+{% endif %}

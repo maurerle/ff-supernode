@@ -1,0 +1,24 @@
+---
+
+- hosts: "supernodes:{{ experimental_supernodes | default('') }}"
+  pre_tasks:
+    - name: "Import pre_tasks: reboot-required.yml"
+      import_tasks: "include/reboot-required.yml"
+      tags: [always]
+    - name: "Import pre_task etckeeper"
+      import_tasks: "include/etckeeper_pre.yml"
+      tags: [always]
+  roles:
+    # General
+    #- { name: ff.mesh_batman, tags: mesh_batman, become: yes }
+    #- { name: ff.ipforward, tags: ipforward, become: yes }
+    - { name: ff.wait_for, tags: wait_for, become: yes }
+    - { name: ff.networkd, tags: networkd, become: yes }
+    - { name: ff.mesh_wireguard, tags: mesh_wireguard, become: yes }
+    - { name: ff.mesh_wireguard_remotes_peers_git, tags: mesh_wireguard_remotes_peers_git, become: yes }
+    # Backups
+    #- { name: ff.restic, tags: restic }
+  post_tasks:
+    - name: "Import post_task etckeeper"
+      import_tasks: "include/etckeeper_post.yml"
+      tags: [always]

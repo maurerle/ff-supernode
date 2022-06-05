@@ -1,0 +1,25 @@
+#!/bin/bash
+
+repo="$1"
+
+function getCurrentVersion() {
+ git log --format=format:%H -1
+}
+
+cd "$repo"
+
+# Get current version hash
+GIT_REVISION=$(getCurrentVersion)
+
+# This could fail if we have local changes, so avoid them!
+git pull --quiet
+
+# Get new version hash
+GIT_NEW_REVISION=$(getCurrentVersion)
+
+if [ $GIT_REVISION != $GIT_NEW_REVISION ]
+then
+  exit 0 # updated
+else
+  exit 1 # nothing to do
+fi
