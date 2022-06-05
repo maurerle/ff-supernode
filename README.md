@@ -30,5 +30,12 @@ It is highly inspired by the ansible scripts from [Freifunk Hannover](https://gi
 5. create a gluon client which connects to your host
     * `uci set wgpeerselector.sn01.public_key='mypublickey'`
     * `uci set wgpeerselector.sn01.endpoint='192.168.0.159:51820'`
+6. create a repo with name peers-wg at host `git_addr`
+    1. access the generated `.ssh` key from the auto user 
+    2. add the key as a readaccess key the peers-wg repo
+    3. delete `wait_for_access.lock` to move on
+    4. now the allowed keys are pulled from the repo and are update automatically
 
+
+This allows to create a mail-based-workflow like "send your key to ... to add it" or create a web worker which commits and deletes keys from the repo automatically.
 
