@@ -10,12 +10,6 @@ dns_searchdomains: "ffac.zone"
 dns_recursive_allowed_private_rdns_zones:
 - "8.0.0.0.e.e.f.f.a.c.d.f.ip6.arpa."
 
-is_supernode: true
-is_exitnode: true
-iperf3_is_public_server: true
-
-mesh_prefix_len: "48"
-
 batman_version: "BATMAN_V"
 
 

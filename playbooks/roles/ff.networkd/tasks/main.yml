@@ -50,7 +50,6 @@
   register: enableresolved
   file: src=/run/systemd/resolve/resolv.conf dest=/etc/resolv.conf state=link force=yes
 
-# configure static interfaces - no needed - using cloud-init
 - name: Install iface configs
   notify: Restart networkd
   template:
