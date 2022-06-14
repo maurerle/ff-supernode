@@ -1,5 +1,13 @@
 ---
 
+- name: Install dependencies (radvd)
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - radvd
+
 - name: Generate radvd config
   notify: Restart radvd
   template:
