@@ -61,6 +61,10 @@
   service: name=systemd-networkd state=restarted
   when: enableresolved is changed
 
+- name: Directly restart resolved
+  service: name=systemd-resolved state=restarted
+  when: enableresolved is changed
+
 - name: Disable debian networking
   service: name=networking enabled=no
   # Do not stop the debian networking scripts immediately, since the scripts
