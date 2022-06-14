@@ -1,0 +1,29 @@
+{% for domain in domains | default( [] ) %}
+interface bat{{ domain.id }}
+{
+ AdvSendAdvert on;
+{% if radv_announce_default | default(False) %}
+ AdvDefaultLifetime 300;
+{% else %}
+ AdvDefaultLifetime 0;
+{% endif %}
+ MaxRtrAdvInterval 60;
+ AdvRASolicitedUnicast on;
+
+ prefix {{ mesh_prefix }}:{{ sn }}{{ domain.id }}::/64 {
+   AdvValidLifetime 300;
+   AdvPreferredLifetime 150;
+ };
+
+ prefix fdca:ffee:8:{{domain.id}}::/64 {
+   AdvValidLifetime 300;
+   AdvPreferredLifetime 150;
+ };
+
+ RDNSS fdca:ffee:8:{{ domain.id }}::1 {
+  FlushRDNSS off;
+ };
+
+};
+
+{% endfor %}
