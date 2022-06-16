@@ -51,7 +51,7 @@
   file: src=/run/systemd/resolve/resolv.conf dest=/etc/resolv.conf state=link force=yes
 
 - name: Install iface configs
-  notify: Restart networkd
+  register: enableresolved
   template:
     src: 1x-iface.network.j2
     dest: /etc/systemd/network/10-{{ item.1.iface }}.network
