@@ -17,6 +17,7 @@
     - { name: ff.mesh_wireguard, tags: mesh_wireguard, become: yes }
     - { name: ff.mesh_wireguard_remotes_peers_git, tags: mesh_wireguard_remotes_peers_git, become: yes }
     - { name: ff.radv_server, tags: radv_server, become: yes }
+    - { name: ff.kea_dhcp4_server, tags: dhcp, become: yes }
     # Backups
     #- { name: ff.restic, tags: restic }
   post_tasks:

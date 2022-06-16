@@ -18,15 +18,3 @@
 
 - name: Load batman_adv module
   modprobe: name=batman_adv state=present
-
-# - name: Restart mesh_wg
-#   service: name=wg@mesh_wg state=restarted
-#   when: installedversion is changed and bat0_exists.stat.exists
-
-# # SMELL: Should not depend on bat0 (legacy_dom0 may be false)
-# - name: Restart domain fastds
-#   service: name=fastd@mesh_fastd_{{ domain.id }} state=restarted
-#   with_items: "{{ domains }}"
-#   loop_control:
-#     loop_var: domain
-#   when: domains is defined and installedversion is changed and bat0_exists.stat.exists

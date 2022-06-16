@@ -1,0 +1,77 @@
+---
+
+- name: "Add ISC Kea repository key"
+  apt_key:
+    url: "https://dl.cloudsmith.io/public/isc/kea-2-1/gpg.32D53EC4807EC10E.key"
+    state: "present"
+
+- name: "Add ISC Kea repository"
+  register: "iscrepositoryadded"
+  apt_repository:
+    repo: "deb https://dl.cloudsmith.io/public/isc/kea-2-1/deb/debian {{ ansible_distribution_release }} main"
+
+- name: "Update apt chache to get isc packages"
+  apt:
+    update_cache: "yes"
+  when: "iscrepositoryadded is changed"
+
+- name: "Install isc-kea-dhcp4-server"
+  register: "keainstall"
+  apt:
+    name: "isc-kea-dhcp4-server"
+  when: not ansible_check_mode
+
+- name: "Remove SYSV init script"
+  file:
+    path: "/etc/init.d/isc-kea-dhcp4-server"
+    state: "absent"
+
+- name: "Add a ramdisk entry in fstab"
+  notify: "Restart isc-kea-dhcp4-server"
+  mount: 
+    name: "/var/lib/kea"
+    src: "tmpfs" 
+    fstype: "tmpfs" 
+    opts: "defaults,size=10M" 
+    state: "mounted"
+
+- name: "Generate kea-dhcp4.conf config"
+  notify: "Restart isc-kea-dhcp4-server"
+  template:
+    src: "kea-dhcp4.conf.j2"
+    dest: "/etc/kea/kea-dhcp4.conf"
+    mode: "0644"
+    owner: "_kea"
+    group: "_kea"
+
+- name: "Create /etc/systemd/system/isc-kea-dhcp4-server.service.d directory if it does not exist"
+  file:
+    state: "directory"
+    path: "/etc/systemd/system/isc-kea-dhcp4-server.service.d"
+    mode: "0755"
+    owner: "root"
+    group: "root"
+
+- name: "Deploy unit file sniplet to wait for bat devices"
+  template:
+    src: "50-bat-device.conf.j2"
+    dest: "/etc/systemd/system/isc-kea-dhcp4-server.service.d/50-bat-devices.conf"
+    mode: "0644"
+    owner: "root"
+    group: "root"
+
+- name: "Enable wait-for servicefile for each bat interface"
+  systemd:
+    name: "wait-for-ip@bat{{ domain.id }}.service"
+    enabled: "yes"
+  with_items: "{{ domains }}"
+  loop_control:
+    loop_var: "domain"
+  when: "domains is defined"
+
+- name: "Start isc-kea-dhcp4-server service"
+  systemd:
+    name: "isc-kea-dhcp4-server"
+    state: "started"
+    enabled: "yes"
+    daemon_reload: "yes"

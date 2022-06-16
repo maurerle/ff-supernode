@@ -1,0 +1,4 @@
+[Unit]
+{% for domain in domains | default([]) %}
+After=wait-for-ip4@bat{{ domain.id }}.service
+{% endfor %}
