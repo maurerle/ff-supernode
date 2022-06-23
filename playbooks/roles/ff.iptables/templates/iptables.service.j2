@@ -1,0 +1,7 @@
+[Unit]
+Description=Set NAT Masquerade in iptables
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=iptables -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE -t nat; ip6tables -t nat -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE

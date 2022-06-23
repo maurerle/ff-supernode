@@ -1,0 +1,10 @@
+---
+- name: "Install wait-for-ip system service file"
+  notify: "systemd daemon-reload"
+  template:
+    src: "iptables.service.j2"
+    dest: "/etc/systemd/system/iptables@.service"
+    mode: "0644"
+    owner: "root"
+    group: "root"
+  with_indexed_items: "{{ networkd_configures }}"
