@@ -1,0 +1,86 @@
+---
+
+- name: Ensure git
+  apt:
+    name: git
+    update_cache: yes
+
+- name: Ensure rsync
+  apt:
+    name: rsync
+    update_cache: yes
+
+- name: Ensure golang
+  apt:
+    name: golang
+    update_cache: yes
+
+- name: Install yanic
+  script: /usr/bin/go install {{ yanic_repo_path }}@{{ yanic_tag }}
+
+- name: Create yanic user
+  user:
+    name: "{{ yanic_user }}"
+    group: "{{ yanic_group }}"
+    system: yes
+
+- name: Ensure persist directory, if needed
+  file:
+    path: "/var/lib/yanic/"
+    state: directory
+    owner: yanic
+  when: yanic_nodes_enabled
+
+- name: Ensure nodes path, if needed
+  file:
+    path: "{{ yanic_nodes_path }}"
+    state: directory
+    owner: yanic
+    group: www-data
+  when: yanic_nodes_enabled
+
+- name: Configure yanic (DIFF REDACTED)
+  notify: Restart yanic
+  template:
+    src: config.yml.j2
+    dest: /etc/yanic.conf
+
+- name: Copy systemd service
+  notify: Daemon reload
+  template:
+    src: yanic.service.j2
+    dest: /lib/systemd/system/yanic.service
+
+# - name: Generate firewall config stanza (ferm)
+#   register: ferm_changed
+#   template:
+#     src: ferm.conf.j2
+#     dest: /etc/ferm/conf.d/50-yanic.conf
+#   notify: reload ferm
+
+- name: Enable yanic
+  systemd:
+    name: yanic
+    state: started
+    enabled: yes
+
+- name: Set neigh gc_thresh1 IPv6
+  sysctl:
+    name: net.ipv6.neigh.default.gc_thresh1
+    value: "32768"
+    sysctl_file: /etc/sysctl.d/50-gc_thresh.conf
+    reload: yes
+
+- name: Set neigh gc_thresh2 IPv6
+  sysctl:
+    name: net.ipv6.neigh.default.gc_thresh2
+    value: "65536"
+    sysctl_file: /etc/sysctl.d/50-gc_thresh.conf
+    reload: yes
+
+- name: Set neigh gc_thresh3 IPv6
+  sysctl:
+    name: net.ipv6.neigh.default.gc_thresh3
+    value: "131072"
+    sysctl_file: /etc/sysctl.d/50-gc_thresh.conf
+    reload: yes

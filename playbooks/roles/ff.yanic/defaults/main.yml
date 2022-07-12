@@ -1,0 +1,16 @@
+---
+
+yanic_user: yanic
+yanic_group: www-data
+yanic_port: 10001
+yanic_nodes_enabled: true
+yanic_nodes_version: 2
+yanic_nodes_path: /var/www/html/meshviewer/data
+yanic_state_path: /var/lib/yanic/state.json
+yanic_influx2_enabled: true
+yanic_repo_path: "github.com/FreifunkBremen/yanic"
+yanic_tag: "v1.2.1"
+yanic_influx2_hostname: "freifunk"
+yanic_influx2_token: "Slt8N2QzZCuAINwi_U1EeOvafjryX46IsAIIiT4BMKNpGhYo8PsAsPZcyYvl1LJglfFmlqASKl0ervGJPgX1-A=="
+yanic_influx2_organisation_id: "freifunk"
+yanic_influx2_bucket: "freifunk"
