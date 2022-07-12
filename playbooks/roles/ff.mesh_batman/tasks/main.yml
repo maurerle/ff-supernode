@@ -14,7 +14,7 @@
   when: not batman_build_from_source
 
 - name: Install autostart batman_adv on boot
-  lineinfile: dest=/etc/modules line=batman_adv
+  lineinfile: dest=/etc/modules line=batman-adv
 
 - name: Load batman_adv module
   modprobe: name=batman_adv state=present
