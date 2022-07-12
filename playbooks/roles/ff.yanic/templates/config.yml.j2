@@ -29,8 +29,8 @@ ifname = "bat{{ domain.id }}"
 # A little build-in webserver, which statically serves a directory.
 # This is useful for testing purposes or for a little standalone installation.
 [webserver]
-enable  = true
-bind    = "127.0.0.1:8080"
+enable  = {{ yanic_webserver }}
+bind    = "0.0.0.0:8080"
 webroot = "/var/www/html/meshviewer"
 
 

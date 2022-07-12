@@ -1,0 +1,49 @@
+- name: Clone meshviewer sources
+  git:
+    repo: https://github.com/freifunk-ffm/meshviewer
+    dest: '{{ meshviewer_source_dir }}'
+    version: "master"
+  register: repo_clone    
+  failed_when:
+  - repo_clone.failed
+  - not 'Local modifications exist in repository' in repo_clone.msg
+
+- name: Install dev dependencies of meshviewer
+  apt:
+    pkg:
+      - npm
+
+- name: Check for package.json
+  ansible.builtin.stat:
+    path: '{{ meshviewer_source_dir }}/package.json'
+  register: packagejson
+
+- name: Create node_modules directory
+  file:
+    state: directory
+    dest: '{{ meshviewer_source_dir }}/node_modules'
+
+- name: Install meshviewer packages based on package.json.
+  ansible.builtin.command: npm install
+  when: packagejson.stat.exists
+
+- name: Run gulp
+  ansible.builtin.command: node_modules/gulp/bin/gulp.js
+  args:
+    chdir: '{{ meshviewer_source_dir }}'
+  when: packagejson.stat.exists
+
+- name: "copy build dir"
+  copy:
+    src: '{{ meshviewer_source_dir }}/build/'
+    dest: "/var/www/html/meshviewer"
+    remote_src: yes
+    owner: "yanic"
+    group: "www-data"    
+
+- name: "copy meshviewer config"
+  template:
+    src: "meshviewer_config.json.j2"
+    dest: "/var/www/html/meshviewer/config.json"
+    owner: "www-data"
+    group: "www-data"

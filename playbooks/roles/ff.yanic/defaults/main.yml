@@ -3,6 +3,7 @@
 yanic_user: yanic
 yanic_group: www-data
 yanic_port: 10001
+yanic_webserver: "false"
 yanic_nodes_enabled: true
 yanic_nodes_version: 2
 yanic_nodes_path: /var/www/html/meshviewer/data
