@@ -2,9 +2,9 @@
 show_secret_diffs: no
 
 git_host: "git.ff.zone"
-git_addr: "ssh://git@git.ff.zone:22"
+git_addr: "ssh://github.com/ffac"
 
-reboot_on_kernelpanic: true
+freifunk_site: "ffac"
 
 dns_searchdomains: "ffac.zone"
 dns_recursive_allowed_private_rdns_zones:
@@ -25,10 +25,3 @@ domains:
   vxlanid: "2293484"
 - id: "99"
   vxlanid: "9705333"
-domains_with_dom0:
-- id: "0"
-- id: "10"
-- id: "11"
-- id: "12"
-- id: "20"
-- id: "99"
