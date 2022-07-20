@@ -1,0 +1,83 @@
+---
+
+- name: Install python3, git
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python3
+    - python3-pip
+    - git
+
+- name: Create auto user
+  register: createuser
+  user:
+    name: auto
+    system: yes
+    generate_ssh_key: yes
+
+- name: Create the peers directory
+  file:
+    state: directory
+    dest: /etc/wireguard/peers-wg
+    owner: auto
+
+- name: Clone the peers git
+  become: yes
+  become_user: auto
+  git:
+    repo: "{{ git_addr }}/peers-wg"
+    dest: /etc/wireguard/peers-wg
+    accept_hostkey: true
+    version: main
+
+- name: Install broker script
+  template:
+    src: broker.py
+    dest: /home/auto/broker.py
+    mode:  u=rwx,g=r,o=r
+    owner: auto
+    group: auto
+
+- name: Install gunicorn and Flask python package
+  become: yes
+  become_user: auto
+  ansible.builtin.pip:
+    name: 
+      - flask
+      - gunicorn
+
+- name: Set Git Config Mail
+  git_config:
+    name: user.email
+    repo: /etc/wireguard/peers-wg
+    scope: local
+    value: 'auto@{{ dns_searchdomains }}'
+
+- name: Set Git Config User
+  git_config:
+    name: user.name
+    repo: /etc/wireguard/peers-wg
+    scope: local
+    value: 'auto'
+
+- name: Install broker service
+  template:
+    src: wgbroker.service.j2
+    dest: /etc/systemd/system/wgbroker.service
+  register: servicefile
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+  when: servicefile.changed
+
+- name: Enable wgbroker service
+  systemd:
+    name: wgbroker.service
+    state: started
+    enabled: yes
+  when: servicefile.changed
+
