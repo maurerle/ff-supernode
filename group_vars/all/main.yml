@@ -2,7 +2,7 @@
 show_secret_diffs: no
 
 git_host: "git.ff.zone"
-git_addr: "ssh://github.com/ffac"
+git_addr: "ssh://git@github.com/ffac"
 
 freifunk_site: "ffac"
 
