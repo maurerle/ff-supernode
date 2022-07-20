@@ -19,6 +19,7 @@
     - { name: ff.radv_server, tags: radv_server, become: yes }
     - { name: ff.kea_dhcp4_server, tags: dhcp, become: yes }
     - { name: ff.iptables, tags: iptables, become: yes }
+    #- { name: ff.gw-statuspage, tags: gw-statuspage, become: yes }
     # Backups
     #- { name: ff.restic, tags: restic }
   post_tasks:

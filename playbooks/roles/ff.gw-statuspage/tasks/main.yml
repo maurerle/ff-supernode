@@ -28,7 +28,7 @@
   become: yes
   become_user: auto
   git: >
-    repo=https://github.com/freifunkh/site.git
+    repo={{ git_addr }}/site.git
     dest=/var/cache/gw-statuspage/site
     accept_hostkey=true
   register: site
