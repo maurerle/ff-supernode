@@ -4,4 +4,5 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=iptables -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE -t nat; ip6tables -t nat -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE
+ExecStart=iptables -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE -t nat
+ExecStart=ip6tables -t nat -A POSTROUTING -s {{ item.1.ipv6_address }}  -o {{ item.1.iface }} -j MASQUERADE

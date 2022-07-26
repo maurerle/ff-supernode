@@ -71,7 +71,7 @@ def add_key():
         if not data.get('public_key'):
             raise Exception('public_key missing')
 
-        execute_autouser("git -C {REPO} reset --hard origin/main")
+        execute_autouser(f"git -C {REPO} reset --hard origin/main")
         pull_repo()
         filename = slugify(data['node_name'])
         add_file(filename, data['public_key'])

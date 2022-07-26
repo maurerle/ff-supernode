@@ -4,7 +4,6 @@ Name=bat{{ domain.id }}
 [Network]
 Address=10.{{ domain.id }}.{{ sn }}0.1/16
 Address={{ mesh_prefix }}:{{ sn }}{{ domain.id }}::{{ "%x" | format(sn) }}001/64
-Address=fdac:ffee:8:{{ domain.id }}::{{ "%x" | format(sn) }}001/64
 IPv6AcceptRouterAdvertisements=false
 
 [Link]
@@ -17,9 +16,6 @@ Table=42
 {% endfor %}
 [Route]
 Destination=10.{{ domain.id }}.0.0/16
-Table=42
-[Route]
-Destination=fdac:ffee:8:{{ domain.id }}::/64
 Table=42
 [Route]
 Destination={{ mesh_prefix }}:{{ sn }}{{ domain.id }}::/64
