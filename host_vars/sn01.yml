@@ -4,15 +4,18 @@ sn: 01
 
 # cloud-init config
 networkd_configures:
-  - iface: eth0
+  - iface: ens160
     addresses:
-      - 192.168.0.159/24
-      #- fdca::1/64
-    gateway4: 192.168.0.1
+      - 5.145.135.151/27
+      - 2a00:fe0:43::201/64
+    gateway4: 5.145.135.129
+    gateway6: 2a00:fe0:43::1
     dns_server:
       - 5.1.66.255
       - '2001:678:ed0:f000::'
       - 9.9.9.9
+    ipv6_address: 2a00:fe0:43::201/128
 
-mesh_prefix: "2a03:2260:114"
+# ffrl prefix
+mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
