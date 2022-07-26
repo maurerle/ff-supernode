@@ -56,6 +56,21 @@
     scope: local
     value: 'auto@{{ dns_searchdomains }}'
 
+- name: Install ssh config
+  become: yes
+  become_user: auto
+  template:
+    src: sshconfig.j2
+    dest: /home/auto/.ssh/config
+  when: servicefile.changed
+
+- name: Set Git Config User
+  git_config:
+    name: user.name
+    repo: /etc/wireguard/peers-wg
+    scope: local
+    value: 'auto'
+
 - name: Set Git Config User
   git_config:
     name: user.name
@@ -80,4 +95,3 @@
     state: started
     enabled: yes
   when: servicefile.changed
-

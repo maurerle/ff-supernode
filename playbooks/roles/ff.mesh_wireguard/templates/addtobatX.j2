@@ -8,8 +8,7 @@ ExecStart=/sbin/ip link set {{ vxlan_iface_prefix }}-%i up
 ExecStart=/bin/sh /usr/bin/wait_for_iface.sh {{ vxlan_iface_prefix }}-%i unknown_is_fine
 ExecStart=/usr/sbin/batctl meshif bat%I if add {{ vxlan_iface_prefix }}-%i
 ExecStart=/sbin/ip link set bat%I    up
-ExecStart=/usr/sbin/batctl meshif bat%I gw server
-ExecStart=/usr/sbin/batctl hardif {{ vxlan_iface_prefix }}-%i to 1000mbit
+ExecStart=/usr/sbin/batctl meshif bat%I gw server 1024mbit/1024mbit
 
 
 [Install]

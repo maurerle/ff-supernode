@@ -14,16 +14,6 @@ interface bat{{ domain.id }}
    AdvValidLifetime 300;
    AdvPreferredLifetime 150;
  };
-
- prefix fdac:ffee:8:{{domain.id}}::/64 {
-   AdvValidLifetime 300;
-   AdvPreferredLifetime 150;
- };
-
- RDNSS fdac:ffee:8:{{ domain.id }}::1 {
-  FlushRDNSS off;
- };
-
 };
 
 {% endfor %}
