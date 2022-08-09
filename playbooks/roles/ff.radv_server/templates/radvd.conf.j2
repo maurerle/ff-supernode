@@ -7,13 +7,13 @@ interface bat{{ domain.id }}
 {% else %}
  AdvDefaultLifetime 0;
 {% endif %}
- MaxRtrAdvInterval 60;
+ MaxRtrAdvInterval 10;
  AdvLinkMTU 1280;
  AdvRASolicitedUnicast on;
 
  prefix {{ mesh_prefix }}:{{ sn }}{{ domain.id }}::/64 {
-   AdvValidLifetime 300;
-   AdvPreferredLifetime 150;
+   AdvValidLifetime 600;
+   AdvPreferredLifetime 30;
  };
 };
 
