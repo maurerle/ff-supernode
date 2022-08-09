@@ -10,11 +10,16 @@ interface bat{{ domain.id }}
  MaxRtrAdvInterval 10;
  AdvLinkMTU 1280;
  AdvRASolicitedUnicast on;
-
+ AdvSourceLLAddress off;
+ 
  prefix {{ mesh_prefix }}:{{ sn }}{{ domain.id }}::/64 {
    AdvValidLifetime 600;
    AdvPreferredLifetime 30;
+   AdvOnLink on;
+   AdvAutonomous on;
+   AdvRouterAddr on;
  };
+ route 2a03:2260:3006:120::1001/128 {};
 };
 
 {% endfor %}
