@@ -30,7 +30,7 @@ ifname = "bat{{ domain.id }}"
 # This is useful for testing purposes or for a little standalone installation.
 [webserver]
 enable  = {{ yanic_webserver }}
-bind    = "0.0.0.0:8080"
+bind    = "[::]:8080"
 webroot = "/var/www/html/meshviewer"
 
 
