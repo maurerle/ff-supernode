@@ -1,5 +1,10 @@
 ---
 
+- name: "Create wireguard privatekey file (dom {{ domain.id }}) (DIFF REDACTED)"
+  copy:
+    content: "{{ wireguard_keys[domain.id].secret }}" 
+    dest: /etc/wireguard/privatekey-{{ '%02d' % domain.id | int }}
+
 - name: "Generate networkd wg netdev (dom {{ domain.id }}) (DIFF REDACTED)"
   template:
     src: wireguard.netdev.j2

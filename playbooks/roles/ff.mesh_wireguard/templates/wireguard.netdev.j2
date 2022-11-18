@@ -3,7 +3,7 @@ Name={{ mesh_wireguard_iface_prefix }}-{{ '%02d' % domain.id | int }}
 Kind=wireguard
 
 [WireGuard]
-PrivateKey={{ wireguard_keys[servername].secret }}
+PrivateKeyFile=/etc/wireguard/privatekey-{{ '%02d' % domain.id | int }}
 ListenPort=518{{ '%02d' % domain.id | int }}
 
 [WireGuardPeer]
