@@ -79,3 +79,25 @@ Finally, ansible needs to ask for the vault-password now using:
 ```
 ansible-playbook --ask-vault-password playbooks/supernode.yml --tags mesh_wireguard
 ```
+
+## Roles - Supernode
+
+* ff.mesh_batman - configures batman
+* ff.ipforward - configures ipforwarding on the host
+* ff.wait_for - waits until interfaces are ready
+* ff.networkd - configures network based on `networkd_configures` in host_vars
+* ff.mesh_wireguard - installs wireguard, vxlan and batman per domain (+ wg_netlink service with https://github.com/freifunkh/wireguard-vxlan-glue.git)
+* ff.mesh_wireguard_remotes_peers_git - clones `peers-wg` repo containing client public keys and updates them regularly through cron
+* ff.radv_server - install radvd with the given `mesh_prefix` and IPv6 config
+* ff.kea_dhcp4_server - configures internal DHCP server for IPv4 and subnets per domain
+* ff.iptables - adds nat config like `iptables -A POSTROUTING -o -j MASQUERADE -t nat` - not needed if uplink is provided through VPN or Freifunk Rheinland
+* ff.gw-statuspage - installs a statuspage on the supernode
+
+## Roles - Monitor
+
+* ff.influxdb - installs InfluxDB
+* ff.yanic - install Node collector for statistics and meshviewer
+* ff.meshviewer - install meshviewer for Freifunk Map
+* ff.wgbroker - install broker service where a public key can be entered - also used by Firmware as rest endpoint
+* ff.grafana - install grafana with provided templates (TODO)
+* ff.promtail & loki & telegraf - host monitoring of the Backbone
