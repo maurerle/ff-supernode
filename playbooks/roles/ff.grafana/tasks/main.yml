@@ -1,0 +1,51 @@
+---
+
+- name: Install https for apt
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+
+- name: Add grafana repository key
+  apt_key:
+    url: https://packages.grafana.com/gpg.key
+    state: present
+
+- name: Add grafana repositories
+  register: grafanarepo
+  apt_repository:
+    repo: "deb https://packages.grafana.com/oss/deb stable main"
+
+- name: Update apt chache to get grafana packages
+  apt: update_cache=yes
+  when: grafanarepo is changed
+
+- name: Install grafana
+  apt:
+    name: grafana
+
+- name: Generate grafana config
+  notify: Restart grafana
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+
+- name: Permissions on data directory
+  file:
+    state: directory
+    path: "{{ grafana_datadir }}"
+    owner: "grafana"
+    group: "grafana"
+    recurse: yes
+
+- name: Change DATA_DIR in /etc/default/grafana-server
+  lineinfile:
+    dest: /etc/default/grafana-server
+    regexp: '^(DATA_DIR=).*'
+    line: 'DATA_DIR={{ grafana_datadir }}'
+    state: present
+
+- name: Enable grafana
+  service:
+    name: grafana-server
+    enabled: yes
+    state: started
