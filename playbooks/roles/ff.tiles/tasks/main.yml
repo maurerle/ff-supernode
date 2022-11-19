@@ -1,0 +1,23 @@
+---
+
+- name: Ensure nginx
+  apt:
+    name: nginx
+    update_cache: yes
+
+- name: Create cache directory
+  file:
+    state: directory
+    dest: /var/cache/tilecache/logs
+    owner: www-data
+    recurse: yes
+
+- name: Copy Tilecache Config
+  template:
+    src: tilecache.conf.j2
+    dest: /etc/nginx/sites-available/tilecache.conf
+
+- name: reload nginx
+  systemd:
+    name: nginx
+    state: "reloaded"
