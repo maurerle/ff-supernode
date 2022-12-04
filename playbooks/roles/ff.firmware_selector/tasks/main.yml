@@ -1,0 +1,16 @@
+---
+
+- name: Clone batman sources
+  git:
+    repo: https://github.com/freifunk-darmstadt/gluon-firmware-selector.git
+    dest: /var/www/gluon-firmware-selector
+
+- name: Install devices.js
+  template:
+    src: devices.js
+    dest: /var/www/gluon-firmware-selector/devices.js
+
+- name: Install config.js
+  template:
+    src: config.js
+    dest: /var/www/gluon-firmware-selector/config.js
