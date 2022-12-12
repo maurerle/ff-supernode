@@ -58,11 +58,12 @@
 
 - name: Install ssh config
   become: yes
-  become_user: auto
   template:
     src: sshconfig.j2
     dest: /home/auto/.ssh/config
-  when: servicefile.changed
+    mode: "0600"
+    owner: "auto"
+    group: "auto"
 
 - name: Set Git Config User
   git_config:
