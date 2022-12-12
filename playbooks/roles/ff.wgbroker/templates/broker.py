@@ -74,7 +74,7 @@ def add_key():
 
         execute_autouser(f"git -C {REPO} reset --hard origin/main")
         pull_repo()
-        filename = f"{slugify(data['node_name'])}_{data['public_key'][:4]}"_
+        filename = f"{slugify(data['node_name'])}_{data['public_key'][:4]}"
         add_file(filename, data['public_key'])
         commit_repo(filename)
         push_repo()
