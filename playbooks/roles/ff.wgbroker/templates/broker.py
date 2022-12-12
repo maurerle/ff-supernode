@@ -55,10 +55,11 @@ def commit_repo(filename):
     execute_autouser(f'git -C {REPO} commit -m "auto add new key: {filename}"')
 
 def add_file(filename, publickey):
-    if os.path.isfile(f"{REPO}/{filename}"):
-        raise Exception('Node Name already exists')
     if WG_PUBKEY_PATTERN.match(publickey) is None:
         raise ValueError(f"Not a valid Wireguard public key: {publickey}.")
+    if os.path.isfile(f"{REPO}/{filename}"):
+        raise Exception(f'{filename} already exists')
+    
     execute_autouser(f"echo {publickey} > {REPO}/{filename}")
 
 
@@ -73,7 +74,7 @@ def add_key():
 
         execute_autouser(f"git -C {REPO} reset --hard origin/main")
         pull_repo()
-        filename = slugify(data['node_name'])
+        filename = f"{slugify(data['node_name'])}_{data['public_key'][:4]}"_
         add_file(filename, data['public_key'])
         commit_repo(filename)
         push_repo()
