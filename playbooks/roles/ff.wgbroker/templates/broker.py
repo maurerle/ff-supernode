@@ -43,6 +43,7 @@ def execute_autouser(cmd):
 
     s = subprocess.Popen([cmd], shell=True, env=env,
                          preexec_fn=demote(user_uid, user_gid), stdout=subprocess.PIPE)
+    s.wait()
 
 def push_repo():
     execute_autouser(f"git -C {REPO} push")
@@ -74,7 +75,7 @@ def add_key():
 
         execute_autouser(f"git -C {REPO} reset --hard origin/main")
         pull_repo()
-        filename = f"{slugify(data['node_name'])}_{data['public_key'][:4]}"
+        filename = slugify(f"{data['node_name']}_{data['public_key'][:4]}")
         add_file(filename, data['public_key'])
         commit_repo(filename)
         push_repo()
