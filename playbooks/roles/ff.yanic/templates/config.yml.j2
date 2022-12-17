@@ -140,18 +140,14 @@ path = "{{ yanic_nodes_path }}/raw.jsonl"
 no_owner = false
 domain_append_site = true
 
-{% if yanic_influx2_enabled %}
 [database]
 # this will send delete commands to the database to prune data
 # which is older than:
 delete_after    = "365d"
 #   how often run the cleaning
-delete_interval = "1h"
+delete_interval = "1d"
 
-## [[database.connection.example]]
-# Each database-connection has its own config block and needs to be enabled by adding:
-#enable = true
-
+{% if yanic_influx2_enabled %}
 # Save collected data to InfluxDB.
 # There are the following measurments:
 #   node: store node specific data i.e. clients memory, airtime
@@ -164,7 +160,18 @@ address  = "{{ yanic_influx2_hostname }}"
 token = "{{ yanic_influx2_token }}"
 organization_id = "{{ yanic_influx2_organisation_id }}"
 bucket_default = "{{ yanic_influx2_bucket }}"
+{% endif %}
 
+{% if yanic_influx_enabled %}
+[[database.connection.influxdb]]
+enable   = true
+address  = "{{ yanic_influx_hostname }}"
+database = "{{ yanic_influx_database }}"
+username = "{{ yanic_influx_username }}"
+password = "{{ yanic_influx_password }}"
+{% endif %}
+
+{% if yanic_influx_enabled or yanic_influx2_enabled %}
 # Tagging of the data (optional)
 #[database.connection.influxdb.tags]
 # Tags used by Yanic would override the tags from this config

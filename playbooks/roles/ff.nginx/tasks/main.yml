@@ -1,0 +1,55 @@
+- name: remove other http server installs
+  apt:
+    name: apache2
+    state: absent
+
+- name: Ensure nginx
+  apt:
+    name: "{{item}}"
+    state: latest
+    update_cache: yes
+  loop:
+    - nginx-full
+    - ssl-cert
+
+- name: Nginx config
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  register: nginxconfig
+
+- name: Nginx sites config
+  template:
+    src: proxy.conf
+    dest: /etc/nginx/sites-available/proxy.conf
+  register: nginxconfig
+
+- name: Enable nginx sites config
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/proxy.conf
+    dest: /etc/nginx/sites-enabled/proxy.conf
+    state: link
+
+- name: Delete default config
+  file:
+    state: absent
+    path: "{{item}}"
+  loop:
+    - /etc/nginx/sites-enabled/default
+    - /etc/nginx/sites-available/default
+
+- name: Create Selfsigned-certs
+  become: true
+  raw: make-ssl-cert generate-default-snakeoil #--force-overwrite
+
+- name: Test nginx config
+  become: true
+  raw:
+    nginx -t
+
+- name: Restart Nginx
+  systemd:
+    name: nginx.service
+    state: restarted
+    enabled: yes
+  when: nginxconfig.changed

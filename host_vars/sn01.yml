@@ -26,5 +26,7 @@ client_dns_server_v6: 2a03:2260:3006::53
 mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
 
-yanic_url: http://01.wg-test.freifunk-aachen.de:8080/data
-yanic_webserver: "true"
+monitor_hostname: 01.wg-test.freifunk-aachen.de
+
+yanic_url: http://{{ monitor_hostname }}/data
+yanic_webserver: "false"

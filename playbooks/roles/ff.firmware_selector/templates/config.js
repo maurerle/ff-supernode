@@ -25,11 +25,11 @@ var config = {
   // recommended devices.
   recommended_toggle: true,
   // Optional link to an info page about no longer recommended devices
-  recommended_info_link: null,
+  recommended_info_link: '{{ recommended_info_link }}',
   // community prefix of the firmware images
   community_prefix: 'gluon-ffac-',
   // firmware version regex
-  version_regex: /-(v?\d+\.\d+\.\d+(-\d+)?(-.{8}~exp\d{8})?)-/,
+  version_regex: /-(v?\d+\.\d+\.\d+(-\d+)?(-.+~exp\d{8})?)-/,
   // relative image paths and branch
 
   directories: {
@@ -42,6 +42,10 @@ var config = {
     '../release_images/from-2021.1.x/experimental/other/': 'v2021_novpn_experimental',
     '../release_images/from-2021.1.x/experimental/sysupgrade/': 'v2021_novpn_experimental',
 
+    '../release_images/from-latest/experimental/factory/': 'nightly',
+    '../release_images/from-latest/experimental/other/': 'nightly',
+    '../release_images/from-latest/experimental/sysupgrade/': 'nightly',
+
     //'http://updates.freifunk-aachen.de/stable/factory/': 'oldstable',
     //'http://updates.freifunk-aachen.de/other/': 'oldstable',
     //'http://updates.freifunk-aachen.de/sysupgrade/': 'oldstable',
@@ -52,13 +56,14 @@ var config = {
   // branch descriptions shown during selection
   branch_descriptions: {
     v2022_experimental: 'Images auf Gluon 2022/Openwrt 2022 Basis mit tag und WG - nicht für 4/32er Geräte',
-    v2021_novpn_experimental: 'Images Gluon 2021 ohne Mesh-VPN möglichkeit'
+    v2021_novpn_experimental: 'Images Gluon 2021 ohne Mesh-VPN möglichkeit',
+    nightly: 'Die zuletzt gebauten Images - nur nach Aufforderung nutzen!'
     //v2019: 'Images basierend auf Gluon 2021, OpenWRT 2019 - mit Wireguard'
   },
   // recommended branch will be marked during selection
   recommended_branch: 'v2022-experimental',
   // experimental branches (show a warning for these branches)
-  experimental_branches: [''],
+  experimental_branches: ['nightly'],
   // path to preview pictures directory
   preview_pictures: 'pictures/',
   // link to changelog

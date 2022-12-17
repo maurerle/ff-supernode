@@ -13,6 +13,8 @@
     - { name: ff.influxdb, tags: influxdb, become: yes }
     - { name: ff.yanic, tags: yanic, become: yes }
     #- { name: ffh.grafana, tags: grafana, become: yes }
+    - { name: ff.nginx, tags: nginx, become: yes }
+    - { name: ff.certbot, tags: certbot, become: yes }
     - { name: ff.meshviewer, tags: meshviewer, become: yes }
     - { name: ff.wgbroker, tags: wgbroker, become: yes }
   post_tasks:
