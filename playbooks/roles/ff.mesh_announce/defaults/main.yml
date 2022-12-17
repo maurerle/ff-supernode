@@ -1,0 +1,4 @@
+---
+
+mesh_announce_cfg_path: "/etc/mesh-announce"
+is_supernode: true

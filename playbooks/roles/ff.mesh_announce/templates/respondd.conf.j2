@@ -1,0 +1,60 @@
+# Default settings
+[Defaults]
+# Contact information of Owner
+# optional, default is None
+Contact: {{ info_mail }}
+# Listen port
+# optional, default: 1001
+Port: 1001
+# Default link local listen addresses
+# optional, default: ff02::2:1001
+MulticastLinkAddress: ff02::2:1001
+# Default site local listen addresses
+# optional, default: ff05::2:1001
+MulticastSiteAddress: ff05::2:1001
+# Default domain to use
+# optional, if specified incoming requests that can not be mapped to a domain
+# are mapped to this domain
+DefaultDomain: {{ freifunk_site }}
+# Default domain type
+# optional, default: simple
+# supported domain types are: simple, batadv
+DomainType: batadv
+# Hostname to advertise
+# optional, default is the System Hostname
+Hostname: {{ servername }}
+# Default ddhcpd IPv4 gateway address
+# optional
+# IPv4Gateway: 10.116.128.8
+# Is the System considered an Gateway
+# optional, default is True
+VPN: {{ is_supernode }}
+# Default vpn protocols to use
+# may contain csv if more than one protocol is used
+# optional, default is fastd
+# supported protocols are: fastd, None, wireguard
+VPNProtocols: {% if fastd_keys[servername] is defined %}fastd{% endif -%}
+{% if fastd_keys[servername] is defined and wireguard_keys[servername] is defined%},{% endif -%}
+{% if wireguard_keys[servername] is defined%}wireguard{% endif %}
+
+# Default fastd-public-key to use
+# optional, default is None
+FastdPublicKey: {{ fastd_keys[servername].public | default("None") }}
+# Default WireGuard-public-key to use
+# optional, default is None
+WireGuardPublicKey: {{ wireguard_keys[servername].public | default("None") }}
+{% if coordinates is defined %}
+# Latitude of the system
+# optional, default: @Latitude
+Latitude: {{ coordinates[0] }}
+# Longitude of the system
+# optional, default: @Longitude
+Longitude: {{ coordinates[1] }}
+{% endif %}
+
+{% for domain in domains | default( [] ) %}
+[{{ freifunk_site }}_{{ domain.id }}]
+BatmanInterface: bat{{ domain.id }}
+Interfaces: vx-{{ domain.id }}
+Hostname: {{ servername }}-{{ domain.id }}
+{% endfor %}

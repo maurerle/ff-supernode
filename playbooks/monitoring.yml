@@ -10,13 +10,13 @@
       tags: [always]
   roles:
     # General
-    - { name: ff.influxdb, tags: influxdb, become: yes }
-    - { name: ff.yanic, tags: yanic, become: yes }
-    #- { name: ffh.grafana, tags: grafana, become: yes }
-    - { name: ff.nginx, tags: nginx, become: yes }
-    - { name: ff.certbot, tags: certbot, become: yes }
-    - { name: ff.meshviewer, tags: meshviewer, become: yes }
-    - { name: ff.wgbroker, tags: wgbroker, become: yes }
+    - { name: ff.influxdb, tags: influxdb, become: true }
+    - { name: ff.yanic, tags: yanic, become: true }
+    #- { name: ffh.grafana, tags: grafana, become: true }
+    - { name: ff.nginx, tags: nginx, become: true }
+    - { name: ff.certbot, tags: certbot, become: true }
+    - { name: ff.meshviewer, tags: meshviewer, become: true }
+    - { name: ff.wgbroker, tags: wgbroker, become: true }
   post_tasks:
     - name: "Import post_task etckeeper"
       import_tasks: "include/etckeeper_post.yml"
