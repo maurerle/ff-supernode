@@ -15,7 +15,7 @@
     owner: auto
 
 - name: Clone the peers git
-  become: yes
+  become: true
   become_user: auto
   git:
     repo: "{{ git_addr }}/peers-wg"

@@ -25,7 +25,7 @@
     recurse: yes
 
 - name: Clone site
-  become: yes
+  become: true
   become_user: auto
   git: >
     repo={{ git_addr }}/site.git

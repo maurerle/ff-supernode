@@ -51,6 +51,6 @@
 - name: Enable netlink service
   systemd:
     name: wg_netlink.service
-    state: started
+    state: restarted
     enabled: yes
   when: servicefile.changed or repo.changed

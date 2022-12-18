@@ -46,14 +46,8 @@
     name: influxdb
     state: restarted
     daemon_reload: yes
-  when: influx2_configfile is changed
-
-- name: Enable service
-  service:
-    name: influxdb
     enabled: yes
-    state: started
-
+  when: influx2_configfile is changed
 
 - name: setup influxdb if not done yet
   command: influx setup -u freifunk -p freifunk -o freifunk -b freifunk -r 0 -f -t {{ influx2_token }}

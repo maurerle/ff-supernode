@@ -25,7 +25,7 @@
     owner: auto
 
 - name: Clone the peers git
-  become: yes
+  become: true
   become_user: auto
   git:
     repo: "{{ git_addr }}/peers-wg"
@@ -43,7 +43,7 @@
   register: updatebroker
 
 - name: Install gunicorn and Flask python package
-  become: yes
+  become: true
   become_user: auto
   ansible.builtin.pip:
     name: 
@@ -58,7 +58,7 @@
     value: 'auto@{{ dns_searchdomains }}'
 
 - name: Install ssh config
-  become: yes
+  become: true
   template:
     src: sshconfig.j2
     dest: /home/auto/.ssh/config
@@ -90,13 +90,7 @@
 - name: Enable wgbroker service
   systemd:
     name: wgbroker.service
-    state: started
+    state: restarted
     daemon_reload: yes
     enabled: yes
-  when: servicefile is changed
-
-- name: Restart broker service
-  systemd:
-    name: wgbroker.service
-    state: restarted
-  when: updatebroker is changed
+  when: servicefile is changed or updatebroker is changed
