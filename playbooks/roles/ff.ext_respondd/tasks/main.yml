@@ -1,0 +1,40 @@
+---
+
+- name: Ensure python3-netifaces
+  apt:
+    name: "{{item}}"
+    state: latest
+    update_cache: yes
+  loop:
+    - python3-netifaces 
+    - ethtool
+    - lsb-release
+
+- name: Clone ext-respondd sources
+  git:
+    repo: https://github.com/ffggrz/ext-respondd
+    dest: /opt/ext-respondd
+
+- name: Install alias.json
+  template:
+    src: alias.json
+    dest: /opt/ext-respondd/alias.json
+
+- name: Install config.json
+  template:
+    src: config.json
+    dest: /opt/ext-respondd/config.json
+
+- name: Install ext-respondd service
+  template:
+    src: ext-respondd.service
+    dest: /etc/systemd/system/ext-respondd.service
+  register: servicefile
+
+- name: Enable ext-respondd service
+  systemd:
+    name: ext-respondd.service
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  when: servicefile is changed

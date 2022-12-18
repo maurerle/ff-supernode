@@ -1,0 +1,14 @@
+# copied from https://github.com/ffggrz/ext-respondd/blob/master/ext-respondd.service.example
+[Unit]
+Description=ext-respondd (respondd status for servers)
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/ext-respondd
+ExecStart=/opt/ext-respondd/ext-respondd.py
+
+[Install]
+WantedBy=multi-user.target

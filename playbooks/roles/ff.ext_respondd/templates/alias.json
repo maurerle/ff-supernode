@@ -1,0 +1,22 @@
+{
+  "nodeinfo": {
+    "hostname": "{{ ansible_hostname }}",
+    "hardware": {
+      "model": "KVM VirtualMachine"
+    },
+    "owner": {
+      "contact": "{{ info_mail }}"
+    },
+    "system": {
+      "site_code": "{{ freifunk_site }}",
+      "role": "gateway"
+    },
+    "location": {
+      "latitude": 50.78355,
+      "longitude": 6.13470
+    },
+    "pages": [
+    ]
+  },
+  "firstseen": "2022-12-01T15:41:01"
+}

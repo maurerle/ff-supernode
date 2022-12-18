@@ -1,0 +1,9 @@
+{
+  "addr": "ff05::2:1001",
+  "port": 1002,
+  "batman": "bat20",
+  "bridge": "vx-20",
+  "mesh-vpn": [ "wg-20"],
+  "rate_limit": 30,
+  "rate_limit_burst": 10
+}
