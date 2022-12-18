@@ -29,20 +29,6 @@ Hostname: {{ servername }}
 # Is the System considered an Gateway
 # optional, default is True
 VPN: {{ is_supernode }}
-# Default vpn protocols to use
-# may contain csv if more than one protocol is used
-# optional, default is fastd
-# supported protocols are: fastd, None, wireguard
-VPNProtocols: {% if fastd_keys[servername] is defined %}fastd{% endif -%}
-{% if fastd_keys[servername] is defined and wireguard_keys[servername] is defined%},{% endif -%}
-{% if wireguard_keys[servername] is defined%}wireguard{% endif %}
-
-# Default fastd-public-key to use
-# optional, default is None
-FastdPublicKey: {{ fastd_keys[servername].public | default("None") }}
-# Default WireGuard-public-key to use
-# optional, default is None
-WireGuardPublicKey: {{ wireguard_keys[servername].public | default("None") }}
 {% if coordinates is defined %}
 # Latitude of the system
 # optional, default: @Latitude
@@ -57,4 +43,23 @@ Longitude: {{ coordinates[1] }}
 BatmanInterface: bat{{ domain.id }}
 Interfaces: vx-{{ domain.id }}
 Hostname: {{ servername }}-{{ domain.id }}
+
+# Default vpn protocols to use
+# may contain csv if more than one protocol is used
+# optional, default is fastd
+# supported protocols are: fastd, None, wireguard
+VPNProtocols: {% if fastd_keys[domain.id] is defined %}fastd{% endif -%}
+{% if fastd_keys[domain.id] is defined and wireguard_keys[domain.id] is defined%},{% endif -%}
+{% if wireguard_keys[domain.id] is defined%}wireguard{% endif %}
+
+{% if fastd_keys[domain.id] is defined %}
+# Default fastd-public-key to use
+FastdPublicKey: {{ fastd_keys[domain.id].public | default("None") }}
+{% endif %}
+{% if wireguard_keys[domain.id] is defined%}
+# Default WireGuard-public-key to use
+# optional, default is None
+WireGuardPublicKey: {{ wireguard_keys[domain.id].public | default("None") }}
+{% endif %}
+
 {% endfor %}

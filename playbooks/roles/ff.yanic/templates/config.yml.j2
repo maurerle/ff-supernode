@@ -92,7 +92,7 @@ path = "{{ yanic_nodes_path }}/meshviewer.json"
 [nodes.output.meshviewer-ffrgb.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
 no_owner = false
-domain_append_site = true
+domain_append_site = false
 #blacklist = ["00112233445566", "1337f0badead"]
 #sites = ["ffhb"]
 #has_location = true
@@ -122,7 +122,7 @@ graph_path = "{{ yanic_nodes_path }}/graph.json"
 [nodes.output.meshviewer.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
 no_owner = false
-domain_append_site = true
+domain_append_site = false
 
 
 # definition for nodelist.json
@@ -138,7 +138,7 @@ path = "{{ yanic_nodes_path }}/raw.jsonl"
 [nodes.output.nodelist.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
 no_owner = false
-domain_append_site = true
+domain_append_site = false
 
 [database]
 # this will send delete commands to the database to prune data
