@@ -2,8 +2,13 @@
 
 - name: "Create wireguard privatekey file (dom {{ domain.id }}) (DIFF REDACTED)"
   copy:
-    content: "{{ wireguard_keys[domain.id].secret }}" 
+    content: "{{ wireguard_keys['%02d' % sn][domain.id].secret }}" 
     dest: /etc/wireguard/privatekey-{{ '%02d' % domain.id | int }}
+    mode: "0644" 
+    owner: "root"
+    group: "{{ ansible_user }}"
+    # TODO put files somehwere else
+    # default user can not read /etc/wireguard
 
 - name: "Generate networkd wg netdev (dom {{ domain.id }}) (DIFF REDACTED)"
   template:

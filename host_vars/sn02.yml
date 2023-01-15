@@ -1,0 +1,23 @@
+---
+servername: sn02
+sn: 02
+
+# cloud-init config
+networkd_configures:
+  - iface: eth0
+    addresses:
+      - 5.145.135.152/27
+      - 2a00:fe0:43::202/64
+    gateway4: 5.145.135.129
+    gateway6: 2a00:fe0:43::1
+    dns_server:
+      - 5.1.66.255
+      - '2001:678:ed0:f000::'
+      - 9.9.9.9
+    ipv6_address: 2a00:fe0:43::202/128
+    upstream_routers:
+      - 2a00:fe0:43::bb:1
+      - 2a00:fe0:43::bb:2
+
+client_dns_server_v4: 5.1.66.255
+client_dns_server_v6: 2a03:2260:3006::53

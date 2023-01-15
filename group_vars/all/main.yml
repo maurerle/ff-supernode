@@ -27,3 +27,7 @@ domains:
   vxlanid: "2293484"
 - id: "99"
   vxlanid: "2293484"
+
+# ffrl prefix
+mesh_prefix: "2a03:2260:3006"
+radv_announce_default: true

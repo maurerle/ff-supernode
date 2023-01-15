@@ -4,7 +4,12 @@ all:
   hosts:
     sn01:
       ansible_host: ffac-test
+      ansible_user: florian
+    sn02:
+      ansible_host: 5.145.135.152
+      ansible_user: debian
 
 supernodes:
   hosts:
     sn01:
+    sn02:

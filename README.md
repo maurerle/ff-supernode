@@ -60,13 +60,15 @@ Using ansible-secrets, one can create a file `group_vars/all/secrets.yml` contai
 
 ```yml
 wireguard_keys: {
-  '10': {
-    'secret': 'xxx',
-    'public': 'xxx'
-  },
-  '20': {
-    'secret': 'xxx',
-    'public': 'xxx'
+  '01': {  # <-- sn
+    '10': { # <-- domain/segment
+      'secret': 'xxx',
+      'public': 'xxx'
+    },
+    '20': {
+      'secret': 'xxx',
+      'public': 'xxx'
+    }
   }
 }
 ```

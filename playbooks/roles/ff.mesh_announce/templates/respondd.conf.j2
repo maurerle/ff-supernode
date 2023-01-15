@@ -49,17 +49,17 @@ Hostname: {{ servername }}-{{ domain.id }}
 # optional, default is fastd
 # supported protocols are: fastd, None, wireguard
 VPNProtocols: {% if fastd_keys[domain.id] is defined %}fastd{% endif -%}
-{% if fastd_keys[domain.id] is defined and wireguard_keys[domain.id] is defined%},{% endif -%}
-{% if wireguard_keys[domain.id] is defined%}wireguard{% endif %}
+{% if fastd_keys[domain.id] is defined and wireguard_keys['%02d' % sn][domain.id] is defined%},{% endif -%}
+{% if wireguard_keys['%02d' % sn][domain.id] is defined%}wireguard{% endif %}
 
 {% if fastd_keys[domain.id] is defined %}
 # Default fastd-public-key to use
 FastdPublicKey: {{ fastd_keys[domain.id].public | default("None") }}
 {% endif %}
-{% if wireguard_keys[domain.id] is defined%}
+{% if wireguard_keys['%02d' % sn][domain.id] is defined%}
 # Default WireGuard-public-key to use
 # optional, default is None
-WireGuardPublicKey: {{ wireguard_keys[domain.id].public | default("None") }}
+WireGuardPublicKey: {{ wireguard_keys['%02d' % sn][domain.id].public | default("None") }}
 {% endif %}
 
 {% endfor %}
