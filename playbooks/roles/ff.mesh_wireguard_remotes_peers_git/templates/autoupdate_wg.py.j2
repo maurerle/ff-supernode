@@ -38,10 +38,8 @@ def pull_repo(repo):
     s = subprocess.Popen(["git -C {} pull".format(repo)], shell=True, env=env,
                          preexec_fn=demote(user_uid, user_gid), stdout=subprocess.PIPE)
 
-def read_repo_keys():
+def read_repo_keys(directory):
     repokeys=[]
-    directory = os.fsencode(REPO)
-
     for file in os.scandir(directory):
         if file.is_file():
             filename = os.fsdecode(file)
@@ -147,9 +145,13 @@ if "__main__" == __name__:
     args = parser.parse_args()
     verbose = args.verbose
 
-    l_repo_keys=read_repo_keys()
+    
     for dom in wg_domains:
         iface="{}{}".format(wgintf_base, dom)
+        l_repo_keys=read_repo_keys(os.fsencode(REPO))
+        if os.path.exists(os.path.join(REPO,iface)):
+            domain_keys=read_repo_keys(os.path.join(REPO,iface))
+            l_repo_keys.extend(domain_keys)
         l_iface_keys=read_interface_keys(iface)
         a, r = create_diff(l_repo_keys, l_iface_keys, iface)
         for key in a:
