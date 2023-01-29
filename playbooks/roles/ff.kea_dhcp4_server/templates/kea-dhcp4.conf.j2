@@ -65,13 +65,12 @@
 				// "always-send": true
 			}
 		],
-
 		"subnet4": [
 {% for domain in domains | default( [] ) %}
 			{
 				"interface": "bat{{ domain.id }}",
 				"subnet": "10.{{ domain.id }}.0.0/16",
-				"pools": [{ "pool":  "10.{{ domain.id }}.{{ sn }}0.20 - 10.{{ domain.id }}.{{ sn }}8.254" }],
+				"pools": [{ "pool":  "10.{{ domain.id }}.{{ (sn-1)*mesh_pool_size }}.20 - 10.{{ domain.id }}.{{ (sn*mesh_pool_size)-1 }}.254" }],
 				"option-data": [
 					{
 						"name": "domain-name-servers",
@@ -79,7 +78,7 @@
 					},
 					{
 						"name": "routers",
-						"data": "10.{{ domain.id }}.{{ sn }}0.1"
+						"data": "10.{{ domain.id }}.{{ (sn-1)*mesh_pool_size }}.1"
 					}
 				]
 			}{% if not loop.last %},{% endif %}
