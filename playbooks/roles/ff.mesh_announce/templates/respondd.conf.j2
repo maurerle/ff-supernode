@@ -41,7 +41,7 @@ Longitude: {{ coordinates[1] }}
 {% for domain in domains | default( [] ) %}
 [{{ freifunk_site }}_{{ domain.id }}]
 BatmanInterface: bat{{ domain.id }}
-Interfaces: vx-{{ domain.id }}
+Interfaces: {{ vxlan_iface_prefix }}-{{ domain.id }}
 Hostname: {{ servername }}-{{ domain.id }}
 
 # Default vpn protocols to use
