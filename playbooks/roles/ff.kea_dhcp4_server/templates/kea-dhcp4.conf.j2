@@ -6,7 +6,7 @@
 		"interfaces-config": {
 			// Set to UDP to avoid raw socket performance penalty
 			// "dhcp-socket-type": "udp",
-                        "interfaces": [ {% for domain in domains | default( [] ) %} "bat{{ domain.id }}"{% if not loop.last %}, {% endif %}{% endfor %} ]
+						"interfaces": [ {% for domain in domains | default( [] ) %} "bat{{ domain.id }}"{% if not loop.last %}, {% endif %}{% endfor %} ]
 		},
 
 		"sanity-checks": {
@@ -18,6 +18,12 @@
 			// Store leases in memory
 			"type": "memfile",
 			"lfc-interval": 900
+		},
+
+		"multi-threading": {
+			"enable-multi-threading": true,
+			"thread-pool-size": 4,
+			"packet-queue-size": 16
 		},
 
 		"control-socket": {
