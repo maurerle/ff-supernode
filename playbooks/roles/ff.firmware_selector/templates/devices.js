@@ -14,7 +14,8 @@ var devices_recommended = {
   },
 
   "Arcadyan": {
-    "vgv7510kw22/O2 Box 6431": {"arcadyan-vgv7510kw22": "--ignore--", "o2-box-6431": ""}
+    "O2 Box 6431": "o2-box-6431",
+    "vgv7510kw22": "arcadyan-vgv7510kw22"
   },
 
   "Aruba": {
@@ -67,6 +68,9 @@ var devices_recommended = {
   "Cudy": {
     "WR1000": {"cudy-wr1000": "v2"},
     "WR2100": "cudy-wr2100",
+    "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
+    "X6": "cudy-x6",
+    "M1800": "cudy-m1800",
   },
 
   "D-Link": {
