@@ -2,7 +2,7 @@
 Name=bat{{ domain.id }}
 
 [Network]
-Address=10.{{ domain.id }}.{{ sn }}0.1/16
+Address=10.{{ domain.id }}.{{ (sn-1)*mesh_pool_size }}.1/16
 Address={{ mesh_prefix }}:{{ sn }}{{ domain.id }}::{{ "%x" | format(sn) }}001/64
 IPv6AcceptRouterAdvertisements=false
 
@@ -11,7 +11,7 @@ MACAddress=88:E6:40:ba:{{ "%x" | format(sn) }}0:{{ domain.id }}
 
 {% for i in range(0,10) %}
 [Route]
-Destination=10.{{ domain.id }}.{{ sn }}{{ i }}.0/24
+Destination=10.{{ domain.id }}.{{ (sn-1)*mesh_pool_size }}.0/20
 Table=42
 {% endfor %}
 [Route]

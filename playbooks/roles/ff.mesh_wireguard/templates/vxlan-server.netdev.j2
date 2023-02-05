@@ -9,5 +9,5 @@ Id=1000{{ '%02d' % domain.id | int }}
 DestinationPort=84{{ '%02d' % domain.id | int }}
 UDP6ZeroChecksumRx=true
 UDP6ZeroChecksumTx=true
-Remote=remote_vxlan_supernode
-Local=local_vxlan_supernode
+Remote={{ remote_vxlan_supernode }}
+Local={{ local_vxlan_supernode }}
