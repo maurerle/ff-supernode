@@ -69,20 +69,6 @@ PreferredSource={{ route.pref_src }}
 {% endif %}
 {% endfor %}
 
-{% if item.1.upstream_routers is defined %}
-[RoutingPolicyRule]
-From={{mesh_prefix}}:100::/56
-Table=42
- 
-[Route]
-Destination=::/0
-#Gateway=2a00:fe0:43::bb:1
-{% for router in item.1.upstream_routers %}
-MultiPathRoute={{router}}
-{% endfor %}
-Table=42
-{% endif %}
-
 {% if item.1.additional_config is defined -%}
 {{ item.1.additional_config }}
 {% endif %}
