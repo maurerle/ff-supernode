@@ -1,5 +1,5 @@
 ---
 
 cache_expiration: 14d
-tiles_mailto: info@ff-domain
-tiles_hostname: tiles.ff-domain
+tiles_mailto: "info@{{ dns_searchdomains }}"
+tiles_hostname: "tiles.{{ dns_searchdomains }}"

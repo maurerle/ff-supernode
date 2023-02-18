@@ -1,26 +1,24 @@
 ---
 show_secret_diffs: no
 
-git_host: "git.ffac.rocks"
+dns_searchdomains: "ffac.rocks"
+
+git_host: "git.{{ dns_searchdomains }}"
 git_addr: "ssh://git@github.com/ffac"
 
 freifunk_site: "ffac"
-info_mail: "info@ffac.rocks"
 
 # firmware selector
 recommended_info_link: "https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/"
+version_regex: r"/-(v?\d+\.\d+\.\d+(-\d+)?(-.+~exp\d{8})?(.*-next\d{8})?)-/"
 firmware_changelog: "https://github.com/ffac/site/blob/v2022.1.x/CHANGELOG.md"
 community_prefix: "gluon-ffac-"
-
-dns_searchdomains: "ffac.zone"
-
-batman_version: "BATMAN_V"
 
 # meshviewer
 deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB RAM/32MB Flash). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/\">dieser Post</a>'
 
-
 # vxlan ids may be generated using vx.py in scripts
+# ids are segment/domain
 domains:
 - id: "10"
   vxlanid: "2293484"
@@ -36,3 +34,16 @@ domains:
 # ffrl prefix
 mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
+batman_version: "BATMAN_V"
+
+# mesh_announce & nginx
+info_mail: "info@{{ dns_searchdomains }}"
+
+# mesh size kea
+mesh_pool_size: 64
+grafana_root_url: "https://stats.{{ dns_searchdomains }}"
+#grafana_smtp_host: ""
+grafana_smtp_from: "info@{{ dns_searchdomains }}"
+
+# yanic
+yanic_influx2_hostname: "http://ffac.rocks:8086"

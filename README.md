@@ -73,6 +73,8 @@ wireguard_keys: {
 }
 ```
 
+Access to the public key is therefore `wireguard_keys['%02d' % sn][domain.id].public`
+
 Then, one can use `ansible-vault encrypt group_vars/all/secrets.yml` and set a password.
 The file can then be committed
 
