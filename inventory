@@ -3,10 +3,10 @@
 all:
   hosts:
     sn01:
-      ansible_host: ffac-test
+      ansible_host: 01.wg-node.freifunk-aachen.de
       ansible_user: florian
     sn02:
-      ansible_host: 5.145.135.152
+      ansible_host: 02.wg-node.freifunk-aachen.de
       ansible_user: debian
 
 supernodes:

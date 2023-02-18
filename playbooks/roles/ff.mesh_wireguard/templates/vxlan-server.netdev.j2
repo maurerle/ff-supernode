@@ -1,11 +1,11 @@
 [NetDev]
 Name={{ vxlan_iface_prefix }}-{{ '%02d' % domain.id | int }}-server
 Kind=vxlan
-MACAddress=02:a1:71:05:02:20
+MACAddress=02:a1:71:05:{{ '%02d' % sn | int }}:{{ '%02d' % domain.id | int }}
 
 [VXLAN]
 Id=1000{{ '%02d' % domain.id | int }}
-#VNI=2293484
+#VNI=1000{{ '%02d' % domain.id | int }}
 DestinationPort=84{{ '%02d' % domain.id | int }}
 UDP6ZeroChecksumRx=true
 UDP6ZeroChecksumTx=true

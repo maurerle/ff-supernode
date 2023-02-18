@@ -17,7 +17,7 @@ networkd_configures:
     ipv6_address: 2a00:fe0:43::202/128
     additional_config: |
       [RoutingPolicyRule]
-      From=2a03:2260:3006:100::/56
+      From=2a03:2260:3006:200::/56
       Table=42
 
       [Route]
@@ -29,5 +29,6 @@ networkd_configures:
 
 client_dns_server_v4: 5.1.66.255
 client_dns_server_v6: 2a03:2260:3006::53
+
 local_vxlan_supernode: 2a00:fe0:43::202
 remote_vxlan_supernode: 2a00:fe0:43::201

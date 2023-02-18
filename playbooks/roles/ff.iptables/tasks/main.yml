@@ -9,8 +9,9 @@
     group: "root"
   with_indexed_items: "{{ networkd_configures }}"
 
-- name: Start iptables-forward service
+- name: Start and enable iptables-forward service
   systemd:
     name: iptables-forward
     state: started
+    enabled: yes
     daemon_reload: yes
