@@ -1,6 +1,6 @@
 ---
 
-- name: Clone batman sources
+- name: Clone firmware selector
   git:
     repo: https://github.com/freifunk-darmstadt/gluon-firmware-selector.git
     dest: /var/www/gluon-firmware-selector

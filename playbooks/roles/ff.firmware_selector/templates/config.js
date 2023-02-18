@@ -23,13 +23,13 @@ var config = {
   // Display a checkbox that allows to display not recommended devices.
   // This only make sense if enabled_device_categories also contains not
   // recommended devices.
-  recommended_toggle: true,
+  recommended_toggle: {{ recommended_toggle }},
   // Optional link to an info page about no longer recommended devices
   recommended_info_link: '{{ recommended_info_link }}',
   // community prefix of the firmware images
-  community_prefix: 'gluon-ffac-',
+  community_prefix: '{{ community_prefix }}',
   // firmware version regex
-  version_regex: /-(v?\d+\.\d+\.\d+(-\d+)?(-.+~exp\d{8})?)-/,
+  version_regex: {{ version_regex }},
   // relative image paths and branch
 
   directories: {
@@ -38,17 +38,17 @@ var config = {
     '../release_images/from-2022.1.x/experimental/other/': 'v2022_experimental',
     '../release_images/from-2022.1.x/experimental/sysupgrade/': 'v2022_experimental',
 
-    '../release_images/from-2021.1.x/experimental/factory/': 'v2021_novpn_experimental',
-    '../release_images/from-2021.1.x/experimental/other/': 'v2021_novpn_experimental',
-    '../release_images/from-2021.1.x/experimental/sysupgrade/': 'v2021_novpn_experimental',
+    '../release_images/from-2021.1.x/experimental/factory/': 'v2021_experimental',
+    '../release_images/from-2021.1.x/experimental/other/': 'v2021_experimental',
+    '../release_images/from-2021.1.x/experimental/sysupgrade/': 'v2021_experimental',
 
-    '../release_images/from-latest/experimental/factory/': 'nightly',
-    '../release_images/from-latest/experimental/other/': 'nightly',
-    '../release_images/from-latest/experimental/sysupgrade/': 'nightly',
+    '../release_images/from-next/experimental/factory/': 'nightly',
+    '../release_images/from-next/experimental/other/': 'nightly',
+    '../release_images/from-next/experimental/sysupgrade/': 'nightly',
 
-    //'http://updates.freifunk-aachen.de/stable/factory/': 'oldstable',
-    //'http://updates.freifunk-aachen.de/other/': 'oldstable',
-    //'http://updates.freifunk-aachen.de/sysupgrade/': 'oldstable',
+//    'http://updates.freifunk-aachen.de/stable/factory/': 'v2019',
+//    'http://updates.freifunk-aachen.de/other/': 'v2019',
+//    'http://updates.freifunk-aachen.de/sysupgrade/': 'v2019',
 
   },
   // page title
@@ -56,7 +56,7 @@ var config = {
   // branch descriptions shown during selection
   branch_descriptions: {
     v2022_experimental: 'Images auf Gluon 2022/Openwrt 2022 Basis mit tag und WG - nicht für 4/32er Geräte',
-    v2021_novpn_experimental: 'Images Gluon 2021 ohne Mesh-VPN möglichkeit',
+    v2021_experimental: 'Images auf Gluon 2021/Openwrt 2019 Basis',
     nightly: 'Die zuletzt gebauten Images - nur nach Aufforderung nutzen!'
     //v2019: 'Images basierend auf Gluon 2021, OpenWRT 2019 - mit Wireguard'
   },
@@ -67,7 +67,7 @@ var config = {
   // path to preview pictures directory
   preview_pictures: 'pictures/',
   // link to changelog
-  changelog: 'CHANGELOG.html',
+  changelog: '{{ firmware_changelog }}',
   // links for instructions like flashing of certain devices (optional)
   // can be set for a whole model or individual revisions
   // overwrites default values from devices_info in devices.js

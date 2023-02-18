@@ -30,10 +30,6 @@
   become_user: auto
   shell: "git config --global pull.ff only"
 
-#- name: Publish new public ssh key to repository
-#  include_tasks: gitolite.yml
-#  when: createuser is changed
-
 - name: Create lockfile to wait until ssh key is deployed to the git server
   file: path=/home/auto/wait_for_access.lock state=touch
   when: createuser is changed

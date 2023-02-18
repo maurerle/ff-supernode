@@ -6,11 +6,13 @@ git_addr: "ssh://git@github.com/ffac"
 
 freifunk_site: "ffac"
 info_mail: "info@ffac.rocks"
+
+# firmware selector
 recommended_info_link: "https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/"
+firmware_changelog: "https://github.com/ffac/site/blob/v2022.1.x/CHANGELOG.md"
+community_prefix: "gluon-ffac-"
 
 dns_searchdomains: "ffac.zone"
-dns_recursive_allowed_private_rdns_zones:
-- "8.0.0.0.e.e.f.f.a.c.d.f.ip6.arpa."
 
 batman_version: "BATMAN_V"
 

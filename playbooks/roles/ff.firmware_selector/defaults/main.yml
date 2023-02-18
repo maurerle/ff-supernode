@@ -1,0 +1,7 @@
+---
+
+recommended_info_link: ""
+community_prefix: "gluon-ff-"
+recommended_toggle: "true"
+version_regex: "/-(v?\d+\.\d+\.\d+(-\d+)?(-.+~exp\d{8})?(.*-next\d{8})?)-/"
+firmware_changelog: "CHANGELOG.html"
