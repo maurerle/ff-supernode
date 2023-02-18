@@ -1,11 +1,11 @@
 ---
 show_secret_diffs: no
 
-git_host: "git.ff.zone"
+git_host: "git.ffac.rocks"
 git_addr: "ssh://git@github.com/ffac"
 
 freifunk_site: "ffac"
-info_mail: "info@ff.zone"
+info_mail: "info@ffac.rocks"
 recommended_info_link: "https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/"
 
 dns_searchdomains: "ffac.zone"
