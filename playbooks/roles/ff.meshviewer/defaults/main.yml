@@ -1,4 +1,6 @@
 ---
 grafana_url: https://freifunk.fail
-yanic_url: https://yanic.freifunk.fail
+yanic_url: "/data/"
 meshviewer_source_dir: /home/{{ ansible_user }}/meshviewer #/opt/meshviewer
+meshviewer_geo: "[]"
+deprecation_text: ""

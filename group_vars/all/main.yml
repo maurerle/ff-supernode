@@ -16,6 +16,9 @@ dns_searchdomains: "ffac.zone"
 
 batman_version: "BATMAN_V"
 
+# meshviewer
+deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB RAM/32MB Flash). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/\">dieser Post</a>'
+
 
 # vxlan ids may be generated using vx.py in scripts
 domains:

@@ -74,13 +74,6 @@
     scope: local
     value: 'auto'
 
-- name: Set Git Config User
-  git_config:
-    name: user.name
-    repo: /etc/wireguard/peers-wg
-    scope: local
-    value: 'auto'
-
 - name: Install broker service
   template:
     src: wgbroker.service.j2

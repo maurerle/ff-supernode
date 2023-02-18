@@ -8,8 +8,15 @@ all:
     sn02:
       ansible_host: 02.wg-node.freifunk-aachen.de
       ansible_user: debian
+    monitor:
+      ansible_host: 01.wg-node.freifunk-aachen.de
+      ansible_user: florian
 
 supernodes:
   hosts:
     sn01:
     sn02:
+
+monitoring:
+  hosts:
+    monitor:

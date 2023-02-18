@@ -27,10 +27,10 @@
 - name: Clone site
   become: true
   become_user: auto
-  git: >
-    repo={{ git_addr }}/site.git
-    dest=/var/cache/gw-statuspage/site
-    accept_hostkey=true
+  git:
+    repo: {{ git_addr }}/site.git
+    dest: /var/cache/gw-statuspage/site
+    accept_hostkey: true
   register: site
 
 - name: Add cron job for git pull of site

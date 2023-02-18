@@ -36,8 +36,5 @@ radv_announce_default: true
 
 monitor_hostname: 01.wg-test.freifunk-aachen.de
 
-yanic_url: http://{{ monitor_hostname }}/data
-yanic_webserver: "false"
-
 local_vxlan_supernode: 2a00:fe0:43::201
 remote_vxlan_supernode: 2a00:fe0:43::202

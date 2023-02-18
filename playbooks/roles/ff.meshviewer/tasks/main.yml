@@ -1,9 +1,11 @@
+# should be upstream https://github.com/freifunk-ffm/meshviewer
+# https://github.com/freifunk-ffm/meshviewer/pull/8
 - name: Clone meshviewer sources
   git:
-    repo: https://github.com/freifunk-ffm/meshviewer
+    repo: https://github.com/maurerle/meshviewer
     dest: '{{ meshviewer_source_dir }}'
-    version: "master"
-  register: repo_clone    
+    version: "fix_geo"
+  register: repo_clone
   failed_when:
   - repo_clone.failed
   - not 'Local modifications exist in repository' in repo_clone.msg
@@ -39,7 +41,7 @@
     dest: "/var/www/html/meshviewer"
     remote_src: yes
     owner: "yanic"
-    group: "www-data"    
+    group: "www-data"
 
 - name: "copy meshviewer config"
   template:

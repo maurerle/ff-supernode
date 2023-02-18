@@ -12,22 +12,33 @@
         "config": {
           "type": "osm",
           "maxZoom": 19,
-          "attribution": "<a href='https://github.com/ffrgb/meshviewer/issues' target='_blank'>Report Bug</a> | Map data &copy; <a href\"http://openstreetmap.org\">OpenStreetMap</a> contributor"
+          "attribution": "<a href='https://github.com/ffrgb/meshviewer/issues' target='_blank'>Report Bug</a> | Map data &copy; <a href\"http://openstreetmap.org\">OpenStreetMap</a> contributor",
+          "start": 10
         }
+      },
+    {
+      "name": "EsriWorldImagery",
+      "url": "https://tiles.aachen.freifunk.net/EsriWorldImagery/{z}/{y}/{x}.png",
+      "config": {
+        "maxZoom": 19,
+        "start": 30,
+        "mode": "night",
+        "attribution": "<a href=\"http://arcgis.com/\" target=\"_blank\">&copy; ArcGIS-Satellite</a> <a href=\"http://arcgis.com/about/\" target=\"_blank\">&copy; ArcGIS</a>"
       }
+    }
     ],
     "fixedCenter": [
       [
-        50.5099,
-        8.1393
+        50.91,
+        5.9393
       ],
       [
-        49.9282,
-        9.3164
+        50.7282,
+        6.2164
       ]
     ],
     "siteNames": [
-      { "site": "Segmen01", "name": "{{ freifunk_site }}" } ,
+      { "site": "Segment01", "name": "{{ freifunk_site }}" } ,
       { "site": "site_default", "name": "Default" }
     ],
     "domainNames": [
@@ -43,43 +54,52 @@
     "nodeInfos": [
       {
         "name": "Clientstatistik",
-        "href": "{{ grafana_url }}/dashboard/db/nodes?var-name={NODE_NAME}&from=now-7d&to=now",
-        "image": "{{ grafana_url }}/render/dashboard-solo/db/node-details-for-map?panelId=7&var-id={NODE_ID}&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} ({NODE_NAME})"
+        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=1&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Knoten {NODE_ID} - weitere Statistiken"
       },
       {
-        "name": "Traffic",
-        "href": "{{ grafana_url }}/dashboard/db/nodes?var-name={NODE_NAME}&from=now-7d&to=now",
-        "image": "{{ grafana_url }}/render/dashboard-solo/db/node-details-for-map?panelId=1&var-id={NODE_ID}&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} ({NODE_NAME})"
+        "name": "Trafficstatistik",
+        "href": "{{ grafana_url }}/d/0100000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=2&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Knoten {NODE_ID} - weitere Statistiken"
       },
       {
-        "name": "Uptime",
-        "href": "{{ grafana_url }}/dashboard/db/nodes?var-name={NODE_NAME}&from=now-7d&to=now",
-        "image": "{{ grafana_url }}/render/dashboard-solo/db/node-details-for-map?panelId=5&var-id={NODE_ID}&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} ({NODE_NAME})"
+        "name": "Airtime",
+        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=5&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Knoten {NODE_ID} - weitere Statistiken"
       },
       {
-        "name": "CPU Auslastung",
-        "href": "{{ grafana_url }}/dashboard/db/nodes?var-name={NODE_NAME}&from=now-7d&to=now",
-        "image": "{{ grafana_url }}/render/dashboard-solo/db/node-details-for-map?panelId=2&var-id={NODE_ID}&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} ({NODE_NAME})"
-      },
+        "name": "Traffic Volume",
+        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=15&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Knoten {NODE_ID} - weitere Statistiken"
+      }
+    ],
+    "linkInfos": [
       {
-        "name": "Neighbours",
-        "href": "{{ grafana_url }}/dashboard/db/nodes?var-name={NODE_NAME}&from=now-7d&to=now",
-        "image": "{{ grafana_url }}/render/dashboard-solo/db/node-details-for-map?panelId=4&var-id={NODE_ID}&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} ({NODE_NAME})"
+        "name": "Statistik für alle Links zwischen diese Knoten",
+        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={SOURCE_ID}&var-nodetolink={TARGET_ID}",
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=7&var-node={SOURCE_ID}&var-nodetolink={TARGET_ID}&from=now-7d&&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Linkstatistik des letzten Tages, min und max aller Links zwischen diesen Knoten"
       }
     ],
     "globalInfos": [
       {
         "name": "Wochenstatistik",
-        "href": "{{ grafana_url }}/dashboard/db/deck?from=now-7d&to=now",
-        "image": "{{ grafana_url }}/render/dashboard-solo/db/deck?&panelId=22&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
+        "href": "{{ grafana_url }}/d/000000001/globals?orgId=1&refresh=15m",
+        "image": "{{ grafana_url }}/render/d-solo/000000001/globals?panelId=2&from=now-7d&to=now&width=600&height=300&theme=light&_t={TIME}",
         "title": "Bild der Wochenstatistik"
       }
     ],
-    "deprecation_text": "Hier kann ein eigener Text für die Deprecation Warning (inkl. HTML) stehen!",
-    "deprecation_enabled": true
+    "hwImg": [
+    { "thumbnail": "https://map.eulenfunk.de/nodes/{MODELHASH}.svg",
+      "caption": "Knoten {MODELHASH}"
+    }
+    ],
+    "geo": {{ meshviewer_geo }},
+
+    "deprecation_text": "{{ deprecation_text }}",
+    "deprecation_enabled": {% if deprecation_text != "" %}true{% else %}false{% endif %}
   }

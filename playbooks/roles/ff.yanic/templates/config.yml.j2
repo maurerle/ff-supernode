@@ -56,7 +56,7 @@ offline_after = "10m"
 #
 # WARNING: if it is not set, it will publish contact information of other persons
 # Set to true, if you did not want the json files to contain the owner information
-#no_owner = true
+#no_owner = {{ yanic_no_owner }}
 #
 # List of nodeids of nodes that should be filtered out, so they won't appear in output
 #blacklist = ["00112233445566", "1337f0badead"]
@@ -91,7 +91,7 @@ path = "{{ yanic_nodes_path }}/meshviewer.json"
 
 [nodes.output.meshviewer-ffrgb.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
-no_owner = true
+no_owner = {{ yanic_no_owner }}
 domain_append_site = false
 #blacklist = ["00112233445566", "1337f0badead"]
 #sites = ["ffhb"]
@@ -121,7 +121,7 @@ graph_path = "{{ yanic_nodes_path }}/graph.json"
 
 [nodes.output.meshviewer.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
-no_owner = true
+no_owner = {{ yanic_no_owner }}
 domain_append_site = false
 
 
@@ -137,7 +137,7 @@ path = "{{ yanic_nodes_path }}/raw.jsonl"
 
 [nodes.output.nodelist.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
-no_owner = true
+no_owner = {{ yanic_no_owner }}
 domain_append_site = false
 
 [database]
