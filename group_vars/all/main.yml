@@ -41,7 +41,7 @@ info_mail: "info@{{ dns_searchdomains }}"
 
 # mesh size kea
 mesh_pool_size: 64
-grafana_root_url: "https://stats.{{ dns_searchdomains }}"
+grafana_url: "https://grafana.{{ dns_searchdomains }}"
 #grafana_smtp_host: ""
 grafana_smtp_from: "info@{{ dns_searchdomains }}"
 
