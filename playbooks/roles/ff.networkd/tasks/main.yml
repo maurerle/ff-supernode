@@ -57,6 +57,14 @@
     dest: /etc/systemd/network/10-{{ item.1.iface }}.network
   with_indexed_items: "{{ networkd_configures }}"
 
+- name: Install iface link config
+  register: enableresolved
+  template:
+    src: 1x-iface.network.j2
+    dest: /etc/systemd/network/10-{{ item.1.iface }}.link
+  with_indexed_items: "{{ networkd_configures }}"
+  when: "{{ item.1.fixed_mac }}"
+
 - name: Directly restart networkd
   service: name=systemd-networkd state=restarted
   when: enableresolved is changed

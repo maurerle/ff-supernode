@@ -11,10 +11,11 @@ networkd_configures:
     gateway4: 5.145.135.129
     gateway6: 2a00:fe0:43::1
     dns_server:
-      - 5.1.66.255
-      - '2001:678:ed0:f000::'
       - 9.9.9.9
-    ipv6_address: 2a00:fe0:43::202/128
+      - '2001:678:ed0:f000::'
+      - 5.1.66.255
+    nat4: True
+    nat6: True
     additional_config: |
       [RoutingPolicyRule]
       From=2a03:2260:3006:200::/56

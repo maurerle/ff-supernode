@@ -4,8 +4,12 @@ After=network-online.target
 
 [Service]
 Type=oneshot
+{% if item.1.nat4 is defined %}
 ExecStart=iptables -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE -t nat
+{% endif %}
+{% if item.1.nat6 is defined %}
 ExecStart=ip6tables -t nat -A POSTROUTING -o {{ item.1.iface }} -j MASQUERADE
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target

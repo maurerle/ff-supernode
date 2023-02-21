@@ -4,17 +4,19 @@ sn: 01
 
 # cloud-init config
 networkd_configures:
-  - iface: ens160
+  - iface: eth0
+    fixed_mac: 5a:d3:2c:f9:92:15
     addresses:
       - 5.145.135.151/27
       - 2a00:fe0:43::201/64
     gateway4: 5.145.135.129
     gateway6: 2a00:fe0:43::1
     dns_server:
-      - 5.1.66.255
-      - '2001:678:ed0:f000::'
       - 9.9.9.9
-    ipv6_address: 2a00:fe0:43::201/128
+      - '2001:678:ed0:f000::'
+      - 5.1.66.255
+    nat4: True
+    nat6: False
     additional_config: |
       [RoutingPolicyRule]
       From=2a03:2260:3006:100::/56
@@ -37,4 +39,4 @@ radv_announce_default: true
 monitor_hostname: 01.wg-test.freifunk-aachen.de
 
 local_vxlan_supernode: 2a00:fe0:43::201
-remote_vxlan_supernode: 2a00:fe0:43::202
+#remote_vxlan_supernode: 2a00:fe0:43::202
