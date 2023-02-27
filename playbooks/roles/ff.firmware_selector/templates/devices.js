@@ -545,6 +545,10 @@ var devices_info = {
     "Instant On AP11D": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=c6e972c8772a628a1a2f2e5590d7c6f4acef9ab0",
     "Instant On AP17": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=300b7fe85a743ab0e039457a5a551819b49450da",
   },
+  "Arcadyan": {
+    "O2 Box 6431": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6",
+    "vgv7510kw22": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6"
+  },
   "AVM": {
     "FRITZ!Box 3370": "https://openwrt.org/toh/avm/fritz.box.wlan.3370#installation",
     "FRITZ!Box 4020": "https://fritz-tools.readthedocs.io/",
@@ -557,6 +561,7 @@ var devices_info = {
     "FRITZ!Box 7360 SL": "https://fritz-tools.readthedocs.io/",
     "FRITZ!Box 7362 SL": "https://openwrt.org/toh/avm/avm_7362_sl#installation",
     "FRITZ!Box 7412": "https://openwrt.org/toh/avm/avm_fritz_box_7412#installation",
+    "FRITZ!Box 7520": "https://openwrt.org/toh/avm/avm_fritz_box_7530#installation",
     "FRITZ!Box 7530": "https://openwrt.org/toh/avm/avm_fritz_box_7530#installation",
     "FRITZ!Repeater 1200": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=7f187229a8e9b7966248b1e024217e07a9fc3e50",
     "FRITZ!WLAN Repeater 300E": "https://fritz-tools.readthedocs.io/",
@@ -577,6 +582,14 @@ var devices_info = {
     "WiFi Pro 1750e": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1c2f7b511514d43d8a826b26e09817b2750a2bf4",
     "WiFi Pro 1750i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=8d68be8057d6c689025cc236d20b96b77a6ccf30",
     "WiFi Pro 1750x": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=cb3cd526948af3f69da1af18e035177a0a8f58e3"
+  },
+  "Netgear": {
+    "DGN3500": "netgear-dgn3500b",
+    "EX3700": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex3700/",
+    "EX3800": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex3700/",
+    "EX6150": "https://freifunk-ingolstadt.de/eigener-freifunk-hotspot/anleitung/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex6150-v2/",
+    "R6120": "https://freifunk-ingolstadt.de/eigener-freifunk-hotspot/anleitung/installationsanleitung-fuer-netgear-r6120/",
+    "R6220": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-r6220/",
   },
   "RAVPower": {
     "RP-WD009": "https://openwrt.org/toh/ravpower/rp-wd009#oem_installation_using_the_tftp_method"
