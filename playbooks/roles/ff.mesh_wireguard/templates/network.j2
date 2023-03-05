@@ -7,7 +7,7 @@ Address={{ mesh_prefix }}:{{ sn }}{{ domain.id }}::{{ "%x" | format(sn) }}001/64
 IPv6AcceptRouterAdvertisements=false
 
 [Link]
-MACAddress=FF:AC:40:ba:{{ "%x" | format(sn) }}0:{{ domain.id }}
+MACAddress=88:e6:ff:ac:{{ "%x" | format(sn) }}0:{{ domain.id }}
 
 [Route]
 Destination=10.{{ domain.id }}.{{ (sn-1)*mesh_pool_size }}.0/20
