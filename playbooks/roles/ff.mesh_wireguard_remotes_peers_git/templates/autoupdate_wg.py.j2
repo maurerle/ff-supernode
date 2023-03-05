@@ -148,12 +148,15 @@ if "__main__" == __name__:
     
     for dom in wg_domains:
         iface="{}{}".format(wgintf_base, dom)
-        l_repo_keys=read_repo_keys(os.fsencode(REPO))
+
+        domain_keys = []
         if os.path.exists(os.path.join(REPO,iface)):
-            domain_keys=read_repo_keys(os.path.join(REPO,iface))
-            l_repo_keys.extend(domain_keys)
+            domain_keys.extend(read_repo_keys(os.path.join(REPO,iface)))
+        # last is default domain
+        if wg_domains[-1] == dom:
+            domain_keys.extend(read_repo_keys(os.fsencode(REPO)))
         l_iface_keys=read_interface_keys(iface)
-        a, r = create_diff(l_repo_keys, l_iface_keys, iface)
+        a, r = create_diff(domain_keys, l_iface_keys, iface)
         for key in a:
             wg_modify_peer(key, iface)
         for key in r:
