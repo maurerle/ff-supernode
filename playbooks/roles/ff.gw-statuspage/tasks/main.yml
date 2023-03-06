@@ -28,7 +28,7 @@
   become: true
   become_user: auto
   git:
-    repo: {{ git_addr }}/site.git
+    repo: "{{ git_addr }}/site.git"
     dest: /var/cache/gw-statuspage/site
     accept_hostkey: true
   register: site
@@ -38,7 +38,7 @@
     name: "gw-statuspage site git pull"
     user: "auto"
     minute: "4,44"
-    hour: "*"
+    hour: "5"
     job: "cd /var/cache/gw-statuspage/site; git pull >/dev/null 2>&1"
 
 - name: add aiyions gpg-key as known gpg key to verify packages

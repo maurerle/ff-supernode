@@ -6,7 +6,7 @@
 		"interfaces-config": {
 			// Set to UDP to avoid raw socket performance penalty
 			// "dhcp-socket-type": "udp",
-						"interfaces": [ {% for domain in domains | default( [] ) %} "bat{{ domain.id }}"{% if not loop.last %}, {% endif %}{% endfor %} ]
+			"interfaces": [ {% for domain in domains | default( [] ) %} "bat{{ domain.id }}"{% if not loop.last %}, {% endif %}{% endfor %} ]
 		},
 
 		"sanity-checks": {

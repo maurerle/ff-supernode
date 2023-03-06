@@ -5,6 +5,7 @@ sn: 02
 # cloud-init config
 networkd_configures:
   - iface: eth0
+    fixed_mac: ee:fa:5b:e2:b4:68
     addresses:
       - 5.145.135.152/27
       - 2a00:fe0:43::202/64

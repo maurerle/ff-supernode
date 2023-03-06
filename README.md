@@ -84,6 +84,14 @@ Finally, ansible needs to ask for the vault-password now using:
 ansible-playbook --ask-vault-password playbooks/supernode.yml --tags mesh_wireguard
 ```
 
+### Removing domains
+
+To remove domains, it is suggested to `rm /etc/systemd/network/*` and `rm -r /etc/systemd/system/sys-subsystem-net-devices*`
+
+### MAC-Selection
+
+MAC addresses are not allowed to start with FF - systemd-networkd complains about such interfaces with `Could not join netdev: Provided Ethernet address is not unicast`
+
 ## Roles - Supernode
 
 * ff.mesh_batman - configures batman

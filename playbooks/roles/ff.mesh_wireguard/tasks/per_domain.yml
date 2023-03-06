@@ -1,5 +1,13 @@
 ---
 
+- name: "Create permissions folder"
+  file:
+    path: /etc/wireguard
+    state: directory
+    mode: "0650" 
+    owner: "root"
+    group: "systemd-network"    
+
 - name: "Create wireguard privatekey file (dom {{ domain.id }}) (DIFF REDACTED)"
   copy:
     content: "{{ wireguard_keys['%02d' % sn][domain.id].secret }}" 

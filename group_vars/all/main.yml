@@ -20,15 +20,25 @@ deprecation_text: 'Dieses Ger√§t ist veraltet und wird nicht mehr lange unterst√
 # vxlan ids may be generated using vx.py in scripts
 # ids are segment/domain
 domains:
-- id: "10"
-  vxlanid: "2293484"
 - id: "11"
   vxlanid: "2293484"
 - id: "12"
   vxlanid: "2293484"
-- id: "20"
+- id: "13"
   vxlanid: "2293484"
-- id: "99"
+- id: "14"
+  vxlanid: "2293484"
+- id: "15"
+  vxlanid: "2293484"
+- id: "16"
+  vxlanid: "2293484"
+- id: "17"
+  vxlanid: "2293484"
+- id: "18"
+  vxlanid: "2293484"
+- id: "19"
+  vxlanid: "2293484"
+- id: "20"
   vxlanid: "2293484"
 
 # ffrl prefix
