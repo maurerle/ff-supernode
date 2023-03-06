@@ -20,7 +20,8 @@
     - { name: ff.kea_dhcp4_server, tags: dhcp, become: true }
     - { name: ff.iptables, tags: iptables, become: true }
     - { name: ff.mesh_announce, tags: mesh_announce, become: true }
-    #- { name: ff.gw-statuspage, tags: gw-statuspage, become: true }
+    - { name: ff.watchdog, tags: watchdog, become: true }
+    #- { name: ff.gw-statuspage, tags: gw_statuspage, become: true }
     # Backups
     #- { name: ff.restic, tags: restic }
   post_tasks:
