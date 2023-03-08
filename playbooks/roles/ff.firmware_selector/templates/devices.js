@@ -14,8 +14,10 @@ var devices_recommended = {
   },
 
   "Arcadyan": {
-    "O2 Box 6431": "o2-box-6431",
-    "vgv7510kw22": "arcadyan-vgv7510kw22"
+    "VGV7510KW22 (o2 Box 6431)": {
+      "arcadyan-vgv7510kw22": "",
+      "o2-box-6431": "--ignore--",
+    },
   },
 
   "Aruba": {
@@ -30,18 +32,15 @@ var devices_recommended = {
   "Asus": {
     "RT-AC51U": "asus-rt-ac51u",
     "RT-AC57U": "asus-rt-ac57u",
-    "RT-AX53U": "asus-rt-ax53u",
   },
 
   "AVM": {
-    "FRITZ!Box 3370": {"avm-fritz-box-3370-rev-2-hynix-nand": "v2 Hynix", "avm-fritz-box-3370-rev-2-micron-nand": "v2 Micron"},
     "FRITZ!Box 4020": "avm-fritz-box-4020",
     "FRITZ!Box 4040": "avm-fritz-box-4040",
     "FRITZ!Box 7312": "avm-fritz-box-7312",
     "FRITZ!Box 7320": "avm-fritz-box-7320",
     "FRITZ!Box 7330": "avm-fritz-box-7330",
     "FRITZ!Box 7330 SL": "avm-fritz-box-7330-sl",
-    "FRITZ!Box 7430": "avm-fritz-box-7430",
     "FRITZ!Box 7360 SL": "avm-fritz-box-7360-sl",
     "FRITZ!Box 7360": "avm-fritz-box-7360",
     "FRITZ!Box 7362 SL": "avm-fritz-box-7362-sl",
@@ -68,15 +67,13 @@ var devices_recommended = {
   "Cudy": {
     "WR1000": {"cudy-wr1000": "v2"},
     "WR2100": "cudy-wr2100",
-    "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
-    "X6": "cudy-x6",
-    "M1800": "cudy-m1800",
   },
 
   "D-Link": {
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
+    "DGS-1210-10P": "d-link_dgs-1210-10p",
     "DIR-505": {"d-link-dir-505-rev": "", "d-link-dir-505": ""},
     "DIR-825": {"d-link-dir-825-rev": "", "d-link-dir825b1": "b1"},
     "DIR-860L": "d-link-dir-860l",
@@ -133,13 +130,14 @@ var devices_recommended = {
   },
 
   "LeMaker": {
-    "Banana Pi": "lemaker-banana-pi",
-    "Banana Pro": "lemaker-banana-pro",
-    "Banana Pi R1 (Lamobo)": {"lamobo-r1": "", "lemaker-lamobo-r1": ""}
+    "Banana Pi": "lemaker-banana-pi"
+  },
+
+  "Librerouter": {
+    "LibreRouter": "librerouter"
   },
 
   "Linksys": {
-    "WRT1200AC": "linksys-wrt1200ac",
     "E8450": {"linksys-e8450": "", "linksys-e8450-ubi-sysupgrade.itb": ""},
   },
 
@@ -152,6 +150,7 @@ var devices_recommended = {
 
   "Mikrotik": {
     "RB951Ui-2nD (hAP)": "mikrotik-routerboard-951ui-2nd-hap",
+    "RBD52G-5HacD2HnD-TC (hAP ac²)": "mikrotik-hap-ac2",
     "RBDiscG-5acD (DISC Lite5 ac)": "mikrotik-discg-5acd",
     "RBSXTsqG-5acD (SXTsq 5 ac)": "mikrotik-sxtsq-5-ac-rbsxtsqg-5acd",
     "nand": {"mikrotik-nand-64m" : "64m", "mikrotik-nand-large" : "large", "mikrotik-nand-large-ac": "large AC"},
@@ -172,7 +171,6 @@ var devices_recommended = {
     "R7800": "netgear-nighthawk-x4s-r7800",
     "WAC104": "netgear-wac104",
     "WAX202": "netgear-wax202",
-    "WAX206": "netgear-wax206",
     "WNR2200": {
       "netgear-wnr2200-16m": "16M",
       "netgear-wnr2200-8m": "8M",
@@ -259,13 +257,6 @@ var devices_recommended = {
     "PA2200": "plasma-cloud-pa2200",
   },
 
-  "Raspberry Pi Foundation": {
-    "PI1": { "raspberry-pi": "", "raspberrypi-model-b": "" },
-    "PI2": { "raspberry-pi-2": "", "raspberrypi-2-model-b": "" },
-    "PI3": { "raspberry-pi-3": "", "raspberrypi-3-model-b": "" },
-    "PI4": { "raspberry-pi-4": "", "raspberry-pi-4-model-b": "" }
-  },
-
   "RAVPower": {
     "RP-WD009": "ravpower-rp-wd009",
   },
@@ -278,16 +269,19 @@ var devices_recommended = {
     "RED 15w": { "sophos-red-15w-rev.1": "Rev.1"},
   },
 
+  "Teltonika": {
+    "RUT230": "teltonika-rut230",
+  },
+
   "TP-Link": {
     "Archer A7": {"tp-link-archer-a7": "v5"},
     "Archer C2": "tp-link-archer-c2",
     "Archer C20": "tp-link-archer-c20",
     "Archer C20i": "tp-link-archer-c20i",
-    "Archer C2600": {"tp-link-archer-c2600": "v1"},
     "Archer C5": "tp-link-archer-c5",
     "Archer C50": {"tp-link-archer-c50": "v1", "tp-link-archer-c50-v3": "v3", "tp-link-archer-c50-v4": "v4"},
     "Archer C59": "tp-link-archer-c59",
-    "Archer C6": {"tp-link-archer-c6-v2-eu-ru-jp": "v2 (EU/RU/JP)", "tp-link-archer-c6-v2": "v2 (EU/RU/JP)"},
+    "Archer C6": {"tp-link-archer-c6-v2-eu-ru-jp": "v2 (EU/RU/JP)", "tp-link-archer-c6-v2": "v2 (EU/RU/JP)", "tp-link-archer-c6-v3": "v3"},
     "Archer C7": "tp-link-archer-c7",
     "CPE210": {"tp-link-cpe210": "", "tp-link-cpe210-220": ""},
     "CPE220": {"tp-link-cpe220": "", "tp-link-cpe220-v1.1": "--ignore--"},
@@ -299,10 +293,8 @@ var devices_recommended = {
     "RE500": "tp-link-re500",
     "RE650": "tp-link-re650",
     "TD-W8970": "tp-link-td-w8970",
-    "TD-W8980": "tp-link-td-w8980",
     "TD-W9980": "tp-link-td-w9980",
     "TL-MR3020": {"tp-link-tl-mr3020-v3": "v3"},
-    "TL-MR6400": {"tp-link-tl-mr6400-v5": "v5"},
     "TL-MR3420": "tp-link-tl-mr3420",
     "TL-WA801N/ND": "tp-link-tl-wa801nd",
     "TL-WDR3500": "tp-link-tl-wdr3500",
@@ -336,7 +328,7 @@ var devices_recommended = {
                     "ubiquiti-nanostation-m2-xw": "M2 XW", "ubiquiti-nano-m2-xw": "M2 XW",
                     "ubiquiti-nanostation-m5-xw": "M5 XW", "ubiquiti-nano-m5-xw": "M5 XW"},
     "Rocket": {"ubiquiti-rocket-m": "M", "ubiquiti-rocket-m-xw": "M XW",
-               "ubiquiti-rocket-m2": "M2", "ubiquiti-rocket-m2-xw": "M2 XW", 
+               "ubiquiti-rocket-m2": "M2", "ubiquiti-rocket-m2-xw": "M2 XW",
                "ubiquiti-rocket-m5": "M5", "ubiquiti-rocket-m5-xw": "M5 XW",
                "ubiquiti-rocket-5ac-lite": "5 AC Lite"},
     "Rocket Titanium": {"ubiquiti-rocket-m-ti": "--ignore--",
@@ -358,6 +350,10 @@ var devices_recommended = {
 
   "VoCore": {
     "VoCore 2": "vocore2"
+  },
+
+  "Wavlink": {
+    "WS-WN572HP3 (4G)": "wavlink-ws-wn572hp3-4g",
   },
 
   "Western Digital": {
@@ -396,18 +392,18 @@ var devices_recommended = {
 
   "ZBT": {
     "WG3526": {"zbt-wg3526-16m": "16M", "zbt-wg3526-32m": "32M", "zbt-wg3526": "16M", "zbtlink-zbt-wg3526-16m": "16M", "zbtlink-zbt-wg3526-32m": "32M",},
-  }
+  },
 };
 
 var devices_ath10k_lowmem = {
 	"TP-Link": {
-		"Archer C25": {"tp-link-archer-c25": "v1"},
-		"Archer C58": {"tp-link-archer-c58": "v1"},
-		"Archer C60": {"tp-link-archer-c60-v1": "v1", "tp-link-archer-c60-v2": "v2"},
+		"Archer C25": {"tp-link-archer-c25": "v1"}, // OOM with 5GHz enabled in most environments
+		"Archer C58": {"tp-link-archer-c58": "v1"}, // OOM with 5GHz enabled in most environments
+		"Archer C60": {"tp-link-archer-c60-v1": "v1", "tp-link-archer-c60-v2": "v2"}, // OOM with 5GHz enabled in most environments
 		"Archer D50": "tp-link-archer-d50",
-		"RE355": "tp-link-re355",
+		"RE355": "tp-link-re355", // OOM with 5GHz enabled in most environments
 		"RE450": "tp-link-re450",
-		"TL-WR902AC": {"tp-link-tl-wr902ac-v1": "v1"},
+		"TL-WR902AC": {"tp-link-tl-wr902ac-v1": "v1"}, // OOM with 5GHz enabled in most environments
 	},
 
 	"ZyXEL": {
@@ -527,7 +523,65 @@ var devices_16_32 = {
   "VoCore": {
     "VoCore": {"vocore-16M": "16M"},
   },
-}
+};
+
+var devices_broken = {
+  "Asus": {
+    // not in release
+    "RT-AX53U": "asus-rt-ax53u",
+  },
+
+  "AVM": {
+    // no button for setup mode
+    "FRITZ!Box 3370": {"avm-fritz-box-3370-rev-2-hynix-nand": "v2 Hynix", "avm-fritz-box-3370-rev-2-micron-nand": "v2 Micron"},
+    "FRITZ!Box 7430": "avm-fritz-box-7430",
+  },
+
+  "Cudy": {
+    // not in release
+    "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
+    "X6": "cudy-x6",
+    "M1800": "cudy-m1800",
+  },
+
+  "Raspberry Pi Foundation": {
+    // no working mesh without usb
+    "PI1": { "raspberry-pi": "", "raspberrypi-model-b": "" },
+    "PI2": { "raspberry-pi-2": "", "raspberrypi-2-model-b": "" },
+    "PI3": { "raspberry-pi-3": "", "raspberrypi-3-model-b": "" },
+    "PI4": { "raspberry-pi-4": "", "raspberry-pi-4-model-b": "" }
+  },
+
+  "LeMaker": {
+    // 802.11s not working
+    "Banana Pro": "lemaker-banana-pro",
+    "Banana Pi R1 (Lamobo)": {"lamobo-r1": "", "lemaker-lamobo-r1": ""}
+  },
+
+  "Linksys": {
+    "WRT1200AC": "linksys-wrt1200ac", // no 802.11s support
+  },
+
+  "Netgear": {
+    // not in release
+    "WAX206": "netgear-wax206",
+  },
+
+  "TP-Link": {
+    "Archer C2600": {"tp-link-archer-c2600": "v1"}, // no 802.11s support
+    "TD-W8980": "tp-link-td-w8980", // 5GHz unsupported
+    "TL-MR6400": {"tp-link-tl-mr6400-v5": "v5"},
+  },
+
+  "ZTE": {
+    // LEDs on the front can not be controlled
+    "MF281": "zte-mf281",
+  },
+
+  "ZyXEL": {
+    "NWA55AXE": "zyxel-nwa55axe",
+  },
+};
 
 var vendormodels = {
   "recommended": devices_recommended,
@@ -537,7 +591,8 @@ var vendormodels = {
   "4_32": devices_4_32,
   "8_32": devices_8_32,
   "16_32": devices_16_32,
-}
+  "broken": devices_broken,
+};
 
 var devices_info = {
   "Aruba": {
@@ -549,8 +604,7 @@ var devices_info = {
     "Instant On AP17": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=300b7fe85a743ab0e039457a5a551819b49450da",
   },
   "Arcadyan": {
-    "O2 Box 6431": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6",
-    "vgv7510kw22": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6"
+    "VGV7510KW22 (o2 Box 6431)": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6",
   },
   "AVM": {
     "FRITZ!Box 3370": "https://openwrt.org/toh/avm/fritz.box.wlan.3370#installation",
@@ -586,8 +640,10 @@ var devices_info = {
     "WiFi Pro 1750i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=8d68be8057d6c689025cc236d20b96b77a6ccf30",
     "WiFi Pro 1750x": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=cb3cd526948af3f69da1af18e035177a0a8f58e3"
   },
+  "Joy-IT": {
+    "JT-OR750i": "https://wiki.freifunk-stuttgart.net/technik:hardware:joy-it_jt-or750i",
+  },
   "Netgear": {
-    "DGN3500": "netgear-dgn3500b",
     "EX3700": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex3700/",
     "EX3800": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex3700/",
     "EX6150": "https://freifunk-ingolstadt.de/eigener-freifunk-hotspot/anleitung/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex6150-v2/",
@@ -622,10 +678,20 @@ var devices_info = {
       "v3": "https://openwrt.org/toh/tp-link/tl-wr902ac_v3#installation"
     }
   },
+  "Wavlink": {
+    "WS-WN572HP3 (4G)": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6cd1035d8dc001561331ca9e613d7dfc7d0fd7a6",
+  },
   "Xiaomi": {
     "Mi Router 4A (100M Edition)": "https://openwrt.org/toh/xiaomi/mi_router_4a_mir4a_100m#installation",
     "Mi Router 4A (100M International Edition)": "https://forum.ffrn.de/t/howto-installation-xiaomi-mi-router-4a-r4ac-100m-international-edition/3536",
     "Mi Router 4A (Gigabit Edition)": "https://github.com/acecilia/OpenWRTInvasion/blob/master/README.md",
     "Mi Router 4C": "https://github.com/acecilia/OpenWRTInvasion/blob/master/README.md",
-  }
+  },
+  "ZTE": {
+    "MF281": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1e1695f959e678868bb7911d059b847f38fc9cf4",
+  },
+  "ZyXEL": {
+    "NWA50AX": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
+    "NWA55AXE": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
+  },
 }

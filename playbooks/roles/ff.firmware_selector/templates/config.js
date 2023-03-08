@@ -19,7 +19,7 @@ var config = {
   // see devices.js for different vendor model maps
   vendormodels: vendormodels,
   // set enabled categories of devices (see devices.js)
-  enabled_device_categories: ["recommended", "small_kernel_part", "ath10k_lowmem", "8_32", "4_32", "16_32"],
+  enabled_device_categories: ["recommended", "small_kernel_part", "ath10k_lowmem", "8_32", "4_32", "16_32", "broken"],
   // Display a checkbox that allows to display not recommended devices.
   // This only make sense if enabled_device_categories also contains not
   // recommended devices.
