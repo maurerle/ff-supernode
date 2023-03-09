@@ -2,13 +2,14 @@
 
 - name: Ensure python3-netifaces
   apt:
-    name: "{{item}}"
-    state: latest
     update_cache: yes
-  loop:
-    - python3-netifaces 
-    - ethtool
-    - lsb-release
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - python3-netifaces 
+      - ethtool
+      - lsb-release
 
 - name: Clone ext-respondd sources
   git:

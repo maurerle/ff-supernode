@@ -1,0 +1,66 @@
+---
+
+- name: Install buildserver dependencies
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - bash
+      - bzip2
+      - curl
+      - diffutils
+      - file
+      - g++
+      - gawk
+      - gcc
+      - git
+      - libncurses5-dev
+      - make
+      - patch
+      - perl
+      - python3
+      - qemu-utils
+      - rsync
+      - tar
+      - unzip
+      - wget
+      - ecdsautils
+      - htop
+
+- name: Create {{ freifunk_site }} user
+  register: createuser
+  user:
+    name: "{{ freifunk_site }}"
+    system: yes
+    generate_ssh_key: yes
+
+- name: Clone site
+  become: true
+  become_user: "{{ freifunk_site }}"
+  git:
+    repo: "{{ git_addr }}/site.git"
+    dest: ~/site
+    accept_hostkey: true
+  register: site
+
+- name: Check if buildserver key exists
+  become: true
+  become_user: "{{ freifunk_site }}"
+  register: key_exists
+  stat:
+    path: ~/.gluon-secret-key
+
+- name: Create Buildserver Gluon signing key
+  become: true
+  become_user: "{{ freifunk_site }}"
+  raw:
+    - ecdsakeygen -s > ~/.gluon-secret-key
+  when: not key_exists
+
+- name: Ensure firmware directory
+  file:
+    path: /var/www/firmware
+    state: directory
+    owner: "yanic"
+    group: "www-data"

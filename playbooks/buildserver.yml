@@ -1,6 +1,6 @@
 ---
 
-- hosts: "monitoring"
+- hosts: "buildserver"
   pre_tasks:
     - name: "Import pre_tasks: reboot-required.yml"
       import_tasks: "include/reboot-required.yml"
@@ -10,13 +10,10 @@
       tags: [always]
   roles:
     # General
-    - { name: ff.influxdb, tags: influxdb, become: true }
-    - { name: ff.yanic, tags: yanic, become: true }
-    - { name: ff.grafana, tags: grafana, become: true }
-    #- { name: ff.nginx, tags: nginx, become: true }
+    - { name: ff.networkd, tags: networkd, become: true }
+    - { name: ff.buildserver, tags: buildserver, become: true }
+    - { name: ff.firmware_selector, tags: firmware_selector, become: true }
     - { name: ff.certbot, tags: certbot, become: true }
-    - { name: ff.meshviewer, tags: meshviewer, become: true }
-    - { name: ff.wgbroker, tags: wgbroker, become: true }
   post_tasks:
     - name: "Import post_task etckeeper"
       import_tasks: "include/etckeeper_post.yml"

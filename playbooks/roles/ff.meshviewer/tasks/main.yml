@@ -12,8 +12,8 @@
 
 - name: Install dev dependencies of meshviewer
   apt:
-    pkg:
-      - npm
+    update_cache: yes
+    name: "npm"
 
 - name: Check for package.json
   ansible.builtin.stat:

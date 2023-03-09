@@ -21,9 +21,9 @@
 
 
 - name: 'Get certificate'
-  command: '/usr/local/bin/certbot -n --nginx -d {{ monitor_hostname }}'
+  command: '/usr/local/bin/certbot -n --nginx -d {{ dns_hostname }}'
   args:
-    creates: '/etc/letsencrypt/live/{{ monitor_hostname }}'
+    creates: '/etc/letsencrypt/live/{{ dns_hostname }}'
   ignore_errors: true
   tags:
     - nginx

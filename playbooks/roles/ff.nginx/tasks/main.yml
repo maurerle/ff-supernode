@@ -5,12 +5,13 @@
 
 - name: Ensure nginx
   apt:
-    name: "{{item}}"
-    state: latest
     update_cache: yes
-  loop:
-    - nginx-full
-    - ssl-cert
+    state: latest
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - nginx-full
+      - ssl-cert
 
 - name: Nginx config
   template:

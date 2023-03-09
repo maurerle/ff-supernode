@@ -39,12 +39,18 @@
     src: networkd.conf.j2
 
 - name: Enable systemd-networkd
-  service: name=systemd-networkd enabled=yes state=started
+  service:
+    name: systemd-networkd
+    enabled: yes
+    state: started
   # networkd does not remove any existing network configuration,
   # so this should be safe.
 
 - name: Enable systemd-resolved
-  service: name=systemd-resolved enabled=yes state=started
+  service:
+    name: systemd-resolved
+    enabled: yes
+    state: started
 
 - name: Enable dns resolving with systemd-resolved
   register: enableresolved
@@ -74,15 +80,21 @@
   when: not item.1.fixed_mac | default(true)
 
 - name: Directly restart networkd
-  service: name=systemd-networkd state=restarted
+  service:
+    name: systemd-networkd
+    state: restarted
   when: enableresolved is changed
 
 - name: Directly restart resolved
-  service: name=systemd-resolved state=restarted
+  service:
+    name: systemd-resolved
+    state: restarted
   when: enableresolved is changed
 
 - name: Disable debian networking
-  service: name=networking enabled=no
+  service:
+    name: networking
+    enabled: no
   # Do not stop the debian networking scripts immediately, since the scripts
   # would remove their already applied configuration. networkd does not perceive
   # the removed configuration and would not apply it's own. This would cause connection

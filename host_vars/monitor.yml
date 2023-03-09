@@ -13,7 +13,7 @@ networkd_configures:
       - 9.9.9.9
       - '2001:678:ed0:f000::'
       - 5.1.66.255
-monitor_hostname: 01.wg-node.freifunk-aachen.de
+dns_hostname: 01.wg-node.freifunk-aachen.de
 yanic_url: /data/
 yanic_webserver: "false"
 
