@@ -5,7 +5,7 @@ After=network.target
 
 [Service]
 User=auto
-WorkingDirectory=/home/auto/segmenter
+WorkingDirectory=/home/auto/autosegmenter
 ExecStart=/usr/bin/python3 watchdog.py
 Restart=always
 RestartSec=10

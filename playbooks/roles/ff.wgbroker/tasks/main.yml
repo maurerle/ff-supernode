@@ -51,6 +51,8 @@
       - gunicorn
 
 - name: Set Git Config Mail
+  become: true
+  become_user: auto
   git_config:
     name: user.email
     repo: /etc/wireguard/peers-wg

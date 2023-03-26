@@ -38,10 +38,12 @@
   become_user: auto
   git:
     repo: https://github.com/ffac/autosegmenter
-    dest: /home/auto/segmenter
+    dest: /home/auto/autosegmenter
   register: updatewatchdog
 
 - name: Set Git Config Mail
+  become: true
+  become_user: auto
   git_config:
     name: user.email
     repo: /etc/wireguard/peers-wg
@@ -49,6 +51,8 @@
     value: 'auto@{{ dns_searchdomains }}'
 
 - name: Set Git Config User
+  become: true
+  become_user: auto
   git_config:
     name: user.name
     repo: /etc/wireguard/peers-wg
@@ -58,7 +62,7 @@
 - name: Install watchdog_config.json
   template:
     src: watchdog_config.json.j2
-    dest: /home/auto/segmenter/watchdog_config.json
+    dest: /home/auto/autosegmenter/watchdog_config.json
     owner: auto
     group: auto
 
