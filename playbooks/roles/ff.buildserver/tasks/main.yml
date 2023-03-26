@@ -70,7 +70,7 @@
   become_user: "{{ freifunk_site }}"
   raw:
     ecdsakeygen -s > ~/.gluon-secret-key
-  when: not key_exists
+  when: not key_exists.stat.exists
 
 - name: Ensure firmware directory
   file:
@@ -87,16 +87,20 @@
     group: "www-data"
 
 - name: "Install deploy.sh"
+  become: true
+  become_user: "{{ freifunk_site }}"
   copy:
     src: "deploy.sh"
     dest: "~/deploy.sh"
-    mode: "700"
+    mode: "744"
 
 - name: "Install header.html"
   copy:
     src: "header.html"
     dest: "/var/www/header.html"
-    mode: "700"
+    mode: "644"
+    owner: "{{ freifunk_site }}"
+    group: "www-data"
 
 - name: Nginx sites config
   copy:
