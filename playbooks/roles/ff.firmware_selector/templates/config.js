@@ -33,18 +33,21 @@ var config = {
   // relative image paths and branch
 
   directories: {
-    // some demo sources
-    '../release_images/from-2022.1.x/experimental/factory/': 'v2022_experimental',
-    '../release_images/from-2022.1.x/experimental/other/': 'v2022_experimental',
-    '../release_images/from-2022.1.x/experimental/sysupgrade/': 'v2022_experimental',
+    '/firmware/download/from-2022.1.x/factory/': 'v2022',
+    '/firmware/download/from-2022.1.x/other/': 'v2022',
+    '/firmware/download/from-2022.1.x/sysupgrade/': 'v2022',
 
-    '../release_images/from-2021.1.x/experimental/factory/': 'v2021_experimental',
-    '../release_images/from-2021.1.x/experimental/other/': 'v2021_experimental',
-    '../release_images/from-2021.1.x/experimental/sysupgrade/': 'v2021_experimental',
+    '/firmware/download/from-2021.1.x/factory/': 'v2021',
+    '/firmware/download/from-2021.1.x/other/': 'v2021',
+    '/firmware/download/from-2021.1.x/sysupgrade/': 'v2021',
 
-    '../release_images/from-next/experimental/factory/': 'nightly',
-    '../release_images/from-next/experimental/other/': 'nightly',
-    '../release_images/from-next/experimental/sysupgrade/': 'nightly',
+    '/firmware/download/from-next/factory/': 'next',
+    '/firmware/download/from-next/other/': 'next',
+    '/firmware/download/from-next/sysupgrade/': 'next',
+
+    '/firmware/download/from-2023.1.x/factory/': 'v2023',
+    '/firmware/download/from-2023.1.x/other/': 'v2023',
+    '/firmware/download/from-2023.1.x/sysupgrade/': 'v2023',
 
 //    'http://updates.freifunk-aachen.de/stable/factory/': 'v2019',
 //    'http://updates.freifunk-aachen.de/other/': 'v2019',
@@ -55,28 +58,18 @@ var config = {
   title: 'Firmware',
   // branch descriptions shown during selection
   branch_descriptions: {
-    v2022_experimental: 'Images auf Gluon 2022/Openwrt 2022 Basis mit tag und WG - nicht für 4/32er Geräte',
-    v2021_experimental: 'Images auf Gluon 2021/Openwrt 2019 Basis',
-    nightly: 'Die zuletzt gebauten Images - nur nach Aufforderung nutzen!'
+    v2022: 'Images auf Gluon 2022/Openwrt 2022 Basis - nicht für 4/32er Geräte',
+    v2021: 'Images auf Gluon 2021/Openwrt 2019 Basis',
+    next: 'Images vom Gluon master, kein tag-definierter Stand',
+    v2023: 'Cutting Edge Images von OpenWRT master - zukünftige Basis für v2023 - noch nicht released'
     //v2019: 'Images basierend auf Gluon 2021, OpenWRT 2019 - mit Wireguard'
   },
   // recommended branch will be marked during selection
   recommended_branch: 'v2022-experimental',
   // experimental branches (show a warning for these branches)
-  experimental_branches: ['nightly'],
+  experimental_branches: ['next', 'v2023'],
   // path to preview pictures directory
   preview_pictures: 'pictures/',
   // link to changelog
-  changelog: '{{ firmware_changelog }}',
-  // links for instructions like flashing of certain devices (optional)
-  // can be set for a whole model or individual revisions
-  // overwrites default values from devices_info in devices.js
-  devices_info: {
-    'AVM': {
-      "FRITZ!Box 4040": "https://fritz-tools.readthedocs.io"
-    },
-    "TP-Link": {
-      "TL-WR841N/ND": {"v13": "https://wiki.freifunk.net/TP-Link_WR841ND/Flash-Anleitung_v13"}
-    }
-  }
+  changelog: '{{ firmware_changelog }}'
 };

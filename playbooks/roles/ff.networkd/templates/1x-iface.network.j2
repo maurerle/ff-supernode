@@ -33,7 +33,7 @@ VLAN=vlan{{ vlan.id }}
 {% endfor %}
 {% endif %}
 {% for domain in domains | default( [] ) %}
-VXLAN={{ vxlan_iface_prefix }}-{{ domain.id }}-server
+VXLAN=vx-{{ domain.id }}-server
 {% endfor %}
 {% if item.1.dhcp is defined and item.1.dhcp %}
 [DHCPv4]

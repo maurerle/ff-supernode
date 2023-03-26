@@ -5,10 +5,11 @@
     repo: https://github.com/maurerle/meshviewer
     dest: '{{ meshviewer_source_dir }}'
     version: "fix_geo"
+    accept_hostkey: true
   register: repo_clone
   failed_when:
   - repo_clone.failed
-  - not 'Local modifications exist in repository' in repo_clone.msg
+  - not 'Local modifications exist in the destination' in repo_clone.msg
 
 - name: Install dev dependencies of meshviewer
   apt:

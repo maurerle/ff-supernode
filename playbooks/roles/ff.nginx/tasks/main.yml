@@ -11,6 +11,7 @@
   vars:
     packages:
       - nginx-full
+#      - nginx-extras
       - ssl-cert
 
 - name: Nginx config
@@ -26,7 +27,7 @@
   register: nginxconfig
 
 - name: Enable nginx sites config
-  ansible.builtin.file:
+  file:
     src: /etc/nginx/sites-available/proxy.conf
     dest: /etc/nginx/sites-enabled/proxy.conf
     state: link

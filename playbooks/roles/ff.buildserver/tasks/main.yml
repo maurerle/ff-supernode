@@ -27,6 +27,8 @@
       - wget
       - ecdsautils
       - htop
+      - nginx-full
+      - nginx-extras
 
 - name: Create {{ freifunk_site }} user
   register: createuser
@@ -43,24 +45,87 @@
     dest: ~/site
     accept_hostkey: true
   register: site
+  failed_when:
+  - site.failed
+  - not 'Local modifications exist in the destination' in site.msg
+
+- name: Clone manifest
+  become: true
+  become_user: "{{ freifunk_site }}"
+  git:
+    repo: "{{ git_addr }}/manifest.git"
+    dest: ~/manifest
+    accept_hostkey: true
+  register: site
 
 - name: Check if buildserver key exists
   become: true
   become_user: "{{ freifunk_site }}"
-  register: key_exists
   stat:
     path: ~/.gluon-secret-key
+  register: key_exists
 
 - name: Create Buildserver Gluon signing key
   become: true
   become_user: "{{ freifunk_site }}"
   raw:
-    - ecdsakeygen -s > ~/.gluon-secret-key
+    ecdsakeygen -s > ~/.gluon-secret-key
   when: not key_exists
 
 - name: Ensure firmware directory
   file:
     path: /var/www/firmware
     state: directory
-    owner: "yanic"
+    owner: "{{ freifunk_site }}"
     group: "www-data"
+
+- name: Ensure packages directory
+  file:
+    path: /var/www/packages
+    state: directory
+    owner: "{{ freifunk_site }}"
+    group: "www-data"
+
+- name: "Install deploy.sh"
+  copy:
+    src: "deploy.sh"
+    dest: "~/deploy.sh"
+    mode: "700"
+
+- name: "Install header.html"
+  copy:
+    src: "header.html"
+    dest: "/var/www/header.html"
+    mode: "700"
+
+- name: Nginx sites config
+  copy:
+    src: proxy.conf
+    dest: /etc/nginx/sites-available/proxy.conf
+  register: nginxconfig
+
+- name: Enable nginx sites config
+  file:
+    src: /etc/nginx/sites-available/proxy.conf
+    dest: /etc/nginx/sites-enabled/proxy.conf
+    state: link
+
+- name: Delete default config
+  file:
+    state: absent
+    path: "{{item}}"
+  loop:
+    - /etc/nginx/sites-enabled/default
+    - /etc/nginx/sites-available/default
+
+- name: Test nginx config
+  become: true
+  raw:
+    nginx -t
+
+- name: Restart Nginx
+  systemd:
+    name: nginx.service
+    state: restarted
+    enabled: yes
+  when: nginxconfig.changed

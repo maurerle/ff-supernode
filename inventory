@@ -12,6 +12,10 @@ all:
       ansible_host: 01.wg-node.freifunk-aachen.de
       ansible_user: florian
 
+    buildserver:
+      ansible_host: community-build.freifunk-aachen.de
+      ansible_user: ffac
+
 supernodes:
   hosts:
     sn01:

@@ -4,6 +4,12 @@
   git:
     repo: https://github.com/freifunk-darmstadt/gluon-firmware-selector.git
     dest: /var/www/gluon-firmware-selector
+    accept_hostkey: true
+  register: repo_clone
+  failed_when:
+  - repo_clone.failed
+  - not 'Local modifications exist in the destination' in repo_clone.msg
+
 
 - name: Install devices.js
   template:

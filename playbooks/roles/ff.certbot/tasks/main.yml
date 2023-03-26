@@ -1,3 +1,11 @@
+- name: Install pip3
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python3-pip
+
 - name: Install certbot
   pip:
     name:
