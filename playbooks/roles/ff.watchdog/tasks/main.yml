@@ -37,7 +37,7 @@
   become: true
   become_user: auto
   git:
-    repo: https://github.com/maurerle/segmenter
+    repo: https://github.com/ffac/autosegmenter
     dest: /home/auto/segmenter
   register: updatewatchdog
 
@@ -68,10 +68,10 @@
     dest: /etc/systemd/system/ff-batman-watchdog.service
   register: servicefile
 
-# - name: Enable watchdog service
-#   systemd:
-#     name: ff-batman-watchdog.service
-#     state: stopped
-#     daemon_reload: yes
-#     enabled: yes
-#   when: servicefile is changed or updatebroker is changed
+- name: Enable watchdog service
+  systemd:
+    name: ff-batman-watchdog.service
+    state: started
+    daemon_reload: yes
+    enabled: yes
+  when: servicefile is changed or updatewatchdog is changed
