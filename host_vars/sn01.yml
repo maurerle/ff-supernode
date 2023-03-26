@@ -37,4 +37,4 @@ mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
 
 local_vxlan_supernode: 2a00:fe0:43::201
-#remote_vxlan_supernode: 2a00:fe0:43::202
+remote_vxlan_supernode: 2a00:fe0:43::202
