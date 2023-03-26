@@ -8,6 +8,7 @@ User=auto
 WorkingDirectory=/home/auto/segmenter
 ExecStart=/usr/bin/python3 watchdog.py
 Restart=always
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
