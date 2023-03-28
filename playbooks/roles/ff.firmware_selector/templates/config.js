@@ -41,6 +41,10 @@ var config = {
     '/firmware/download/from-2021.1.x/other/': 'v2021',
     '/firmware/download/from-2021.1.x/sysupgrade/': 'v2021',
 
+    '/firmware/download/from-2019.1.x/factory/': 'v2019',
+    '/firmware/download/from-2019.1.x/other/': 'v2019',
+    '/firmware/download/from-2019.1.x/sysupgrade/': 'v2019',
+
     '/firmware/download/from-next/factory/': 'next',
     '/firmware/download/from-next/other/': 'next',
     '/firmware/download/from-next/sysupgrade/': 'next',
@@ -48,10 +52,6 @@ var config = {
     '/firmware/download/from-2023.1.x/factory/': 'v2023',
     '/firmware/download/from-2023.1.x/other/': 'v2023',
     '/firmware/download/from-2023.1.x/sysupgrade/': 'v2023',
-
-//    'http://updates.freifunk-aachen.de/stable/factory/': 'v2019',
-//    'http://updates.freifunk-aachen.de/other/': 'v2019',
-//    'http://updates.freifunk-aachen.de/sysupgrade/': 'v2019',
 
   },
   // page title
@@ -61,11 +61,12 @@ var config = {
     v2022: 'Images auf Gluon 2022/Openwrt 2022 Basis - nicht für 4/32er Geräte',
     v2021: 'Images auf Gluon 2021/Openwrt 2019 Basis',
     next: 'Images vom Gluon master, kein tag-definierter Stand',
-    v2023: 'Cutting Edge Images von OpenWRT master - zukünftige Basis für v2023 - noch nicht released'
-    //v2019: 'Images basierend auf Gluon 2021, OpenWRT 2019 - mit Wireguard'
+    v2023: 'Cutting Edge Images von OpenWRT master - zukünftige Basis für v2023 - noch nicht released - kein wifi-mesh',
+    v2019: 'Alte 2019er Images mit FastD'
+
   },
   // recommended branch will be marked during selection
-  recommended_branch: 'v2022-experimental',
+  recommended_branch: 'v2022',
   // experimental branches (show a warning for these branches)
   experimental_branches: ['next', 'v2023'],
   // path to preview pictures directory

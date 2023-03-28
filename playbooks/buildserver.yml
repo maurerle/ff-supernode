@@ -11,9 +11,9 @@
   roles:
     # General
     - { name: ff.networkd, tags: networkd, become: true }
-    - { name: ff.buildserver, tags: buildserver, become: true }
-    - { name: ff.firmware_selector, tags: firmware_selector, become: true }
     - { name: ff.certbot, tags: certbot, become: true }
+    - { name: ff.firmware_selector, tags: firmware_selector, become: true }
+    - { name: ff.buildserver, tags: buildserver, become: true }
   post_tasks:
     - name: "Import post_task etckeeper"
       import_tasks: "include/etckeeper_post.yml"

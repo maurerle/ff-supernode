@@ -5,6 +5,7 @@
   vars:
     packages:
     - python3-pip
+    - nginx-full
 
 - name: Install certbot
   pip:
