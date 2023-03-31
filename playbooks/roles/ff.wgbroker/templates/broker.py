@@ -1,9 +1,14 @@
+import glob
+import os
+import pwd
+import re
 import subprocess
-import os, re, pwd
-from flask import Flask, request, jsonify
 import unicodedata
 
-REPO="/etc/wireguard/peers-wg"
+from flask import Flask, jsonify, request
+
+
+REPO = "/etc/wireguard/peers-wg"
 
 app = Flask(__name__)
 # TODO(ruairi): Refactor load_config to return Dataclass.
@@ -58,8 +63,11 @@ def commit_repo(filename):
 def add_file(filename, publickey):
     if WG_PUBKEY_PATTERN.match(publickey) is None:
         raise ValueError(f"Not a valid Wireguard public key: {publickey}.")
-    if os.path.isfile(f"{REPO}/{filename}"):
-        raise Exception(f'{filename} already exists')
+
+    pattern = f"{REPO}/**/{filename}"
+    for fname in glob.glob(pattern, recursive=True):
+        if os.path.isfile(fname):
+            raise Exception(f'{filename} already exists')
     
     execute_autouser(f"echo {publickey} > {REPO}/{filename}")
 
