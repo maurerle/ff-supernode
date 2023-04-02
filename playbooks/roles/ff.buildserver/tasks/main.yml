@@ -16,9 +16,12 @@
       - gcc
       - git
       - libncurses5-dev
+      - libssl-dev
+      - libelf-dev
       - make
       - patch
       - perl
+      - python2
       - python3
       - qemu-utils
       - rsync
