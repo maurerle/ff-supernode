@@ -42,7 +42,7 @@
 - name: Configure yanic (DIFF REDACTED)
   notify: Restart yanic
   template:
-    src: config.yml.j2
+    src: yanic-config.yml.j2
     dest: /etc/yanic.conf
 
 - name: Copy systemd service
