@@ -73,6 +73,7 @@ var devices_recommended = {
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
+    "DAP-X1860": "d-link-dap-x1860",
     "DGS-1210-10P": "d-link_dgs-1210-10p",
     "DIR-505": {"d-link-dir-505-rev": "", "d-link-dir-505": ""},
     "DIR-825": {"d-link-dir-825-rev": "", "d-link-dir825b1": "b1"},
@@ -93,7 +94,7 @@ var devices_recommended = {
   },
 
   "Enterasys": {
-    "WS-AP3705i": "enterasys-ws-ap3705",
+    "WS-AP3705i": {"enterasys-ws-ap3705": "", "enterasys-ws-ap3705i": ""},
     "WS-AP3710i": "enterasys-ws-ap3710i",
   },
 
@@ -120,7 +121,9 @@ var devices_recommended = {
     "GL-MT300a": "gl-mt300a",
     "GL-MT300n": {"gl-mt300n": "v1", "gl-mt300n-v2": "v2"},
     "GL-MT750": "gl-mt750",
+    "GL-MT1300": "gl.inet-gl-mt1300",
     "GL-USB150": "gl.inet-gl-usb150",
+    "GL-XE300": "gl.inet-gl-xe300",
     "microuter-N300": "gl.inet-microuter-n300",
     "VIXMINI": "gl.inet-vixmini",
   },
@@ -146,6 +149,10 @@ var devices_recommended = {
     "MR16": "meraki-mr16",
     "MR62": "meraki-mr62",
     "MR66": "meraki-mr66"
+  },
+
+  "Mercusys": {
+    "MR70X": "mercusys-mr70x",
   },
 
   "Mikrotik": {
