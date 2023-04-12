@@ -24,9 +24,9 @@ networkd_configures:
 
       [Route]
       Destination=::/0
-      Gateway=2a00:fe0:43::bb:2
-      #MultiPathRoute=2a00:fe0:43::bb:1
-      #MultiPathRoute=2a00:fe0:43::bb:2
+      #Gateway=2a00:fe0:43::bb:2
+      MultiPathRoute=2a00:fe0:43::bb:1
+      MultiPathRoute=2a00:fe0:43::bb:2
       Table=42
 
 client_dns_server_v4: 5.1.66.255
