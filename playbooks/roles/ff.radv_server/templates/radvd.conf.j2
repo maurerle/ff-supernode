@@ -12,14 +12,14 @@ interface bat{{ domain.id }}
  AdvRASolicitedUnicast on;
  AdvSourceLLAddress off;
  
- prefix {{ mesh_prefix }}:1{{ domain.id }}::/64 {
+ prefix {{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::/64 {
    AdvValidLifetime 600;
    AdvPreferredLifetime 30;
    AdvOnLink on;
    AdvAutonomous on;
    AdvRouterAddr on;
  };
- route {{ mesh_prefix }}:1{{ domain.id }}::{{ "%x" | format(sn) }}001/128 {};
+ route {{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::{{ "%x" | format(sn) }}001/128 {};
  RDNSS {{ client_dns_server_v6 }} {};
  DNSSL ffac {};
 };

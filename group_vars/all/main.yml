@@ -45,7 +45,8 @@ domains:
 # ffrl prefix
 mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
-batman_version: "BATMAN_V"
+radv_sn_ipv6: true
+batman_version: "BATMAN_IV"
 
 # mesh_announce & nginx
 info_mail: "info@{{ dns_searchdomains }}"

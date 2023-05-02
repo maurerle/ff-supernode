@@ -98,7 +98,7 @@
     mode: "744"
 
 - name: "Install header.html"
-  copy:
+  template:
     src: "header.html"
     dest: "/var/www/header.html"
     mode: "644"
@@ -106,7 +106,7 @@
     group: "www-data"
 
 - name: Nginx sites config
-  copy:
+  template:
     src: proxy.conf
     dest: /etc/nginx/sites-available/proxy.conf
   register: nginxconfig

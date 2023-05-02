@@ -1,18 +1,11 @@
-- name: Install pip3
+- name: Install nginx, certbot
   apt:
     update_cache: yes
     name: "{{ packages }}"
   vars:
     packages:
-    - python3-pip
     - nginx-full
-
-- name: Install certbot
-  pip:
-    name:
-      - certbot
-      - certbot-nginx
-    executable: pip3
+    - python3-certbot-nginx
 
 - name: Register certbot
   shell: |
@@ -24,16 +17,17 @@
 - name: Setup cronjob for renewal
   cron:
     name: certbot-renewal
-    job: "/bin/bash -lc '/usr/local/bin/certbot -q renew'"
+    job: "/bin/bash -lc '/usr/bin/certbot -q renew'"
     minute: "0"
     hour: "14"
 
 
 - name: 'Get certificate'
-  command: '/usr/local/bin/certbot -n --nginx -d {{ dns_hostname }}'
+  command: '/usr/bin/certbot -n --nginx -d {{ item.1 }}'
   args:
-    creates: '/etc/letsencrypt/live/{{ dns_hostname }}'
+    creates: '/etc/letsencrypt/live/{{ item.1 }}'
   ignore_errors: true
   tags:
     - nginx
     - certbot
+  with_indexed_items: "{{ dns_hostnames }}"

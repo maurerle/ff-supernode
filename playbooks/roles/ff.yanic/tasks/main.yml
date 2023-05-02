@@ -13,6 +13,7 @@
 - name: Ensure golang
   apt:
     name: golang
+    default_release: bullseye-backports
     update_cache: yes
 
 - name: Install yanic

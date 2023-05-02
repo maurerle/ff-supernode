@@ -5,6 +5,11 @@
     name: apt-transport-https
     update_cache: yes
 
+- name: Install gpg for apt
+  apt:
+    name: gpg
+    update_cache: yes
+
 - name: Add grafana repository key
   apt_key:
     url: https://packages.grafana.com/gpg.key

@@ -9,11 +9,11 @@ all:
       ansible_host: 02.wg-node.freifunk-aachen.de
       ansible_user: debian
     monitor:
-      ansible_host: 01.wg-node.freifunk-aachen.de
-      ansible_user: florian
+      ansible_host: monitor.freifunk-aachen.de
+      ansible_user: ffac
 
     buildserver:
-      ansible_host: community-build.freifunk-aachen.de
+      ansible_host: build.freifunk-aachen.de
       ansible_user: ffac
 
 supernodes:

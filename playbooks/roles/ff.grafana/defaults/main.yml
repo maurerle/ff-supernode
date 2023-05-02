@@ -1,5 +1,6 @@
 ---
 grafana_url: http://localhost:3000
+grafana_password: "grafana"
 grafana_listen_on:
   port: 3000
   ip: '' # listens on all ips

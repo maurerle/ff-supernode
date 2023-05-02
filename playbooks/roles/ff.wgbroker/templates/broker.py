@@ -68,7 +68,7 @@ def add_file(filename, publickey):
     for fname in glob.glob(pattern, recursive=True):
         if os.path.isfile(fname):
             raise Exception(f'{filename} already exists')
-    
+
     execute_autouser(f"echo {publickey} > {REPO}/{filename}")
 
 
@@ -90,7 +90,7 @@ def add_key():
     except Exception as e:
         error_msg = f'Error adding key: {e}'
         print(error_msg)
-        return error_msg, 400
+        return jsonify({"Message": error_msg}), 200
 
     return jsonify({"Message": "OK"}), 200
 

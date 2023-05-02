@@ -4,11 +4,6 @@
   include_tasks: build_from_source.yml
   when: batman_build_from_source
 
-- name: Check if bat0 exists
-  register: bat0_exists
-  stat:
-    path: /sys/class/net/bat0
-
 - name: Install batctl
   apt: name=batctl
   when: not batman_build_from_source

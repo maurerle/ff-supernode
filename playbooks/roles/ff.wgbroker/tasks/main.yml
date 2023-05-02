@@ -24,6 +24,14 @@
     dest: /etc/wireguard/peers-wg
     owner: auto
 
+- name: Create lockfile to wait until ssh key is deployed to the git server
+  file: path=/home/auto/wait_for_access.lock state=touch
+  when: createuser is changed
+
+- name: Wait until the ssh key is deployed to the git server and /home/auto/wait_for_access.lock is removed manually
+  wait_for: path=/home/auto/wait_for_access.lock state=absent
+
+
 - name: Clone the peers git
   become: true
   become_user: auto
@@ -70,6 +78,8 @@
   when: updatebroker is changed
 
 - name: Set Git Config User
+  become: true
+  become_user: auto
   git_config:
     name: user.name
     repo: /etc/wireguard/peers-wg
