@@ -10,8 +10,8 @@
       tags: [always]
   roles:
     # General
-    #- { name: ff.influxdb, tags: influxdb, become: true }
-    - { name: ff.yanic, tags: yanic, become: true }
+    - { name: ff.influxdb, tags: influxdb, become: true }
+    - { name: ff.yanic, tags: yanic }
     - { name: ff.grafana, tags: grafana, become: true }
     - { name: ff.certbot, tags: certbot, become: true }
     - { name: ff.nginx, tags: nginx, become: true }

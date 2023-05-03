@@ -1,6 +1,6 @@
 ---
 
-influx2_bind_address: ":8086"
-influx2_bolt_path: "/influxdb/bolt"
-influx2_engine_path: "/influxdb/engine"
-influx2_token: "Slt8N2QzZCuAINwi_U1EeOvafjryX46IsAIIiT4BMKNpGhYo8PsAsPZcyYvl1LJglfFmlqASKl0ervGJPgX1-A=="
+influxdb_bind_address: ":8086"
+influxdb_username: "freifunk"
+influxdb_password: "freifunk"
+influxdb_database_name: "freifunk"

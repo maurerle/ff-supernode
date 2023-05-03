@@ -16,7 +16,13 @@ collect_interval = "1m"
 ## list of domains on this site to save stats for (empty for global only)
 domains = ['']
 
-
+{% if yanic_central %}
+[[respondd.interfaces]]
+ifname = "eth0"
+#ip_address = "2a00:fe0:43::148"
+send_no_request = true
+port = 11001
+{% else %}
 {% for domain in domains | default([]) %}
 [[respondd.interfaces]]
 ifname = "bat{{ domain.id }}"
@@ -24,7 +30,7 @@ ifname = "bat{{ domain.id }}"
 #multicast_address = "ff05::2:1001"
 #port = {{ yanic_port }}
 {% endfor %}
-
+{% endif %}
 
 # A little build-in webserver, which statically serves a directory.
 # This is useful for testing purposes or for a little standalone installation.
@@ -92,6 +98,7 @@ path = "{{ yanic_nodes_path }}/meshviewer.json"
 [nodes.output.meshviewer-ffrgb.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
 no_owner = {% if yanic_no_owner %}true{% else %}false{% endif %}
+
 domain_append_site = false
 #blacklist = ["00112233445566", "1337f0badead"]
 #sites = ["ffhb"]
@@ -122,6 +129,7 @@ graph_path = "{{ yanic_nodes_path }}/graph.json"
 [nodes.output.meshviewer.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
 no_owner = {% if yanic_no_owner %}true{% else %}false{% endif %}
+
 domain_append_site = false
 
 
@@ -138,6 +146,7 @@ path = "{{ yanic_nodes_path }}/raw.jsonl"
 [nodes.output.nodelist.filter]
 # WARNING: if it is not set, it will publish contact information of other persons
 no_owner = {% if yanic_no_owner %}true{% else %}false{% endif %}
+
 domain_append_site = false
 
 [database]
@@ -194,16 +203,19 @@ address  = "localhost:2003"
 # probably wont care much about "polluting" the namespace.
 prefix   = "freifunk"
 
+{% if yanic_central %}
 # respondd (yanic)
 # forward collected respondd package to a address
 # (e.g. to another respondd collector like a central yanic instance or hopglass)
+# https://github.com/FreifunkBremen/yanic/pull/161#issuecomment-475084475
 [[database.connection.respondd]]
-enable   = false
+enable   = true
 # type of network to create a connection
 type     = "udp6"
 # destination address to connect/send respondd package
-address  = "stats.bremen.freifunk.net:11001"
-
+address  = "monitor.{{ dns_searchdomains }}:11001"
+{% endif %}
+ 
 # Logging
 [[database.connection.logging]]
 enable   = false

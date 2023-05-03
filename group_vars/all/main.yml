@@ -1,7 +1,7 @@
 ---
 show_secret_diffs: no
 
-dns_searchdomains: "ffac.rocks"
+dns_searchdomains: "freifunk-aachen.de"
 
 git_host: "git.{{ dns_searchdomains }}"
 git_addr: "ssh://git@github.com/ffac"

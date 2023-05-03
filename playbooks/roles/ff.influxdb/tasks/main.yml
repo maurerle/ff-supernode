@@ -2,34 +2,28 @@
 
 - name: Add repo key
   apt_key:
-    url: https://repos.influxdata.com/influxdb.key
+    url: https://repos.influxdata.com/influxdata-archive_compat.key
     state: present
 
 - name: Add influx repo
   register: influxrepositoryadded
   apt_repository:
-    repo: "deb https://repos.influxdata.com/debian {{ ansible_distribution_release }} stable"
+    repo: "deb https://repos.influxdata.com/debian stable main"
 
 - name: Update apt chache to get influxdb packages
   apt: update_cache=yes
   when: influxrepositoryadded is changed
 
-- name: Install influxdb2 from repo
+- name: Install influxdb from repo
   register: influxinstall
   apt:
-    name: influxdb2
+    name: influxdb
     state: latest
-
-- name: Generate config file
-  register: influx2_configfile
-  template:
-    src: influx2.config.toml.j2
-    dest: /etc/influxdb/config.toml
 
 - name: Ensure engine directory exists and has correct ownership
   file:
     state: directory
-    path: "{{ influx2_engine_path }}"
+    path: "{{ influx_engine_path }}"
     owner: "influxdb"
     group: "influxdb"
     recurse: yes
@@ -41,14 +35,41 @@
 #     dest: /etc/ferm/conf.d/50-influxdb.conf
 #   notify: reload ferm
 
-- name: Reload influxdb2 service
+- name: Restart influxdb2 service
   systemd:
     name: influxdb
     state: restarted
     daemon_reload: yes
     enabled: yes
-  when: influx2_configfile is changed
 
-- name: setup influxdb if not done yet
-  command: influx setup -u freifunk -p freifunk -o freifunk -b freifunk -r 0 -f -t {{ influx2_token }}
-  when: influxinstall is changed
+- name: Create ffac user - no auth on first install
+  community.general.influxdb_user:
+    login_username: "{{ influxdb_username }}"
+    login_password: "{{ influxdb_password }}"
+    user_name: "{{ influxdb_username }}"
+    user_password: "{{ influxdb_password }}"
+    admin: true
+
+- name: Generate config file - activate auth
+  register: influx_configfile
+  template:
+    src: influxdb.conf.j2
+    dest: /etc/influxdb/influxdb.conf
+
+
+- name: Restart influxdb2 service - apply auth
+  systemd:
+    name: influxdb
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  when: influx_configfile is changed
+
+
+- name: Create database using custom credentials
+  community.general.influxdb_database:
+      username: "{{influxdb_username}}"
+      password: "{{influxdb_password}}"
+      database_name: "{{influxdb_database_name}}"
+      ssl: true
+      validate_certs: true

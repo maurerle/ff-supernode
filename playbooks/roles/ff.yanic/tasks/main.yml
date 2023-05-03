@@ -13,7 +13,7 @@
 - name: Ensure golang
   apt:
     name: golang
-    default_release: bullseye-backports
+    default_release: {{ ansible_distribution_release }}-backports
     update_cache: yes
 
 - name: Install yanic
@@ -43,7 +43,7 @@
 - name: Configure yanic (DIFF REDACTED)
   notify: Restart yanic
   template:
-    src: yanic-config.yml.j2
+    src: yanic.conf.j2
     dest: /etc/yanic.conf
 
 - name: Copy systemd service
