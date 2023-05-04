@@ -2,28 +2,29 @@
 
 - name: Ensure git
   apt:
-    name: git
     update_cache: yes
-
-- name: Ensure rsync
-  apt:
-    name: rsync
-    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - git
+    - acl
+    - rsync
 
 - name: Ensure golang
   apt:
     name: golang
-    default_release: {{ ansible_distribution_release }}-backports
-    update_cache: yes
-
-- name: Install yanic
-  script: /usr/bin/go install {{ yanic_repo_path }}@{{ yanic_tag }}
+    default_release: "{{ ansible_distribution_release }}-backports"
 
 - name: Create yanic user
   user:
     name: "{{ yanic_user }}"
     group: "{{ yanic_group }}"
     system: yes
+
+- name: Install yanic
+  become: true
+  become_user: "{{ yanic_user }}"
+  script: /usr/bin/go install {{ yanic_repo_path }}@{{ yanic_tag }}
 
 - name: Ensure persist directory, if needed
   file:
@@ -51,13 +52,6 @@
   template:
     src: yanic.service.j2
     dest: /lib/systemd/system/yanic.service
-
-# - name: Generate firewall config stanza (ferm)
-#   register: ferm_changed
-#   template:
-#     src: ferm.conf.j2
-#     dest: /etc/ferm/conf.d/50-yanic.conf
-#   notify: reload ferm
 
 - name: Enable yanic
   systemd:

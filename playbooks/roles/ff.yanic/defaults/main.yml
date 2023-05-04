@@ -16,10 +16,11 @@ yanic_influx2_token: "Slt8N2QzZCuAINwi_U1EeOvafjryX46IsAIIiT4BMKNpGhYo8PsAsPZcyY
 yanic_influx2_organisation_id: "freifunk"
 yanic_influx2_bucket: "freifunk"
 
-yanic_influx_enabled: true
+yanic_influx_enabled: false
 yanic_influx_hostname: "http://monitor.{{ dns_searchdomains}}:8086"
 yanic_influx_database: "freifunk"
 yanic_influx_username: "freifunk"
 yanic_influx_password: "freifunk"
 yanic_no_owner: true
 yanic_central: false
+yanic_central_server: false

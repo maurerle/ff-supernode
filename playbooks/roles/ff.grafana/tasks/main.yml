@@ -1,14 +1,17 @@
 ---
 
-- name: Install https for apt
+- name: Install dependencies
   apt:
-    name: apt-transport-https
     update_cache: yes
-
-- name: Install gpg for apt
-  apt:
-    name: gpg
-    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - apt-transport-https
+    - gpg
+    # required for image renderer plugin
+    - libasound2
+    - libgbm-dev
+    - libnss3
 
 - name: Add grafana repository key
   apt_key:
@@ -48,8 +51,32 @@
 
 - name: Install provisioning files
   copy:
-    src: "grafana"
+    src: "grafana/dashboard-definitions"
     dest: "{{ grafana_datadir }}/provisioning"
+    owner: "grafana"
+    group: "grafana"
+
+- name: ensures dashboards dir exists
+  file: 
+    path: "{{ grafana_datadir }}/provisioning/dashboards"
+    state: directory
+
+- name: ensures datasources dir exists
+  file: 
+    path: "{{ grafana_datadir }}/provisioning/datasources"
+    state: directory
+
+- name: Install dashboards files
+  template:
+    src: "dashboards/dashboards.yaml"
+    dest: "{{ grafana_datadir }}/provisioning/dashboards/dashboards.yaml"
+    owner: "grafana"
+    group: "grafana"
+
+- name: Install datasources files
+  template:
+    src: "datasources/datasources.yaml"
+    dest: "{{ grafana_datadir }}/provisioning/datasources/datasources.yaml"
     owner: "grafana"
     group: "grafana"
 
@@ -58,3 +85,7 @@
     name: grafana-server
     enabled: yes
     state: started
+
+- name: Install Image renderer plugin
+  raw:
+    grafana-cli plugins install grafana-image-renderer

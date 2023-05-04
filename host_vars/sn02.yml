@@ -34,3 +34,4 @@ client_dns_server_v6: 2a03:2260:3006::53
 
 local_vxlan_supernode: 2a00:fe0:43::202
 remote_vxlan_supernode: 2a00:fe0:43::201
+yanic_central: "true"

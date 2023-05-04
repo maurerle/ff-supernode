@@ -8,4 +8,4 @@ providers:
   disableDeletion: false
   allowUiUpdates: true
   options:
-    path: /etc/grafana/provisioning/dashboard-definitions
+    path: "{{ grafana_datadir }}/provisioning/dashboard-definitions"

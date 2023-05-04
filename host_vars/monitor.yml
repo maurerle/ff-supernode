@@ -21,8 +21,8 @@ dns_hostnames:
   - devmap.freifunk-aachen.de
 yanic_url: /data/
 yanic_webserver: "false"
-yanic_central: "true"
-yanic_influx_enabled: "false"
+yanic_central_server: "true"
+yanic_influx_enabled: "true"
 
 meshviewer_geo: |
     [

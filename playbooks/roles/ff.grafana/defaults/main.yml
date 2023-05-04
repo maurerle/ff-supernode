@@ -8,3 +8,8 @@ grafana_allow_signup: false
 grafana_anonymous_access: true
 grafana_datadir: "/var/lib/grafana"
 grafana_smtp_from: "grafana-admin@localhost"
+
+influxdb_bind_address: ":8086"
+influxdb_username: "freifunk"
+influxdb_password: "freifunk"
+influxdb_database_name: "freifunk"

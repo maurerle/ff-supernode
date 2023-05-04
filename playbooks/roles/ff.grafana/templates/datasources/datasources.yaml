@@ -12,10 +12,10 @@ datasources:
   # <string, required> name of the datasource. Required
 - name: ff
   type: influxdb
-  url: "localhost{{ influx2_bind_address }}"
-  user: ff
-  database: freifunk
+  url: "localhost{{ influxdb_bind_address }}"
+  user: "{{ influxdb_username }}"
+  database: "{{ influxdb_database_name }}"
   secureJsonData:
-    password: ff
+    password: "{{ influxdb_password }}"
   isDefault: true
   editable: true
