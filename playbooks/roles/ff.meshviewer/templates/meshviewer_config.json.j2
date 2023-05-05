@@ -3,7 +3,7 @@
       "{{ yanic_url }}"
     ],
     "siteName": "{{ freifunk_site }}",
-    "maxAge": 21,
+    "maxAge": 14,
     "nodeZoom": 19,
     "mapLayers": [
       {
@@ -96,7 +96,7 @@
       },
       {
         "name": "Trafficstatistik",
-        "href": "{{ grafana_url }}/d/0100000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
+        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
         "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=2&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
         "title": "Knoten {NODE_ID} - weitere Statistiken"
       },

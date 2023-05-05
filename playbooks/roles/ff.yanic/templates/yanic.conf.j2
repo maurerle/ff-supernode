@@ -50,7 +50,7 @@ prune_after   = "14d"
 # Export nodes and graph periodically
 save_interval = "5s"
 # Set node to offline if not seen within this period
-offline_after = "10m"
+offline_after = "5m"
 
 
 ## [[nodes.output.example]]
@@ -100,7 +100,7 @@ path = "{{ yanic_nodes_path }}/meshviewer.json"
 no_owner = {% if yanic_no_owner %}true{% else %}false{% endif %}
 
 domain_append_site = false
-#blacklist = ["00112233445566", "1337f0badead"]
+blacklist = ["60e327b2d88a"]
 #sites = ["ffhb"]
 #has_location = true
 
