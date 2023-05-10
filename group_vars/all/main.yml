@@ -16,7 +16,7 @@ firmware_changelog: "https://github.com/ffac/site/blob/v2022.1.x/CHANGELOG.md"
 community_prefix: "gluon-ffac-"
 
 # meshviewer
-deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB RAM/32MB Flash). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/\">dieser Post</a>'
+deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB Flash/32MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/\">dieser Post</a>'
 
 # vxlan ids may be generated using vx.py in scripts
 # ids are segment/domain
