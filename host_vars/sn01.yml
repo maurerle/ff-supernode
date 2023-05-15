@@ -38,3 +38,4 @@ radv_announce_default: true
 
 local_vxlan_supernode: 2a00:fe0:43::201
 remote_vxlan_supernode: 2a00:fe0:43::202
+yanic_central: "true"

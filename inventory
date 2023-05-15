@@ -4,7 +4,7 @@ all:
   hosts:
     sn01:
       ansible_host: 01.wg-node.freifunk-aachen.de
-      ansible_user: florian
+      ansible_user: ffac
     sn02:
       ansible_host: 02.wg-node.freifunk-aachen.de
       ansible_user: debian
