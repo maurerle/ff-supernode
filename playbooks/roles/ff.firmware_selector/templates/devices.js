@@ -45,6 +45,7 @@ var devices_recommended = {
     "FRITZ!Box 7360": "avm-fritz-box-7360",
     "FRITZ!Box 7362 SL": "avm-fritz-box-7362-sl",
     "FRITZ!Box 7412": "avm-fritz-box-7412",
+    "FRITZ!Box 7430": "avm-fritz-box-7430",
     "FRITZ!Box 7520": "avm-fritz-box-7520",
     "FRITZ!Box 7530": "avm-fritz-box-7530",
     "FRITZ!Repeater 1200": "avm-fritz-repeater-1200",
@@ -541,7 +542,6 @@ var devices_broken = {
   "AVM": {
     // no button for setup mode
     "FRITZ!Box 3370": {"avm-fritz-box-3370-rev-2-hynix-nand": "v2 Hynix", "avm-fritz-box-3370-rev-2-micron-nand": "v2 Micron"},
-    "FRITZ!Box 7430": "avm-fritz-box-7430",
   },
 
   "Cudy": {
