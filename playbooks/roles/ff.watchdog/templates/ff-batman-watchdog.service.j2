@@ -6,9 +6,12 @@ After=network.target
 [Service]
 User=auto
 WorkingDirectory=/home/auto/autosegmenter
-ExecStart=/usr/bin/python3 watchdog.py
+ExecStart=/home/auto/autosegmenter/watchdog.py
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ff-batman-watchdog
 Restart=always
-RestartSec=10
+RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
