@@ -1,6 +1,8 @@
 [Unit]
 Description=Respondd
 After=network.target
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 ExecStart=/opt/mesh-announce/respondd.py -d /opt/mesh-announce/providers -f {{ mesh_announce_cfg_path }}/respondd.conf

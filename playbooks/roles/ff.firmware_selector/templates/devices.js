@@ -31,7 +31,7 @@ var devices_recommended = {
 
   "Asus": {
     "RT-AC51U": "asus-rt-ac51u",
-    "RT-AC57U": "asus-rt-ac57u",
+    "RT-AC57U": { "asus-rt-ac57u": "", "asus-rt-ac57u-v1": ""},
   },
 
   "AVM": {
@@ -121,6 +121,7 @@ var devices_recommended = {
     "GL-B1300": "gl.inet-gl-b1300",
     "GL-MT300a": "gl-mt300a",
     "GL-MT300n": {"gl-mt300n": "v1", "gl-mt300n-v2": "v2"},
+    "GL-MT3000": "gl.inet-gl-mt3000",
     "GL-MT750": "gl-mt750",
     "GL-MT1300": "gl.inet-gl-mt1300",
     "GL-USB150": "gl.inet-gl-usb150",
@@ -143,11 +144,13 @@ var devices_recommended = {
 
   "Linksys": {
     "E8450": {"linksys-e8450": "", "linksys-e8450-ubi-sysupgrade.itb": ""},
+    "MR8300": {"linksys-mr8300-dallas": ""},
   },
 
   "Meraki": {
     "MR12": "meraki-mr12",
     "MR16": "meraki-mr16",
+    "MR33": {"meraki-mr33": "", "meraki-mr33-access-point": ""},
     "MR62": "meraki-mr62",
     "MR66": "meraki-mr66"
   },
@@ -537,6 +540,7 @@ var devices_broken = {
   "Asus": {
     // not in release
     "RT-AX53U": "asus-rt-ax53u",
+    "TUF-AX4200": "asus_tuf-ax4200",
   },
 
   "AVM": {
@@ -549,6 +553,7 @@ var devices_broken = {
     "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
     "X6": "cudy-x6",
     "M1800": "cudy-m1800",
+    "WR3000": {"cudy-wr3000-v1": "v1"},
   },
 
   "Raspberry Pi Foundation": {

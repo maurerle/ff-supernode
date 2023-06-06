@@ -1,10 +1,8 @@
-# should be upstream https://github.com/freifunk-ffm/meshviewer
-# https://github.com/freifunk-ffm/meshviewer/pull/8
 - name: Clone meshviewer sources
   git:
-    repo: https://github.com/maurerle/meshviewer
+    repo: https://github.com/freifunk-ffm/meshviewer
     dest: '{{ meshviewer_source_dir }}'
-    version: "fix_geo"
+    version: "main"
     accept_hostkey: true
   register: repo_clone
   failed_when:
