@@ -67,7 +67,9 @@ var devices_recommended = {
 
   "Cudy": {
     "WR1000": {"cudy-wr1000": "v2"},
+    "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
     "WR2100": "cudy-wr2100",
+    "X6": "cudy-x6",
   },
 
   "D-Link": {
@@ -348,7 +350,7 @@ var devices_recommended = {
     "UniFi 6 Lite": "ubiquiti-unifi-6-lite",
     "UniFi 6 LR": "ubiquiti-unifi-6-lr",
     "UniFi AC Lite": "ubiquiti-unifi-ac-lite",
-    "UniFi AC LR": "ubiquiti-unifi-ac-lite-mesh",
+    "UniFi AC LR": { "ubiquiti-unifi-ac-lite-mesh": "", "ubiquiti-unifi-ac-lr": "" },
     "UniFi AC Mesh": "ubiquiti-unifi-ac-mesh",
     "UniFi AC Mesh Pro": "ubiquiti-unifi-ac-mesh-pro",
     "UniFi AC Pro": "ubiquiti-unifi-ac-pro",
@@ -550,8 +552,6 @@ var devices_broken = {
 
   "Cudy": {
     // not in release
-    "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
-    "X6": "cudy-x6",
     "M1800": "cudy-m1800",
     "WR3000": {"cudy-wr3000-v1": "v1"},
   },
@@ -636,6 +636,12 @@ var devices_info = {
     "FRITZ!WLAN Repeater 300E": "https://fritz-tools.readthedocs.io/",
     "FRITZ!WLAN Repeater 450E": "https://fritz-tools.readthedocs.io/"
   },
+  "Cudy": {
+    "WR1300": "http://www.cudytech.com/openwrt_software_download",
+    "WR2100": "https://openwrt.org/toh/cudy/cudy_wr2100_v1#installation_using_web_interface",
+    "M1800": "http://www.cudytech.com/openwrt_software_download",
+    "X6": "http://www.cudytech.com/openwrt_software_download",
+  },
   "Enterasys": {
     "WS-AP3705i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=ebddc5f984a240980303aed68524eb615484eef8",
     "WS-AP3710i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=16b01fb1b9c99513c318109bef96a1a3545c57a0",
@@ -643,6 +649,9 @@ var devices_info = {
   "Extreme Networks": {
     "WS-AP3805i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=f8c87aa2d27ab405f284dd4357377ab5c893a345",
     "WS-AP3825i": "https://forum.darmstadt.freifunk.net/t/flashing-of-the-extreme-networks-ws-ap3825i/923",
+  },
+  "D-Link": {
+    "DAP-X1860": "https://openwrt.org/inbox/toh/d-link/dap-x1860#how_to_flash_openwrt_to_this_device",
   },
   "devolo": {
     "WiFi Pro 1200e": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1724d4e9ed7716a5444eca42adf045c2f3afc554",
