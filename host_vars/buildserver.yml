@@ -13,4 +13,8 @@ networkd_configures:
       - 9.9.9.9
       - '2001:678:ed0:f000::'
       - 5.1.66.255
-dns_hostname: build.freifunk-aachen.de
+dns_hostname: firmware.freifunk-aachen.de
+dns_hostnames:
+  - firmware.freifunk-aachen.de
+  - build.freifunk-aachen.de
+  - community-build.freifunk-aachen.de
