@@ -73,6 +73,7 @@ var devices_recommended = {
   },
 
   "D-Link": {
+    "COVR-X1860": {"d-link-covr-x1860": "", "d-link-covr-x1860-a1-recovery": "a1"},
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
@@ -652,6 +653,7 @@ var devices_info = {
   },
   "D-Link": {
     "DAP-X1860": "https://openwrt.org/inbox/toh/d-link/dap-x1860#how_to_flash_openwrt_to_this_device",
+    "COVR-X1860": "https://forum.openwrt.org/t/add-support-for-d-link-covr-x1860/161862/58",
   },
   "devolo": {
     "WiFi Pro 1200e": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1724d4e9ed7716a5444eca42adf045c2f3afc554",

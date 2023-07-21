@@ -4,11 +4,12 @@
 # version can be from-2019.1.x from-2021.1.x from-v2022.1.x from-v2023.1.x from-next
 # branch can be experimental testing stable
 version="$1"
-branch="$2"
+branches="${2:-experimental beta stable}"
 
 # create folders
 mkdir -p /var/www/packages/
 mkdir -p /var/www/firmware/download/
+mkdir -p /var/www/firmware/images/
 if [ -n "$version" ]; then
     echo "installing $version and branch $branch"
 else
@@ -16,35 +17,42 @@ else
     exit 1
 fi
 
-if [ -n "$branch" ]; then
+site="site-${version#*-}"
+# copy packages
+for file in ~/$site/output/packages/*; do
+  version_name="${file##*/}"
+done
+
+if [ -n "$version_name" ]; then
+    echo "copy packages $version_name"
+    cp -r ~/$site/output/packages/$version_name /var/www/packages/$version_name
+else
+    echo "No packages found for $version_name"
+    exit 1
+fi
+mkdir -p /var/www/firmware/images/$version_name
+rsync -a --exclude "*.manifest" ~/$site/output/images/* /var/www/firmware/images/$version_name/
+
+cd ~/manifest
+git pull
+mkdir -p ~/manifest/$version/
+for branch in $branches; do
+    echo $branch
     mkdir -p /var/www/firmware/$version/$branch
-    # copy packages
-    cp -r ~/site/output/packages/* /var/www/packages/
 
     # copy manifest to branch
-    cd ~/manifest
-    git pull
-    mkdir -p ~/manifest/$version/
-    cp ~/site/output/images/sysupgrade/$branch.manifest ~/manifest/$version/$branch.manifest
+    cp ~/$site/output/images/sysupgrade/$branch.manifest ~/manifest/$version/$branch.manifest
     git add $version/$branch.manifest
-    git commit -m "update $version/$branch.manifest"
-#    git push
 
     # backup current manifests into upper folder
-    cp /var/www/firmware/$version/$branch/sysupgrade/*.manifest /var/www/firmware/$version/$branch/
-    rm -rf /var/www/firmware/$version/$branch/sysupgrade
-    # copy sysupgrade for updates
-    cp -r ~/site/output/images/sysupgrade /var/www/firmware/$version/$branch/sysupgrade
-    # restore manifests from upper folder
-    mv /var/www/firmware/$version/$branch/*.manifest /var/www/firmware/$version/$branch/sysupgrade/
+    rm /var/www/firmware/$version/$branch/sysupgrade
+    ln -sf /var/www/firmware/images/$version_name/sysupgrade /var/www/firmware/$version/$branch/sysupgrade
+    ln -sf ~/manifest/$version/$branch.manifest /var/www/firmware/$version/$branch/sysupgrade/$branch.manifest
+done
+git commit -m "update $version $branches to $version_name"
+#    git push
 
-
-    # delete current manifest and recreate as symlink
-    rm /var/www/firmware/$version/$branch/sysupgrade/$branch.manifest
-    ln -s ~/manifest/$version/$branch.manifest /var/www/firmware/$version/$branch/sysupgrade/$branch.manifest
-fi
-
-# copy for firmware selector download
-rm -rf /var/www/firmware/download/$version
-cp -r ~/site/output/images /var/www/firmware/download/$version
+# symlink for download directorydownload
+rm /var/www/firmware/download/$version
+ln -sf /var/www/firmware/images/$version_name /var/www/firmware/download/$version
 #rm -r ~/site/output/images
