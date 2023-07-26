@@ -1,4 +1,12 @@
 ---
+- name: Install git
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - git
+
 
 - name: Clone firmware selector
   git:

@@ -45,7 +45,7 @@
   become_user: "{{ freifunk_site }}"
   git:
     repo: "{{ git_addr }}/site.git"
-    dest: ~/site
+    dest: /mnt/site
     accept_hostkey: true
   register: site
   failed_when:
@@ -57,7 +57,7 @@
   become_user: "{{ freifunk_site }}"
   git:
     repo: "{{ git_addr }}/manifest.git"
-    dest: ~/manifest
+    dest: /mnt/manifest
     accept_hostkey: true
   register: site
 
@@ -94,7 +94,7 @@
   become_user: "{{ freifunk_site }}"
   copy:
     src: "deploy.sh"
-    dest: "~/deploy.sh"
+    dest: "/mnt/deploy.sh"
     mode: "744"
 
 - name: "Install header.html"

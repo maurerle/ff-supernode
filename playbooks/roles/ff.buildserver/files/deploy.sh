@@ -19,35 +19,35 @@ fi
 
 site="site-${version#*-}"
 # copy packages
-for file in ~/$site/output/packages/*; do
+for file in /mnt/$site/output/packages/*; do
   version_name="${file##*/}"
 done
 
 if [ -n "$version_name" ]; then
     echo "copy packages $version_name"
-    cp -r ~/$site/output/packages/$version_name /var/www/packages/$version_name
+    cp -r /mnt/$site/output/packages/$version_name /var/www/packages/$version_name
 else
     echo "No packages found for $version_name"
     exit 1
 fi
 mkdir -p /var/www/firmware/images/$version_name
-rsync -a --exclude "*.manifest" ~/$site/output/images/* /var/www/firmware/images/$version_name/
+rsync -a --exclude "*.manifest" /mnt/$site/output/images/* /var/www/firmware/images/$version_name/
 
-cd ~/manifest
+cd /mnt/manifest
 git pull
-mkdir -p ~/manifest/$version/
+mkdir -p /mnt/manifest/$version/
 for branch in $branches; do
     echo $branch
     mkdir -p /var/www/firmware/$version/$branch
 
     # copy manifest to branch
-    cp ~/$site/output/images/sysupgrade/$branch.manifest ~/manifest/$version/$branch.manifest
+    cp /mnt/$site/output/images/sysupgrade/$branch.manifest /mnt/manifest/$version/$branch.manifest
     git add $version/$branch.manifest
 
     # backup current manifests into upper folder
     rm /var/www/firmware/$version/$branch/sysupgrade
     ln -sf /var/www/firmware/images/$version_name/sysupgrade /var/www/firmware/$version/$branch/sysupgrade
-    ln -sf ~/manifest/$version/$branch.manifest /var/www/firmware/$version/$branch/sysupgrade/$branch.manifest
+    ln -sf /mnt/manifest/$version/$branch.manifest /var/www/firmware/$version/$branch/sysupgrade/$branch.manifest
 done
 git commit -m "update $version $branches to $version_name"
 #    git push
@@ -55,4 +55,4 @@ git commit -m "update $version $branches to $version_name"
 # symlink for download directorydownload
 rm /var/www/firmware/download/$version
 ln -sf /var/www/firmware/images/$version_name /var/www/firmware/download/$version
-#rm -r ~/site/output/images
+#rm -r /mnt/site/output/images

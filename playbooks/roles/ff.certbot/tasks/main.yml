@@ -6,6 +6,7 @@
     packages:
     - nginx-full
     - python3-certbot-nginx
+    - cron
 
 - name: Register certbot
   shell: |
