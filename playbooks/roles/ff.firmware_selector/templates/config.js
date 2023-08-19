@@ -69,7 +69,8 @@ var config = {
   // experimental branches (show a warning for these branches)
   experimental_branches: ['v2023.1', 'v2023.2'],
   // path to preview pictures directory
-  preview_pictures: 'pictures/',
+  preview_pictures: 'https://map.aachen.freifunk.net/pictures/',
+  preview_pictures_ext: '.svg',
   // link to changelog
   changelog: '{{ firmware_changelog }}'
 };

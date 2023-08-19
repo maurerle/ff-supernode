@@ -48,3 +48,13 @@
     dest: "/var/www/html/meshviewer/config.json"
     owner: "www-data"
     group: "www-data"
+  
+- name: "copy download pictures script"
+  template:
+    src: "download-pictures-script.sh"
+    dest: "/var/www/html/meshviewer/download-pictures-script.sh"
+    owner: "www-data"
+    group: "www-data"
+
+- name: "execute pictures script"
+  raw: "cd /var/www/html/meshviewer/ && ./download-pictures-script.sh && rm -rf pictures && mv output-folder pictures"

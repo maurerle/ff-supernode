@@ -21,7 +21,6 @@
       - make
       - patch
       - perl
-      - python2
       - python3
       - qemu-utils
       - rsync

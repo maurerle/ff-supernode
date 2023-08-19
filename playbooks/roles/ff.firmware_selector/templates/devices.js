@@ -73,7 +73,7 @@ var devices_recommended = {
   },
 
   "D-Link": {
-    "COVR-X1860": {"d-link-covr-x1860": "", "d-link-covr-x1860-a1-recovery": "a1"},
+    "COVR-X1860": {"d-link-covr-x1860": ""},
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
@@ -302,14 +302,16 @@ var devices_recommended = {
     "CPE510": {"tp-link-cpe510": "", "tp-link-cpe510-520": "", "tp-link-cpe520": "--ignore--"},
     "CPE710": "tp-link-cpe710",
     "EAP225-Outdoor": "tp-link-eap225-outdoor",
+    "EAP615-Wall": "tp-link-eap615-wall",
     "RE200": "tp-link-re200",
     "RE305": "tp-link-re305",
     "RE500": "tp-link-re500",
     "RE650": "tp-link-re650",
     "TD-W8970": "tp-link-td-w8970",
     "TD-W9980": "tp-link-td-w9980",
-    "TL-MR3020": {"tp-link-tl-mr3020-v3": "v3"},
+    "TL-MR3020": "tp-link-tl-mr3020",
     "TL-MR3420": "tp-link-tl-mr3420",
+    "TL-MR6400": "tp-link-tl-mr6400",
     "TL-WA801N/ND": "tp-link-tl-wa801nd",
     "TL-WDR3500": "tp-link-tl-wdr3500",
     "TL-WDR3600": "tp-link-tl-wdr3600",
@@ -332,6 +334,7 @@ var devices_recommended = {
   "Ubiquiti": {
     "EdgeRouter X": {"ubnt-erx": "", "ubiquiti-edgerouter-x": ""},
     "EdgeRouter X-SFP": {"ubnt-erx-sfp": "", "ubiquiti-edgerouter-x-sfp": ""},
+    "NanoBeam AC Gen1 (XC)": "ubiquiti-nanobeam-ac-gen1-xc",
     "NanoBeam M5 (XW)": "ubiquiti-nanobeam-m5-xw",
     "NanoBeam": {"ubiquity-nanobeam-m": "--ignore--", "ubiquiti-nanobeam-m5": "M5"},
     "NanoStation Loco": {"ubiquiti-loco-m-xw": "--ignore--",
@@ -402,6 +405,7 @@ var devices_recommended = {
     "NBG6617": "zyxel-nbg6617",
     "NBG6716": "zyxel-nbg6716",
     "NWA50AX": "zyxel-nwa50ax",
+    "WSM20": "zyxel-wsm20",
   },
 
   "ZBT": {
@@ -583,7 +587,6 @@ var devices_broken = {
   "TP-Link": {
     "Archer C2600": {"tp-link-archer-c2600": "v1"}, // no 802.11s support
     "TD-W8980": "tp-link-td-w8980", // 5GHz unsupported
-    "TL-MR6400": {"tp-link-tl-mr6400-v5": "v5"},
   },
 
   "ZTE": {
@@ -716,5 +719,6 @@ var devices_info = {
   "ZyXEL": {
     "NWA50AX": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
     "NWA55AXE": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
+    "WSM20": "https://openwrt.org/toh/zyxel/wsm20#via_web_interface",
   },
 }

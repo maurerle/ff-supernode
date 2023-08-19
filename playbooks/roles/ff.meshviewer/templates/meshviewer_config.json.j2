@@ -130,11 +130,17 @@
       }
     ],
     "hwImg": [
-    { "thumbnail": "https://map.eulenfunk.de/nodes/{MODELHASH}.svg",
-      "caption": "Knoten {MODELHASH}"
+    { "thumbnail": "https://map.aachen.freifunk.net/pictures/{MODEL_NORMALIZED}.svg",
+      "caption": "Knoten {MODEL_NORMALIZED}"
     }
     ],
     "geo": {{ meshviewer_geo }},
+    "linkList": [
+    {
+      "title": "Impressum & Datenschutz",
+      "href": "https://freifunk-aachen.de/impressum/"
+    }
+    ]
 
     "deprecation_text": "{{ deprecation_text }}",
     "deprecation_enabled": {% if deprecation_text != "" %}true{% else %}false{% endif %}
