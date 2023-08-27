@@ -22,7 +22,7 @@
     dest: "/etc/systemd/network/30-{{ mesh_wireguard_iface_prefix }}-{{ domain.id }}.netdev"
     mode: "0644"
     owner: "root"
-    group: "root"
+    group: "systemd-network"
   #diff: "{{ show_secret_diffs }}"
 
 - name: "Generate networkd wg network (dom {{ domain.id }})"

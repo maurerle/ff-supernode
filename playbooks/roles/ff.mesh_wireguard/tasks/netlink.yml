@@ -25,10 +25,11 @@
     - python-setuptools
     - python3-setuptools
 
-- name: Install pyroute2
-  pip:
-    executable: pip3
-    name: pyroute2
+- name: Install python3-pyroute2
+  apt:
+    name: python3-pyroute2
+    update_cache: yes
+    cache_valid_time: 3600
 
 - name: Fetch wireguard-vxlan-glue
   git:

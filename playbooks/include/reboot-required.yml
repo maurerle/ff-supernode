@@ -1,8 +1,8 @@
 ---
 
-- name: "Check for /var/run/reboot-required"
+- name: "Check for /run/reboot-required"
   stat:
-    path: "/var/run/reboot-required"
+    path: "/run/reboot-required"
   register: "rebootrequired"
 
 - pause:

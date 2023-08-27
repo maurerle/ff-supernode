@@ -36,6 +36,13 @@
 #     src: user-auto-reload-wireguard
 #     dest: /etc/sudoers.d/user-auto-reload-wireguard
 
+- name: Set git config regarding pull strategy for auto user
+  git_config:
+    name: pull.ff
+    value: only
+    scope: system
+    repo: /etc/wireguard/peers-wg
+
 - name: Install crontab for autoupdate
   cron:
     name: "autoupdate wireguard peers from git"
