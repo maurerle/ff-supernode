@@ -19,6 +19,10 @@ networkd_configures:
     nat6: False
     additional_config: |
       [RoutingPolicyRule]
+      From=2a03:2260:3006:100::/56
+      Table=42
+
+      [RoutingPolicyRule]
       From=2a03:2260:3006:200::/56
       Table=42
 

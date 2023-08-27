@@ -22,6 +22,10 @@ networkd_configures:
       From=2a03:2260:3006:100::/56
       Table=42
 
+      [RoutingPolicyRule]
+      From=2a03:2260:3006:200::/56
+      Table=42
+
       [Route]
       Destination=::/0
       #Gateway=2a00:fe0:43::bb:2
