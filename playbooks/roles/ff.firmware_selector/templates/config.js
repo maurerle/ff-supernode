@@ -33,17 +33,17 @@ var config = {
   // relative image paths and branch
 
   directories: {
-    '/firmware/download/from-2022.1.x/factory/': 'v2022.1',
-    '/firmware/download/from-2022.1.x/other/': 'v2022.1',
-    '/firmware/download/from-2022.1.x/sysupgrade/': 'v2022.1',
+    '/firmware/download/from-2019.1.x/factory/': 'v2019.1',
+    '/firmware/download/from-2019.1.x/other/': 'v2019.1',
+    '/firmware/download/from-2019.1.x/sysupgrade/': 'v2019.1',
+
+    '/firmware/download/from-2019.1.x-migration/factory/': 'v2019.1-migration',
+    '/firmware/download/from-2019.1.x-migration/other/': 'v2019.1-migration',
+    '/firmware/download/from-2019.1.x-migration/sysupgrade/': 'v2019.1-migration',
 
     '/firmware/download/from-2021.1.x/factory/': 'v2021.1',
     '/firmware/download/from-2021.1.x/other/': 'v2021.1',
     '/firmware/download/from-2021.1.x/sysupgrade/': 'v2021.1',
-
-    '/firmware/download/from-2019.1.x/factory/': 'v2019.1',
-    '/firmware/download/from-2019.1.x/other/': 'v2019.1',
-    '/firmware/download/from-2019.1.x/sysupgrade/': 'v2019.1',
 
     '/firmware/download/from-2023.1.x/factory/': 'v2023.1',
     '/firmware/download/from-2023.1.x/other/': 'v2023.1',
@@ -52,25 +52,24 @@ var config = {
     '/firmware/download/from-2023.2.x/factory/': 'v2023.2',
     '/firmware/download/from-2023.2.x/other/': 'v2023.2',
     '/firmware/download/from-2023.2.x/sysupgrade/': 'v2023.2',
-
   },
   // page title
-  title: 'Firmware',
+  title: '{{freifunk_site}} Firmware',
   // branch descriptions shown during selection
   branch_descriptions: {
-    'v2022.1': 'Images auf Gluon 2022/Openwrt 22.03 Basis - nicht für 4/32er Geräte',
+    'v2019.1': 'Alte 2019er Images mit FastD - benötigt zur Erweiterung von Altinstallationen',
+    'v2019.1-migration': '2019er Images die v2021.1 update runterladen und nach 2h installieren',
     'v2021.1': 'Images auf Gluon 2021/Openwrt 19.07 Basis - für 4/32er Geräte',
-    'v2023.1': 'Images vom Gluon master (23.03), kein tag-definierter Stand',
-    'v2023.2': 'ACHTUNG! - Images von Gluon und OpenWRT master - zukünftige Basis für v2023.2',
-    'v2019.1': 'Alte 2019er Images mit FastD'
+    'v2022.1': 'Images auf Gluon 2022/Openwrt 22.03 Basis - nicht für 4/32er Geräte',
+    'v2023.1': 'Gluon v2023.1.x basierend auf OpenWRT 22.03 - nicht für 4/32er Geräte - upgradable ab v2021.x',
+    'v2023.2': 'Images von Gluon und OpenWRT master (23.05) - zukünftige Basis für v2023.2'
   },
   // recommended branch will be marked during selection
-  recommended_branch: 'v2022.1',
+  recommended_branch: 'v2023.1',
   // experimental branches (show a warning for these branches)
-  experimental_branches: ['v2023.1', 'v2023.2'],
+  experimental_branches: ['v2019.1-migration, v2023.2'],
   // path to preview pictures directory
-  preview_pictures: 'https://map.aachen.freifunk.net/pictures/',
-  preview_pictures_ext: '.svg',
+  preview_pictures: 'https://map.aachen.freifunk.net/router-images/',
   // link to changelog
   changelog: '{{ firmware_changelog }}'
 };
