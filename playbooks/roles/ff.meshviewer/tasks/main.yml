@@ -58,3 +58,23 @@
 
 - name: "execute pictures script"
   raw: "cd /var/www/html/meshviewer/ && ./download-pictures-script.sh && rm -rf pictures && mv output-folder pictures"
+
+- name: "copy graveyard script"
+  template:
+    src: "update-graveyard.sh"
+    dest: "/var/www/html/graveyard/update-graveyard.sh"
+    owner: "www-data"
+    group: "www-data"
+
+- name: Setup cronjob for graveyard update
+  cron:
+    name: graveyard
+    job: "/var/www/html/graveyard && ./update-graveyard.sh"
+    minute: "0"
+    hour: "5"
+
+- name: Symlink meshviewer.json to graveyard.json
+  file:
+    src: /var/www/html/graveyard/graveyard.json
+    dest: /var/www/html/graveyard/meshviewer.json
+    state: link

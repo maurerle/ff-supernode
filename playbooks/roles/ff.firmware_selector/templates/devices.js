@@ -32,6 +32,7 @@ var devices_recommended = {
   "Asus": {
     "RT-AC51U": "asus-rt-ac51u",
     "RT-AC57U": { "asus-rt-ac57u": "", "asus-rt-ac57u-v1": ""},
+    "RT-AX53U": "asus-rt-ax53u",
   },
 
   "AVM": {
@@ -69,6 +70,7 @@ var devices_recommended = {
     "WR1000": {"cudy-wr1000": "v2"},
     "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
     "WR2100": "cudy-wr2100",
+    "WR3000": "cudy-wr3000",
     "X6": "cudy-x6",
   },
 
@@ -167,6 +169,7 @@ var devices_recommended = {
     "RBD52G-5HacD2HnD-TC (hAP ac²)": "mikrotik-hap-ac2",
     "RBDiscG-5acD (DISC Lite5 ac)": "mikrotik-discg-5acd",
     "RBSXTsqG-5acD (SXTsq 5 ac)": "mikrotik-sxtsq-5-ac-rbsxtsqg-5acd",
+    "Routerboard 750gr3": "mikrotik-routerboard-750gr3",
     "nand": {"mikrotik-nand-64m" : "64m", "mikrotik-nand-large" : "large", "mikrotik-nand-large-ac": "large AC"},
     "nor": {"mikrotik-rb-nor-flash-16M-sysupgrade": "16m", "mikrotik-rb-nor-flash-16M-ac": "16m AC"},
     "vmlinux": {"mikrotik-vmlinux-lzma" : "", "mikrotik-vmlinux.lzma" : ""},
@@ -185,6 +188,7 @@ var devices_recommended = {
     "R7800": "netgear-nighthawk-x4s-r7800",
     "WAC104": "netgear-wac104",
     "WAX202": "netgear-wax202",
+    "WAX220": "netgear-wax220",
     "WNR2200": {
       "netgear-wnr2200-16m": "16M",
       "netgear-wnr2200-8m": "8M",
@@ -405,6 +409,7 @@ var devices_recommended = {
     "NBG6617": "zyxel-nbg6617",
     "NBG6716": "zyxel-nbg6716",
     "NWA50AX": "zyxel-nwa50ax",
+    "NWA50AX Pro": "zyxel-nwa50ax-pro",
     "WSM20": "zyxel-wsm20",
   },
 
@@ -546,7 +551,6 @@ var devices_16_32 = {
 var devices_broken = {
   "Asus": {
     // not in release
-    "RT-AX53U": "asus-rt-ax53u",
     "TUF-AX4200": "asus_tuf-ax4200",
   },
 
@@ -558,7 +562,6 @@ var devices_broken = {
   "Cudy": {
     // not in release
     "M1800": "cudy-m1800",
-    "WR3000": {"cudy-wr3000-v1": "v1"},
   },
 
   "Raspberry Pi Foundation": {
