@@ -1,0 +1,31 @@
+- name: Install jq dnsutils
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - jq
+    - dnsutils
+
+- name: Copy DNS update private key
+  raw: "echo key nodes.ffac.rocks > ~/.Knodes.ffac.rocks.secret"
+
+- name: "Install header.html"
+  template:
+    src: "idnaencode.py"
+    dest: "/home/ffac/nsupdater/idnaencode.py"
+    mode: "755"
+    owner: "{{ freifunk_site }}"
+
+- name: "Install header.html"
+  template:
+    src: "update_ns.sh"
+    dest: "/home/ffac/nsupdater/update_ns.sh"
+    mode: "755"
+    owner: "{{ freifunk_site }}"
+
+- name: Setup cronjob for renewal
+  cron:
+    name: update-nameserver
+    job: "cd /home/ffac/nsupdater && ./update_ns.sh"
+    minute: "*/15"
