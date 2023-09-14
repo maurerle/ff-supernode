@@ -31,7 +31,7 @@ def slugify(value):
 
 def demote(user_uid, user_gid):
     def result():
-        print("{}:{}".format(user_uid, user_gid))
+        print(f"{user_uid}:{user_gid}")
         os.setgid(user_gid)
         os.setuid(user_uid)
     return result
@@ -76,10 +76,11 @@ def add_file(filename, publickey):
 def add_key():
     try:
         data = request.get_json(force=True)
+        print(f"adding key: {data}")
         if not data.get('node_name'):
-            raise Exception('node_name missing')
+            raise Exception(f'node_name missing {data}')
         if not data.get('public_key'):
-            raise Exception('public_key missing')
+            raise Exception(f'public_key missing {data}')
 
         execute_autouser(f"git -C {REPO} reset --hard origin/main")
         pull_repo()

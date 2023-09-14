@@ -83,6 +83,7 @@ ln -sf tp-link-archer-c7-v2.svg tp-link-td-w9980-alle.svg
 ln -sf tp-link-tl-mr3020-v1.svg tp-link-tl-mr3020-v3.svg
 ln -sf tp-link-tl-mr3420-v2.svg tp-link-tl-mr3420-v5.svg
 ln -sf tp-link-tl-wa801n-nd-v1.svg tp-link-tl-wa801nd-v5.svg
+ln -sf tp-link-tl-wr1043n-nd-v3.svg tp-link-tl-wr1043n-nd-v4.svg
 ln -sf tp-link-tl-wr1043n-nd-v4.svg tp-link-tl-wr1043n-v5.svg
 ln -sf tp-link-tl-wr841n-nd-v12.svg tp-link-tl-wr841n-v13.svg
 ln -sf tp-link-tl-mr3020-v1.svg tp-link-tl-wr902ac-v3.svg
@@ -93,6 +94,8 @@ ln -sf vocore-v2.svg vocore2.svg
 ln -sf xiaomi-mi-router-4a-gigabit-edition.svg xiaomi-mi-router-4a-100m-edition.svg
 ln -sf xiaomi-mi-router-4a-gigabit-edition.svg xiaomi-mi-router-4a-100m-international-edition.svg
 ln -sf xiaomi-mi-router-4c.svg xiaomi-mi-router-3g.svg
+ln -sf netgear-r7800.svg netgear-nighthawk-x4s-r7800.svg
+
 
 wget -O no_picture_available.jpg https://raw.githubusercontent.com/freifunk-darmstadt/gluon-firmware-selector/master/pictures/no_picture_available.jpg
 wget -O x86-generic.img.svg https://raw.githubusercontent.com/freifunk-darmstadt/gluon-firmware-selector/master/pictures/x86-generic.img.jpg
