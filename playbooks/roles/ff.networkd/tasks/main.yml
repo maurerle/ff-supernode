@@ -99,3 +99,4 @@
   # would remove their already applied configuration. networkd does not perceive
   # the removed configuration and would not apply it's own. This would cause connection
   # loss. So we wait until the next reboot, to let networkd do the whole networking.
+  ignore_errors: true

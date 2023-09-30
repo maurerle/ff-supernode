@@ -65,6 +65,12 @@
         "color":"#1566A9",
         "fillColor":"#5DA439"
       },
+      "online.uplink":{
+        "fillOpacity":1,
+        "opacity":1,
+        "color":"#1566AF",
+        "fillColor":"#43901c"
+      },
       "offline":{
         "color":"#D43E2A",
         "fillColor":"#D43E2A",
@@ -85,6 +91,13 @@
         "opacity":0.5,
         "color":"#1566A9",
         "fillColor":"#93E929"
+      },
+      "new.uplink":{
+        "fillOpacity":1,
+        "opacity":0.5,
+        "color":"#1566A9",
+        "fillColor":"#90ff06",
+        "weight": 5
       }
     },
     "nodeInfos": [
@@ -111,6 +124,12 @@
         "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
         "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=15&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
         "title": "Knoten {NODE_ID} - weitere Statistiken"
+      },
+      {
+        "name": "Uptime",
+        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=12&var-node={NODE_ID}&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Knoten {NODE_ID} - weitere Statistiken"
       }
     ],
     "linkInfos": [
@@ -130,7 +149,7 @@
       }
     ],
     "hwImg": [
-    { "thumbnail": "https://map.aachen.freifunk.net/pictures/{MODEL_NORMALIZED}.svg",
+    { "thumbnail": "https://map.aachen.freifunk.net/router-images/{MODEL_NORMALIZED}.svg",
       "caption": "Knoten {MODEL_NORMALIZED}"
     }
     ],

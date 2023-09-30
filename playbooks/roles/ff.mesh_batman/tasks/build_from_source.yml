@@ -10,7 +10,7 @@
     - git
     #- pkg-config
     - linux-libc-dev
-    - linux-headers-amd64
+    - linux-headers-{{ansible_kernel}}
     - pkg-config
 
 - name: Clone batman sources

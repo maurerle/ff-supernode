@@ -43,6 +43,11 @@
     scope: system
     repo: /etc/wireguard/peers-wg
 
+- name: Install cron
+  apt:
+    update_cache: yes
+    name: "cron"
+
 - name: Install crontab for autoupdate
   cron:
     name: "autoupdate wireguard peers from git"
