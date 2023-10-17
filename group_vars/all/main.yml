@@ -12,7 +12,7 @@ freifunk_site: "ffac"
 recommended_info_link: "https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/"
 version_regex: /-(v?\d+\.\d+\.\d+(-\d+)?(-.+~exp\d{8})?(.*-stable)?(.*-beta)?(.*-migration)?(.*-next\d{8})?)-/
 
-firmware_changelog: "https://github.com/ffac/site/blob/v2022.1.x/CHANGELOG.md"
+firmware_changelog: "https://github.com/ffac/site/blob/v2023.1.x/CHANGELOG.md"
 community_prefix: "gluon-ffac-"
 
 # meshviewer

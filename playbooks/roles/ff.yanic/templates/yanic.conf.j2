@@ -46,7 +46,7 @@ webroot = "/var/www/html/meshviewer"
 state_path    = "{{ yanic_state_path }}"
 # prune data in RAM, cache-file and output json files (i.e. nodes.json)
 # that were inactive for longer than
-prune_after   = "14d"
+prune_after   = "{% if yanic_central_server %}14{% else %}180{% end %}d"
 # Export nodes and graph periodically
 save_interval = "5s"
 # Set node to offline if not seen within this period
@@ -118,8 +118,7 @@ enable = true
 # version 1 is accepted by the legacy meshviewer (which is the master branch)
 #   i.e. https://github.com/ffnord/meshviewer/tree/master
 # version 2 is accepted by the new versions of meshviewer (which are in the legacy develop branch or newer)
-#   i.e. https://github.com/ffnord/meshviewer/tree/dev
-#        https://github.com/ffrgb/meshviewer/tree/develop
+#   i.e. https://github.com/freifunk/meshviewer/tree/main
 version    = {{ yanic_nodes_version }}
 # path where to store nodes.json
 nodes_path = "{{ yanic_nodes_path }}/nodes.json"
