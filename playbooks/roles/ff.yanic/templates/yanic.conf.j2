@@ -46,7 +46,7 @@ webroot = "/var/www/html/meshviewer"
 state_path    = "{{ yanic_state_path }}"
 # prune data in RAM, cache-file and output json files (i.e. nodes.json)
 # that were inactive for longer than
-prune_after   = "{% if yanic_central_server %}14{% else %}180{% end %}d"
+prune_after   = "{% if yanic_central_server %}14{% else %}180{% endif %}d"
 # Export nodes and graph periodically
 save_interval = "5s"
 # Set node to offline if not seen within this period

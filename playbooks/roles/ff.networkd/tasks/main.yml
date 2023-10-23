@@ -1,5 +1,10 @@
 ---
 
+- name: Install systemd-resolved
+  apt:
+    update_cache: yes
+    name: "systemd-resolved"
+
 - name: "sysctl: net.ipv6.conf.all.disable_ipv6 to 0"
   sysctl:
     name: net.ipv6.conf.all.disable_ipv6

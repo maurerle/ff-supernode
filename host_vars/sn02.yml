@@ -13,8 +13,7 @@ networkd_configures:
     gateway6: 2a00:fe0:43::1
     dns_server:
       - 9.9.9.9
-      - '2001:678:ed0:f000::'
-      - 5.1.66.255
+      - '2a03:2260:3006::53'
     nat4: True
     nat6: False
     additional_config: |

@@ -1,4 +1,10 @@
 ---
+
+- name: Install iptables
+  apt:
+    update_cache: yes
+    name: "iptables"
+
 - name: "Install iptables system service file"
   notify: "systemd daemon-reload"
   template:

@@ -19,7 +19,7 @@ Yet this might configure manual networking between the vms so that, e.g. the DHC
 
 ## Features
 
-- multi domain
+- multi domain/segments
 - configurable BATMAN_IV or BATMAN_V
 - wireguard + vxlan + batman
 - included basic broker
@@ -34,6 +34,8 @@ Yet this might configure manual networking between the vms so that, e.g. the DHC
 
 ## Installation
 
+
+0. install `ansible` & `python-is-python3` on the host - windows is not supported for ansible
 1. configure the host vars in sn01.yml according to your freshly set up VM
 2. configure group_vars/all/main.yml according to needed count of domains and features
     * the vx.py can be used to generate th VXLAN VNI tag from the gluon domain_seed
