@@ -32,7 +32,7 @@ var devices_recommended = {
   "Asus": {
     "RT-AC51U": "asus-rt-ac51u",
     "RT-AC57U": { "asus-rt-ac57u": "", "asus-rt-ac57u-v1": ""},
-    "RT-AX53U": "asus-rt-ax53u",
+    "RT-AX53U (RT-AX1800U)": "asus-rt-ax53u",
   },
 
   "AVM": {
@@ -50,8 +50,10 @@ var devices_recommended = {
     "FRITZ!Box 7520": "avm-fritz-box-7520",
     "FRITZ!Box 7530": "avm-fritz-box-7530",
     "FRITZ!Repeater 1200": "avm-fritz-repeater-1200",
+    "FRITZ!Repeater 3000": "avm-fritz-repeater-3000",
     "FRITZ!WLAN Repeater 300E": "avm-fritz-wlan-repeater-300e",
-    "FRITZ!WLAN Repeater 450E": "avm-fritz-wlan-repeater-450e"
+    "FRITZ!WLAN Repeater 450E": "avm-fritz-wlan-repeater-450e",
+    "FRITZ!WLAN Repeater 1750E": "avm-fritz-wlan-repeater-1750e"
   },
 
   "Buffalo": {
@@ -75,11 +77,11 @@ var devices_recommended = {
   },
 
   "D-Link": {
-    "COVR-X1860": {"d-link-covr-x1860": ""},
+    "COVR-X1860": {"d-link-covr-x1860": "", "d-link-covr-x1860-a1": ""},
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
-    "DAP-X1860": "d-link-dap-x1860",
+    "DAP-X1860": {"d-link-dap-x1860": "", "d-link-dap-x1860-a1": ""},
     "DGS-1210-10P": "d-link_dgs-1210-10p",
     "DIR-505": {"d-link-dir-505-rev": "", "d-link-dir-505": ""},
     "DIR-825": {"d-link-dir-825-rev": "", "d-link-dir825b1": "b1"},
@@ -173,6 +175,7 @@ var devices_recommended = {
     "nand": {"mikrotik-nand-64m" : "64m", "mikrotik-nand-large" : "large", "mikrotik-nand-large-ac": "large AC"},
     "nor": {"mikrotik-rb-nor-flash-16M-sysupgrade": "16m", "mikrotik-rb-nor-flash-16M-ac": "16m AC"},
     "vmlinux": {"mikrotik-vmlinux-lzma" : "", "mikrotik-vmlinux.lzma" : ""},
+    "Wap-g-5hacd2hnd (wAP ac)": "mikrotik-wap-ac",
   },
 
   "Netgear": {
@@ -299,8 +302,9 @@ var devices_recommended = {
     "Archer C5": "tp-link-archer-c5",
     "Archer C50": {"tp-link-archer-c50": "v1", "tp-link-archer-c50-v3": "v3", "tp-link-archer-c50-v4": "v4"},
     "Archer C59": "tp-link-archer-c59",
-    "Archer C6": {"tp-link-archer-c6-v2-eu-ru-jp": "v2 (EU/RU/JP)", "tp-link-archer-c6-v2": "v2 (EU/RU/JP)", "tp-link-archer-c6-v3": "v3"},
+    "Archer C6": {"tp-link-archer-c6-v2-eu-ru-jp": "v2", "tp-link-archer-c6-v2": "v2", "tp-link-archer-c6-v3": "v3"},
     "Archer C7": "tp-link-archer-c7",
+    "Archer AX23": "tp-link-archer-ax23",
     "CPE210": {"tp-link-cpe210": "", "tp-link-cpe210-220": ""},
     "CPE220": {"tp-link-cpe220": "", "tp-link-cpe220-v1.1": "--ignore--"},
     "CPE510": {"tp-link-cpe510": "", "tp-link-cpe510-520": "", "tp-link-cpe520": "--ignore--"},
@@ -366,7 +370,8 @@ var devices_recommended = {
     "UniFi AP LR": "ubiquiti-unifi-ap-lr",
     "UniFi AP Pro": "ubiquiti-unifi-ap-pro",
     "UniFi AP Outdoor": {"ubiquiti-unifi-outdoor": "", "ubiquiti-unifiap-outdoor": ""},
-    "UniFi AP Outdoor+": {"ubiquiti-unifi-outdoor-plus": "", "ubiquiti-unifiap-outdoor+": "", "ubiquiti-unifiap-outdoor%2B": "", "ubiquiti-unifiap-outdoor%2b": "", "ubiquiti-unifi-ap-outdoor+": ""}
+    "UniFi AP Outdoor+": {"ubiquiti-unifi-outdoor-plus": "", "ubiquiti-unifiap-outdoor+": "", "ubiquiti-unifiap-outdoor%2B": "", "ubiquiti-unifiap-outdoor%2b": "", "ubiquiti-unifi-ap-outdoor+": ""},
+    "UniFi Nano HD": "ubiquiti-unifi-nanohd",
   },
 
   "VoCore": {
@@ -384,6 +389,7 @@ var devices_recommended = {
 
   "Xiaomi": {
     "AX3200 (RB03)": "xiaomi-redmi-router-ax6s",
+    "AX3600": "xiaomi-ax3600",
     "Mi Router 3G": "xiaomi-mi-router-3g",
     "Mi Router 4A (100M Edition)": "xiaomi-mi-router-4a-100m-edition",
     "Mi Router 4A (100M International Edition)": "xiaomi-mi-router-4a-100m-international-edition",
@@ -410,7 +416,7 @@ var devices_recommended = {
     "NBG6716": "zyxel-nbg6716",
     "NWA50AX": "zyxel-nwa50ax",
     "NWA50AX Pro": "zyxel-nwa50ax-pro",
-    "WSM20": "zyxel-wsm20",
+    "WSM20 (Multy M1)": "zyxel-wsm20",
   },
 
   "ZBT": {
@@ -564,6 +570,12 @@ var devices_broken = {
     "M1800": "cudy-m1800",
   },
 
+  "Google": {
+    // not in release
+    "Wifi Gale": "google-wifi-gale",
+  },
+
+
   "Raspberry Pi Foundation": {
     // no working mesh without usb
     "PI1": { "raspberry-pi": "", "raspberrypi-model-b": "" },
@@ -585,6 +597,7 @@ var devices_broken = {
   "Netgear": {
     // not in release
     "WAX206": "netgear-wax206",
+    "WAX218": "netgear-wax218",
   },
 
   "TP-Link": {
@@ -595,6 +608,7 @@ var devices_broken = {
   "ZTE": {
     // LEDs on the front can not be controlled
     "MF281": "zte-mf281",
+    "MF289F": "zte-mf289f",
   },
 
   "ZyXEL": {
@@ -624,6 +638,9 @@ var devices_info = {
   },
   "Arcadyan": {
     "VGV7510KW22 (o2 Box 6431)": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6",
+  },
+  "Asus": {
+    "RT-AX53U (RT-AX1800U)": "https://openwrt.org/toh/asus/rt-ax53u#installation_with_mtd-write",
   },
   "AVM": {
     "FRITZ!Box 3370": "https://openwrt.org/toh/avm/fritz.box.wlan.3370#installation",
@@ -659,7 +676,7 @@ var devices_info = {
   },
   "D-Link": {
     "DAP-X1860": "https://openwrt.org/inbox/toh/d-link/dap-x1860#how_to_flash_openwrt_to_this_device",
-    "COVR-X1860": "https://forum.openwrt.org/t/add-support-for-d-link-covr-x1860/161862/58",
+    "COVR-X1860": "https://freifunk-aachen.de/2023/08/03/installationsanleitung-d-link-covr-x1860/",
   },
   "devolo": {
     "WiFi Pro 1200e": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1724d4e9ed7716a5444eca42adf045c2f3afc554",
@@ -678,6 +695,8 @@ var devices_info = {
     "EX6150": "https://freifunk-ingolstadt.de/eigener-freifunk-hotspot/anleitung/installationsanleitung-fuer-netgear-wi-fi-range-extender-ex6150-v2/",
     "R6120": "https://freifunk-ingolstadt.de/eigener-freifunk-hotspot/anleitung/installationsanleitung-fuer-netgear-r6120/",
     "R6220": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-r6220/",
+    "WAX202": "https://openwrt.org/toh/netgear/wax202#oem_easy_installation",
+    "WAX206": "https://openwrt.org/toh/netgear/wax206#oem_easy_installation",
   },
   "RAVPower": {
     "RP-WD009": "https://openwrt.org/toh/ravpower/rp-wd009#oem_installation_using_the_tftp_method"
@@ -722,6 +741,6 @@ var devices_info = {
   "ZyXEL": {
     "NWA50AX": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
     "NWA55AXE": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
-    "WSM20": "https://openwrt.org/toh/zyxel/wsm20#via_web_interface",
+    "WSM20 (Multy M1)": "https://openwrt.org/toh/zyxel/wsm20#via_web_interface",
   },
 }
