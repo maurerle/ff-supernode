@@ -30,9 +30,10 @@ var devices_recommended = {
   },
 
   "Asus": {
-    "RT-AC51U": "asus-rt-ac51u",
-    "RT-AC57U": { "asus-rt-ac57u": "", "asus-rt-ac57u-v1": ""},
-    "RT-AX53U (RT-AX1800U)": "asus-rt-ax53u",
+     "RT-AC51U": "asus-rt-ac51u",
+     "RT-AC57U": "asus-rt-ac57u",
+     "RT-AX53U (RT-AX1800U)": "asus-rt-ax53u",
+     "TUF-AX4200": "asus-tuf-ax4200",
   },
 
   "AVM": {
@@ -53,7 +54,7 @@ var devices_recommended = {
     "FRITZ!Repeater 3000": "avm-fritz-repeater-3000",
     "FRITZ!WLAN Repeater 300E": "avm-fritz-wlan-repeater-300e",
     "FRITZ!WLAN Repeater 450E": "avm-fritz-wlan-repeater-450e",
-    "FRITZ!WLAN Repeater 1750E": "avm-fritz-wlan-repeater-1750e"
+    "FRITZ!WLAN Repeater 1750E": "avm-fritz-wlan-repeater-1750e",
   },
 
   "Buffalo": {
@@ -70,18 +71,18 @@ var devices_recommended = {
 
   "Cudy": {
     "WR1000": {"cudy-wr1000": "v2"},
-    "WR1300": {"cudy-wr1300": "v1", "cudy-wr1300-v1": "v1", "cudy-wr1300-v2": "v2", "cudy-wr1300-v3": "v3"},
+    "WR1300": "cudy-wr1300",
     "WR2100": "cudy-wr2100",
     "WR3000": "cudy-wr3000",
     "X6": "cudy-x6",
   },
 
   "D-Link": {
-    "COVR-X1860": {"d-link-covr-x1860": "", "d-link-covr-x1860-a1": ""},
+    "COVR-X1860": "d-link-covr-x1860",
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
-    "DAP-X1860": {"d-link-dap-x1860": "", "d-link-dap-x1860-a1": ""},
+    "DAP-X1860": "d-link-dap-x1860",
     "DGS-1210-10P": "d-link_dgs-1210-10p",
     "DIR-505": {"d-link-dir-505-rev": "", "d-link-dir-505": ""},
     "DIR-825": {"d-link-dir-825-rev": "", "d-link-dir825b1": "b1"},
@@ -104,6 +105,7 @@ var devices_recommended = {
   "Enterasys": {
     "WS-AP3705i": {"enterasys-ws-ap3705": "", "enterasys-ws-ap3705i": ""},
     "WS-AP3710i": "enterasys-ws-ap3710i",
+    "WS-AP3715i": "enterasys-ws-ap3715i",
   },
 
   "Extreme Networks": {
@@ -128,9 +130,9 @@ var devices_recommended = {
     "GL-B1300": "gl.inet-gl-b1300",
     "GL-MT300a": "gl-mt300a",
     "GL-MT300n": {"gl-mt300n": "v1", "gl-mt300n-v2": "v2"},
-    "GL-MT3000": "gl.inet-gl-mt3000",
     "GL-MT750": "gl-mt750",
     "GL-MT1300": "gl.inet-gl-mt1300",
+    "GL-MT3000": "gl.inet-gl-mt3000",
     "GL-USB150": "gl.inet-gl-usb150",
     "GL-XE300": "gl.inet-gl-xe300",
     "microuter-N300": "gl.inet-microuter-n300",
@@ -157,9 +159,9 @@ var devices_recommended = {
   "Meraki": {
     "MR12": "meraki-mr12",
     "MR16": "meraki-mr16",
-    "MR33": {"meraki-mr33": "", "meraki-mr33-access-point": ""},
+    "MR33": "meraki-mr33-access-point",
     "MR62": "meraki-mr62",
-    "MR66": "meraki-mr66"
+    "MR66": "meraki-mr66",
   },
 
   "Mercusys": {
@@ -171,6 +173,7 @@ var devices_recommended = {
     "RBD52G-5HacD2HnD-TC (hAP ac²)": "mikrotik-hap-ac2",
     "RBDiscG-5acD (DISC Lite5 ac)": "mikrotik-discg-5acd",
     "RBSXTsqG-5acD (SXTsq 5 ac)": "mikrotik-sxtsq-5-ac-rbsxtsqg-5acd",
+    "RBwAPR-2nD (wAP R)": "mikrotik-routerboard-wapr-2nd",
     "Routerboard 750gr3": "mikrotik-routerboard-750gr3",
     "nand": {"mikrotik-nand-64m" : "64m", "mikrotik-nand-large" : "large", "mikrotik-nand-large-ac": "large AC"},
     "nor": {"mikrotik-rb-nor-flash-16M-sysupgrade": "16m", "mikrotik-rb-nor-flash-16M-ac": "16m AC"},
@@ -317,7 +320,7 @@ var devices_recommended = {
     "RE650": "tp-link-re650",
     "TD-W8970": "tp-link-td-w8970",
     "TD-W9980": "tp-link-td-w9980",
-    "TL-MR3020": "tp-link-tl-mr3020",
+    "TL-MR3020": {"tp-link-tl-mr3020-v3": "v3"},
     "TL-MR3420": "tp-link-tl-mr3420",
     "TL-MR6400": "tp-link-tl-mr6400",
     "TL-WA801N/ND": "tp-link-tl-wa801nd",
@@ -416,11 +419,17 @@ var devices_recommended = {
     "NBG6716": "zyxel-nbg6716",
     "NWA50AX": "zyxel-nwa50ax",
     "NWA50AX Pro": "zyxel-nwa50ax-pro",
+    "NWA55AXE": "zyxel-nwa55axe",
     "WSM20 (Multy M1)": "zyxel-wsm20",
   },
 
   "ZBT": {
     "WG3526": {"zbt-wg3526-16m": "16M", "zbt-wg3526-32m": "32M", "zbt-wg3526": "16M", "zbtlink-zbt-wg3526-16m": "16M", "zbtlink-zbt-wg3526-32m": "32M",},
+  },
+
+  "ZTE": {
+    "MF281": "zte-mf281",
+    "MF289F": "zte-mf289f",
   },
 };
 
@@ -641,6 +650,7 @@ var devices_info = {
   },
   "Asus": {
     "RT-AX53U (RT-AX1800U)": "https://openwrt.org/toh/asus/rt-ax53u#installation_with_mtd-write",
+    "TUF-AX4200": "https://github.com/blocktrron/openwrt-asus-filogic-factory/releases/tag/filogic-v1",
   },
   "AVM": {
     "FRITZ!Box 3370": "https://openwrt.org/toh/avm/fritz.box.wlan.3370#installation",
@@ -669,6 +679,7 @@ var devices_info = {
   "Enterasys": {
     "WS-AP3705i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=ebddc5f984a240980303aed68524eb615484eef8",
     "WS-AP3710i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=16b01fb1b9c99513c318109bef96a1a3545c57a0",
+    "WS-AP3715i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=765f66810a3324cc35fa6471ee8eeee335ba8c2b",
   },
   "Extreme Networks": {
     "WS-AP3805i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=f8c87aa2d27ab405f284dd4357377ab5c893a345",
@@ -737,9 +748,11 @@ var devices_info = {
   },
   "ZTE": {
     "MF281": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1e1695f959e678868bb7911d059b847f38fc9cf4",
+    "MF289F": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=0de6a3339f1aadc1de2c9371435e3de239a00645",
   },
   "ZyXEL": {
     "NWA50AX": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
+    "NWA50AX Pro": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=f0445746f6fd96fc7c5394b238153bd2ff22bc5b",
     "NWA55AXE": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681",
     "WSM20 (Multy M1)": "https://openwrt.org/toh/zyxel/wsm20#via_web_interface",
   },
