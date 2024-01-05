@@ -20,6 +20,11 @@ var devices_recommended = {
     },
   },
 
+  "Arm SystemReady": {
+    "32-bit (EFI)": "armsr-armv7",
+    "64-bit (EFI)": "armsr-armv8",
+  },
+
   "Aruba": {
     "AP-303": "aruba-ap-303",
     "AP-303H": "aruba-ap-303h",
@@ -37,6 +42,7 @@ var devices_recommended = {
   },
 
   "AVM": {
+    "FRITZ!Box 3390": "avm-fritz-box-3390",
     "FRITZ!Box 4020": "avm-fritz-box-4020",
     "FRITZ!Box 4040": "avm-fritz-box-4040",
     "FRITZ!Box 7312": "avm-fritz-box-7312",
@@ -98,6 +104,10 @@ var devices_recommended = {
     "WiFi Pro 1750x": "devolo-wifi-pro-1750x",
   },
 
+  "Edimax": {
+    "BR 6478ac": "edimax-br-6478ac",
+  },
+
   "EnGenius": {
     "ENS620EXT": {"engenius-ens620ext": "", "engenius-ens620ext-factory_fw30": "fw3.0", "engenius-ens620ext-factory_fw35": "fw3.5"},
   },
@@ -153,6 +163,7 @@ var devices_recommended = {
 
   "Linksys": {
     "E8450": {"linksys-e8450": "", "linksys-e8450-ubi-sysupgrade.itb": ""},
+    "EA8300": {"linksys-ea8300-dallas": ""},
     "MR8300": {"linksys-mr8300-dallas": ""},
   },
 
@@ -175,6 +186,11 @@ var devices_recommended = {
     "RBSXTsqG-5acD (SXTsq 5 ac)": "mikrotik-sxtsq-5-ac-rbsxtsqg-5acd",
     "RBwAPR-2nD (wAP R)": "mikrotik-routerboard-wapr-2nd",
     "Routerboard 750gr3": "mikrotik-routerboard-750gr3",
+    "Routerboard Hex": "mikrotik-routerboard-hex",
+    "Routerboard mAP Lite": "mikrotik-routerboard-map-lite",
+    "Routerboard mAPL": "mikrotik-routerboard-mapl-2nd",
+    "Routerboard wAP-AC": "mikrotik-routerboard-wap-ac",
+    "Routerboard wAP-g-5hact2hnd": "mikrotik-routerboard-wap-g-5hact2hnd",
     "nand": {"mikrotik-nand-64m" : "64m", "mikrotik-nand-large" : "large", "mikrotik-nand-large-ac": "large AC"},
     "nor": {"mikrotik-rb-nor-flash-16M-sysupgrade": "16m", "mikrotik-rb-nor-flash-16M-ac": "16m AC"},
     "vmlinux": {"mikrotik-vmlinux-lzma" : "", "mikrotik-vmlinux.lzma" : ""},
@@ -290,6 +306,10 @@ var devices_recommended = {
   },
 
   "Sophos": {
+    "AP100": "sophos-ap100",
+    "AP100c": "sophos-ap100c",
+    "AP55": "sophos-ap55",
+    "AP55c": "sophos-ap55c",
     "RED 15w": { "sophos-red-15w-rev.1": "Rev.1"},
   },
 
@@ -313,6 +333,7 @@ var devices_recommended = {
     "CPE510": {"tp-link-cpe510": "", "tp-link-cpe510-520": "", "tp-link-cpe520": "--ignore--"},
     "CPE710": "tp-link-cpe710",
     "EAP225-Outdoor": "tp-link-eap225-outdoor",
+    "EAP225-Wall": "tp-link-eap225-wall",
     "EAP615-Wall": "tp-link-eap615-wall",
     "RE200": "tp-link-re200",
     "RE305": "tp-link-re305",
@@ -427,10 +448,6 @@ var devices_recommended = {
     "WG3526": {"zbt-wg3526-16m": "16M", "zbt-wg3526-32m": "32M", "zbt-wg3526": "16M", "zbtlink-zbt-wg3526-16m": "16M", "zbtlink-zbt-wg3526-32m": "32M",},
   },
 
-  "ZTE": {
-    "MF281": "zte-mf281",
-    "MF289F": "zte-mf289f",
-  },
 };
 
 var devices_ath10k_lowmem = {
@@ -590,7 +607,7 @@ var devices_broken = {
     "PI1": { "raspberry-pi": "", "raspberrypi-model-b": "" },
     "PI2": { "raspberry-pi-2": "", "raspberrypi-2-model-b": "" },
     "PI3": { "raspberry-pi-3": "", "raspberrypi-3-model-b": "" },
-    "PI4": { "raspberry-pi-4": "", "raspberry-pi-4-model-b": "" }
+    "PI4": { "raspberry-pi-4": "", "raspberrypi-4-model-b": "", "raspberry-pi-4-model-b": ""}
   },
 
   "LeMaker": {
@@ -617,11 +634,8 @@ var devices_broken = {
   "ZTE": {
     // LEDs on the front can not be controlled
     "MF281": "zte-mf281",
+    "MF286R": "zte-mf286r",
     "MF289F": "zte-mf289f",
-  },
-
-  "ZyXEL": {
-    "NWA55AXE": "zyxel-nwa55axe",
   },
 };
 
@@ -686,7 +700,7 @@ var devices_info = {
     "WS-AP3825i": "https://forum.darmstadt.freifunk.net/t/flashing-of-the-extreme-networks-ws-ap3825i/923",
   },
   "D-Link": {
-    "DAP-X1860": "https://openwrt.org/inbox/toh/d-link/dap-x1860#how_to_flash_openwrt_to_this_device",
+    "DAP-X1860": "https://forum.darmstadt.freifunk.net/t/installation-d-link-dap-x1860/987",
     "COVR-X1860": "https://freifunk-aachen.de/2023/08/03/installationsanleitung-d-link-covr-x1860/",
   },
   "devolo": {
@@ -715,11 +729,17 @@ var devices_info = {
   "Siemens": {
     "WS-AP3610": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=d2b8ccb1c04def81224da6f42f644c7d239b9986",
   },
+  "Sophos": {
+    "AP100": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
+    "AP100c": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
+    "AP55": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
+    "AP55c": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
+  },
   "Ubiquiti": {
     "EdgeRouter X": "https://github.com/oszilloskop/UBNT_ERX_Gluon_Factory-Image/blob/master/README.md#gluon-auf-ubnt-edgerouter-x-und-x-sfp",
     "EdgeRouter X-SFP": "https://github.com/oszilloskop/UBNT_ERX_Gluon_Factory-Image/blob/master/README.md#gluon-auf-ubnt-edgerouter-x-und-x-sfp",
     "UniFi 6 Lite": "https://openwrt.org/toh/ubiquiti/unifi6lite#installation",
-    "UniFi 6 LR": "https://openwrt.org/toh/ubiquiti/unifi6lite#installation",
+    "UniFi 6 LR": "https://openwrt.org/toh/ubiquiti/unifi_6_lr#installation_steps",
     "UniFi AC Lite": "https://forum.darmstadt.freifunk.net/t/unifi-ap-erstinstallation/790",
     "UniFi AC LR": "https://forum.darmstadt.freifunk.net/t/unifi-ap-erstinstallation/790",
     "UniFi AC Mesh Pro": "https://forum.darmstadt.freifunk.net/t/unifi-ap-erstinstallation/790",
