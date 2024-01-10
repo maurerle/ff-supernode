@@ -33,7 +33,9 @@
     name: "/var/lib/kea"
     src: "tmpfs" 
     fstype: "tmpfs" 
-    opts: "defaults,size=10M" 
+    # with flaky clients which do not stop sending lease requests, 10M is not enough
+    # resulting in DHCP service stopping
+    opts: "defaults,size=64M" 
     state: "mounted"
 
 - name: "Generate kea-dhcp4.conf config"

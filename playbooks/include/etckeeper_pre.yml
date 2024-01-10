@@ -1,6 +1,7 @@
 ---
 
 - name: Install etckeeper
+  become: true
   apt:
     update_cache: yes
     name: "etckeeper"

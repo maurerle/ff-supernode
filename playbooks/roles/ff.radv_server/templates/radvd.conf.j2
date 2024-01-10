@@ -7,11 +7,11 @@ interface bat{{ domain.id }}
 {% else %}
  AdvDefaultLifetime 0;
 {% endif %}
- MaxRtrAdvInterval 10;
+ MaxRtrAdvInterval 60;
  AdvLinkMTU 1280;
  AdvRASolicitedUnicast on;
  AdvSourceLLAddress off;
- 
+
  prefix {{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::/64 {
    AdvValidLifetime 600;
    AdvPreferredLifetime 30;

@@ -1,6 +1,6 @@
 - name: Clone meshviewer sources
   git:
-    repo: https://github.com/freifunk-ffm/meshviewer
+    repo: https://github.com/freifunk/meshviewer
     dest: '{{ meshviewer_source_dir }}'
     version: "main"
     accept_hostkey: true
@@ -48,16 +48,18 @@
     dest: "/var/www/html/meshviewer/config.json"
     owner: "www-data"
     group: "www-data"
-  
-- name: "copy download pictures script"
-  template:
-    src: "download-pictures-script.sh"
-    dest: "/var/www/html/meshviewer/download-pictures-script.sh"
-    owner: "www-data"
-    group: "www-data"
 
-- name: "execute pictures script"
-  raw: "cd /var/www/html/meshviewer/ && ./download-pictures-script.sh && rm -rf pictures && mv output-folder pictures"
+- name: Clone picture sources
+  git:
+    repo: https://github.com/freifunk/device-pictures
+    dest: '{{ device_pictures_source_dir }}'
+    version: "main"
+    accept_hostkey: true
+  register: device_pictures_clone
+  
+- name: "convert device pictures"
+  raw: "cd {{ device_pictures_source_dir }} && ./conversion-script.sh && rm -r /var/www/html/pictures-* && cp -rp pictures-* /var/www/html/"
+  when: device_pictures_clone is changed
 
 - name: "copy graveyard script"
   template:
