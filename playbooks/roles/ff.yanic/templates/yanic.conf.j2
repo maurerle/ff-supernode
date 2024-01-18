@@ -48,7 +48,7 @@ state_path    = "{{ yanic_state_path }}"
 # that were inactive for longer than
 prune_after   = "{% if yanic_central_server %}14{% else %}180{% endif %}d"
 # Export nodes and graph periodically
-save_interval = "5s"
+save_interval = "30s"
 # Set node to offline if not seen within this period
 offline_after = "5m"
 

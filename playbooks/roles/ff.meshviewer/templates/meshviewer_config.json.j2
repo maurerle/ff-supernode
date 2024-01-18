@@ -161,6 +161,7 @@
     }
     ],
 
-    "deprecation_text": "{{ deprecation_text }}",
-    "deprecation_enabled": {% if deprecation_text != "" %}true{% else %}false{% endif %}
+    "eol_text": "{{ deprecation_text }}",
+    "deprecation_text": "{{ eol_text }}",
+    "deprecation_enabled": {% if deprecation_enabled != "" %}true{% else %}false{% endif %}
   }

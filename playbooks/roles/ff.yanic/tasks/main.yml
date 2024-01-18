@@ -13,7 +13,7 @@
 - name: Ensure golang
   apt:
     name: golang
-    default_release: "{{ ansible_distribution_release }}-backports"
+    default_release: "{{ ansible_distribution_release }}"
 
 - name: Create yanic user
   user:
