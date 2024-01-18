@@ -18,7 +18,7 @@ dns_hostnames:
   - wg-broker.freifunk-aachen.de
   - grafana.freifunk-aachen.de
   - devmap.freifunk-aachen.de
-yanic_url: /data/
+yanic_url: ./data/
 yanic_webserver: "false"
 yanic_central_server: "true"
 yanic_influx_enabled: "true"

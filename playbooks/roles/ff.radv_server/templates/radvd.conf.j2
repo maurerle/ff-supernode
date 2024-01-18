@@ -14,7 +14,7 @@ interface bat{{ domain.id }}
 
  prefix {{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::/64 {
    AdvValidLifetime 600;
-   AdvPreferredLifetime 30;
+   AdvPreferredLifetime 300;
    AdvOnLink on;
    AdvAutonomous on;
    AdvRouterAddr on;

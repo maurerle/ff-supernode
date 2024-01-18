@@ -24,16 +24,18 @@
     state: directory
     dest: '{{ meshviewer_source_dir }}/node_modules'
 
-- name: Install meshviewer packages based on package.json.
+- name: Install meshviewer packages based on package.json with npm.
   ansible.builtin.command: npm install
-  when: packagejson.stat.exists
-
-- name: Run gulp
-  ansible.builtin.command: node_modules/gulp/bin/gulp.js
   args:
     chdir: '{{ meshviewer_source_dir }}'
   when: packagejson.stat.exists
 
+
+- name: Run npm build
+  ansible.builtin.command: npm run build
+  args:
+    chdir: '{{ meshviewer_source_dir }}'
+  when: packagejson.stat.exists
 - name: "copy build dir"
   copy:
     src: '{{ meshviewer_source_dir }}/build/'
@@ -61,6 +63,13 @@
   raw: "cd {{ device_pictures_source_dir }} && ./conversion-script.sh && rm -r /var/www/html/pictures-* && cp -rp pictures-* /var/www/html/"
   when: device_pictures_clone is changed
 
+- name: Create data directory
+  file:
+    state: directory
+    dest: '/var/www/html/meshviewer/data'
+    owner: "yanic"
+    group: "www-data"
+
 - name: "copy graveyard script"
   template:
     src: "update-graveyard.sh"
@@ -68,15 +77,17 @@
     owner: "www-data"
     group: "www-data"
 
+# TODO as user ffac
 - name: Setup cronjob for graveyard update
   cron:
     name: graveyard
-    job: "/var/www/html/graveyard && ./update-graveyard.sh"
+    user: "ffac"
+    job: "cd /home/ffac && ./update-graveyard.sh"
     minute: "0"
     hour: "5"
 
 - name: Symlink meshviewer.json to graveyard.json
   file:
-    src: /var/www/html/graveyard/graveyard.json
+    src: /home/ffac/graveyard.json
     dest: /var/www/html/graveyard/meshviewer.json
     state: link
