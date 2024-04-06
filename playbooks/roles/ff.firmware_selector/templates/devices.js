@@ -39,6 +39,7 @@ var devices_recommended = {
      "RT-AC57U": "asus-rt-ac57u",
      "RT-AX53U (RT-AX1800U)": "asus-rt-ax53u",
      "TUF-AX4200": "asus-tuf-ax4200",
+     "TUF-AX6000": "asus-tuf-ax6000",
   },
 
   "AVM": {
@@ -88,6 +89,8 @@ var devices_recommended = {
     "DAP-1330": {"d-link-dap-1330-rev": "", "d-link-dap-1330": ""},
     "DAP-1365": "d-link-dap-1365",
     "DAP-2660": "d-link-dap-2660",
+    "DAP-2680": "d-link-dap-2680",
+    "DAP-2695": "d-link-dap-2695",
     "DAP-X1860": "d-link-dap-x1860",
     "DGS-1210-10P": "d-link_dgs-1210-10p",
     "DIR-505": {"d-link-dir-505-rev": "", "d-link-dir-505": ""},
@@ -229,7 +232,10 @@ var devices_recommended = {
       "netgear-wndr3800chmychart": "--ignore--"
     },
     "WNDR4300": "netgear-wndr4300",
-    "WNDRMAC": {"netgear-wndrmac": "v1", "netgear-wndrmacv2": "v2"},
+    "WNDRMAC": {
+      "netgear-wndrmac": "v1",
+      "netgear-wndrmacv2": "v2", "netgear-wndrmac-v2": "v2"
+    },
   },
 
   "Nexx": {
@@ -308,6 +314,7 @@ var devices_recommended = {
   "Sophos": {
     "AP100": "sophos-ap100",
     "AP100c": "sophos-ap100c",
+    "AP15": "sophos-ap15",
     "AP55": "sophos-ap55",
     "AP55c": "sophos-ap55c",
     "RED 15w": { "sophos-red-15w-rev.1": "Rev.1"},
@@ -383,8 +390,10 @@ var devices_recommended = {
     "Rocket Titanium": {"ubiquiti-rocket-m-ti": "--ignore--",
                         "ubiquiti-rocket-m2-ti": "M2",
                         "ubiquiti-rocket-m5-ti": "M5"},
+    "Swiss Army Knife Ultra": "ubiquiti-unifi-swiss-army-knife-ultra",
     "UniFi 6 Lite": "ubiquiti-unifi-6-lite",
     "UniFi 6 LR": "ubiquiti-unifi-6-lr",
+    "UniFi 6+": "ubiquiti-unifi-6-plus",
     "UniFi AC Lite": "ubiquiti-unifi-ac-lite",
     "UniFi AC LR": { "ubiquiti-unifi-ac-lite-mesh": "", "ubiquiti-unifi-ac-lr": "" },
     "UniFi AC Mesh": "ubiquiti-unifi-ac-mesh",
@@ -414,6 +423,7 @@ var devices_recommended = {
   "Xiaomi": {
     "AX3200 (RB03)": "xiaomi-redmi-router-ax6s",
     "AX3600": "xiaomi-ax3600",
+    "Mi RA75": "xiaomi-mi-ra75",
     "Mi Router 3G": "xiaomi-mi-router-3g",
     "Mi Router 4A (100M Edition)": "xiaomi-mi-router-4a-100m-edition",
     "Mi Router 4A (100M International Edition)": "xiaomi-mi-router-4a-100m-international-edition",
@@ -441,7 +451,7 @@ var devices_recommended = {
     "NWA50AX": "zyxel-nwa50ax",
     "NWA50AX Pro": "zyxel-nwa50ax-pro",
     "NWA55AXE": "zyxel-nwa55axe",
-    "WSM20 (Multy M1)": "zyxel-wsm20",
+    "WSM20": "zyxel-wsm20",
   },
 
   "ZBT": {
@@ -660,11 +670,13 @@ var devices_info = {
     "Instant On AP17": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=300b7fe85a743ab0e039457a5a551819b49450da",
   },
   "Arcadyan": {
-    "VGV7510KW22 (o2 Box 6431)": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6",
+    "O2 Box 6431": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6",
+    "vgv7510kw22/O2 Box 6431": "https://forum.openwrt.org/t/installing-lede-u-boot-via-brnboot-web-interface-without-rs232/9857/6"
   },
   "Asus": {
     "RT-AX53U (RT-AX1800U)": "https://openwrt.org/toh/asus/rt-ax53u#installation_with_mtd-write",
-    "TUF-AX4200": "https://github.com/blocktrron/openwrt-asus-filogic-factory/releases/tag/filogic-v1",
+    "TUF-AX4200": "https://github.com/freifunk-darmstadt/projects/wiki/ASUS-TUF-AX4200-Factory",
+    "TUF-AX6000": "https://github.com/herbetom/openwrt-asus-filogic-factory/releases/latest",
   },
   "AVM": {
     "FRITZ!Box 3370": "https://openwrt.org/toh/avm/fritz.box.wlan.3370#installation",
@@ -690,18 +702,9 @@ var devices_info = {
     "M1800": "http://www.cudytech.com/openwrt_software_download",
     "X6": "http://www.cudytech.com/openwrt_software_download",
   },
-  "Enterasys": {
-    "WS-AP3705i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=ebddc5f984a240980303aed68524eb615484eef8",
-    "WS-AP3710i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=16b01fb1b9c99513c318109bef96a1a3545c57a0",
-    "WS-AP3715i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=765f66810a3324cc35fa6471ee8eeee335ba8c2b",
-  },
-  "Extreme Networks": {
-    "WS-AP3805i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=f8c87aa2d27ab405f284dd4357377ab5c893a345",
-    "WS-AP3825i": "https://forum.darmstadt.freifunk.net/t/flashing-of-the-extreme-networks-ws-ap3825i/923",
-  },
   "D-Link": {
+    "DAP-2680": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=5b58710fad2137eedad874f0fe8fe22082d1edc6",
     "DAP-X1860": "https://forum.darmstadt.freifunk.net/t/installation-d-link-dap-x1860/987",
-    "COVR-X1860": "https://freifunk-aachen.de/2023/08/03/installationsanleitung-d-link-covr-x1860/",
   },
   "devolo": {
     "WiFi Pro 1200e": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1724d4e9ed7716a5444eca42adf045c2f3afc554",
@@ -710,6 +713,15 @@ var devices_info = {
     "WiFi Pro 1750e": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=1c2f7b511514d43d8a826b26e09817b2750a2bf4",
     "WiFi Pro 1750i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=8d68be8057d6c689025cc236d20b96b77a6ccf30",
     "WiFi Pro 1750x": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=cb3cd526948af3f69da1af18e035177a0a8f58e3"
+  },
+  "Enterasys": {
+    "WS-AP3705i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=ebddc5f984a240980303aed68524eb615484eef8",
+    "WS-AP3710i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=16b01fb1b9c99513c318109bef96a1a3545c57a0",
+    "WS-AP3715i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=765f66810a3324cc35fa6471ee8eeee335ba8c2b",
+  },
+  "Extreme Networks": {
+    "WS-AP3805i": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=f8c87aa2d27ab405f284dd4357377ab5c893a345",
+    "WS-AP3825i": "https://forum.darmstadt.freifunk.net/t/flashing-of-the-extreme-networks-ws-ap3825i/923",
   },
   "Joy-IT": {
     "JT-OR750i": "https://wiki.freifunk-stuttgart.net/technik:hardware:joy-it_jt-or750i",
@@ -722,6 +734,7 @@ var devices_info = {
     "R6220": "https://freifunk-ingolstadt.de/installationsanleitung-fuer-netgear-r6220/",
     "WAX202": "https://openwrt.org/toh/netgear/wax202#oem_easy_installation",
     "WAX206": "https://openwrt.org/toh/netgear/wax206#oem_easy_installation",
+    "WAX220": "https://openwrt.org/toh/netgear/wax220#oem_easy_installation",
   },
   "RAVPower": {
     "RP-WD009": "https://openwrt.org/toh/ravpower/rp-wd009#oem_installation_using_the_tftp_method"
@@ -732,14 +745,17 @@ var devices_info = {
   "Sophos": {
     "AP100": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
     "AP100c": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
+    "AP15": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=0dc58214896aacf67a3759495d70e2b4e9c160d8",
     "AP55": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
     "AP55c": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=6f1efb28983758116a8ecaf9c93e1d875bb70af7",
   },
   "Ubiquiti": {
     "EdgeRouter X": "https://github.com/oszilloskop/UBNT_ERX_Gluon_Factory-Image/blob/master/README.md#gluon-auf-ubnt-edgerouter-x-und-x-sfp",
     "EdgeRouter X-SFP": "https://github.com/oszilloskop/UBNT_ERX_Gluon_Factory-Image/blob/master/README.md#gluon-auf-ubnt-edgerouter-x-und-x-sfp",
+    "Swiss Army Knife Ultra": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=5ad05681f2de00c8c6d6449df2b958b0838dbc1a",
     "UniFi 6 Lite": "https://openwrt.org/toh/ubiquiti/unifi6lite#installation",
-    "UniFi 6 LR": "https://openwrt.org/toh/ubiquiti/unifi_6_lr#installation_steps",
+    "UniFi 6 LR": "https://openwrt.org/toh/ubiquiti/unifi6lite#installation",
+    "UniFi 6+": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=75ee5546e9b7cfa5bbfd6f844ab8c5fffd5bb594",
     "UniFi AC Lite": "https://forum.darmstadt.freifunk.net/t/unifi-ap-erstinstallation/790",
     "UniFi AC LR": "https://forum.darmstadt.freifunk.net/t/unifi-ap-erstinstallation/790",
     "UniFi AC Mesh Pro": "https://forum.darmstadt.freifunk.net/t/unifi-ap-erstinstallation/790",
@@ -748,7 +764,8 @@ var devices_info = {
   },
   "TP-Link": {
     "EAP225-Outdoor": {
-      "v1": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=4f86edf477edbc0f20b5a49a69f658fa82158284"
+      "v1": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=4f86edf477edbc0f20b5a49a69f658fa82158284",
+      "v3": "https://git.openwrt.org/?p=openwrt/openwrt.git;a=commit;h=7e4de89e631aaf56be5375662b7d5ed0f27e26f6",
     },
     "TL-WR841N/ND" : {
       "v13": "https://openwrt.org/toh/tp-link/tl-wr841nd#tftp_recovery_via_bootloader_for_v8_v9_v10_v11_v12_v13"
