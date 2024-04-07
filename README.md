@@ -20,7 +20,7 @@ Yet this might configure manual networking between the vms so that, e.g. the DHC
 ## Features
 
 - multi domain/segments
-- configurable BATMAN_IV or BATMAN_V
+- configurable batman-iv or batman-v
 - wireguard + vxlan + batman
 - included basic broker
 - synchronizing wireguard public keys through a git repository

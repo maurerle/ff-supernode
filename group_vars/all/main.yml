@@ -48,7 +48,7 @@ domains:
 mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
 radv_sn_ipv6: true
-batman_version: "BATMAN_IV"
+batman_version: "batman-iv"
 
 # mesh_announce & nginx
 info_mail: "info@{{ dns_searchdomains }}"

@@ -15,20 +15,16 @@
     path: /srv/wireguard
     state: directory
 
-- name: Install pip3, setuptools
+- name: Install setuptools and pyroute2
   apt:
-    update_cache: yes
     name: "{{ packages }}"
-  vars:
-    packages:
-    - python3-pip
-    - python3-setuptools
-
-- name: Install python3-pyroute2
-  apt:
-    name: python3-pyroute2
     update_cache: yes
     cache_valid_time: 3600
+  vars:
+    packages:
+    - python3-setuptools
+    - python3-pyroute2
+
 
 - name: Fetch wireguard-vxlan-glue
   git:

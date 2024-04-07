@@ -20,11 +20,5 @@
     loop_var: domain
   when: domains is defined
 
-- name: Setup network wildcards
-  include_tasks: network.yml
-
-- name: Setup batctl service
-  include_tasks: batctl.yml
-
 - name: Establish netlink worker
   include_tasks: netlink.yml
