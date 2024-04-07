@@ -12,7 +12,6 @@
     # General
     - { name: ff.mesh_batman, tags: mesh_batman, become: true }
     - { name: ff.ipforward, tags: ipforward, become: true }
-    - { name: ff.wait_for, tags: wait_for, become: true }
     - { name: ff.networkd, tags: networkd, become: true }
     - { name: ff.mesh_wireguard, tags: mesh_wireguard, become: true }
     - { name: ff.mesh_wireguard_remotes_peers_git, tags: mesh_wireguard_remotes_peers_git, become: true }

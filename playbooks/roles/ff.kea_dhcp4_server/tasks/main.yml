@@ -55,23 +55,6 @@
     owner: "root"
     group: "root"
 
-- name: "Deploy unit file sniplet to wait for bat devices"
-  template:
-    src: "50-bat-device.conf.j2"
-    dest: "/etc/systemd/system/isc-kea-dhcp4-server.service.d/50-bat-devices.conf"
-    mode: "0644"
-    owner: "root"
-    group: "root"
-
-- name: "Enable wait-for servicefile for each bat interface"
-  systemd:
-    name: "wait-for-ip@bat{{ domain.id }}.service"
-    enabled: "yes"
-  with_items: "{{ domains }}"
-  loop_control:
-    loop_var: "domain"
-  when: "domains is defined"
-
 - name: "Start isc-kea-dhcp4-server service"
   systemd:
     name: "isc-kea-dhcp4-server"
