@@ -1,5 +1,11 @@
 ---
 
+- name: Install autostart ip_conntrack on boot
+  lineinfile: dest=/etc/modules line=ip_conntrack
+
+- name: Load ip_conntrack module
+  modprobe: name=ip_conntrack state=present
+
 - name: Adjust netfilter conntrack table size
   sysctl:
     name: net.netfilter.nf_conntrack_max

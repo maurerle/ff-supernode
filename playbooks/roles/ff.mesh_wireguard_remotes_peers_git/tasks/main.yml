@@ -51,7 +51,7 @@
 - name: Install crontab for autoupdate
   cron:
     name: "autoupdate wireguard peers from git"
-    user: auto
+    user: root
     minute: "*/1"
     job: >
-      sudo /home/auto/autoupdate_wg.py
+      /home/auto/autoupdate_wg.py

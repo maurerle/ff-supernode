@@ -21,6 +21,7 @@
     - { name: ff.mesh_announce, tags: mesh_announce, become: true }
     - { name: ff.watchdog, tags: watchdog, become: true }
     - { name: ff.yanic, tags: yanic, become: true }
+    - { name: ff.supernode_scripts, tags: supernode_scripts}
     #- { name: ff.gw-statuspage, tags: gw_statuspage, become: true }
     # Backups
     #- { name: ff.restic, tags: restic }

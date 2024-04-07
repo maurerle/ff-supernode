@@ -88,7 +88,7 @@ ansible-playbook --ask-vault-password playbooks/supernode.yml --tags mesh_wiregu
 
 ### Removing domains
 
-To remove domains, it is suggested to `rm /etc/systemd/network/*` and run `systemctl disable wait-for-ip@batX` for each removed interface
+To remove domains, it is suggested to `rm /etc/systemd/network/*` the file.
 
 ### MAC-Selection
 
