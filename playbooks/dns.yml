@@ -1,0 +1,18 @@
+---
+
+- hosts: "dns"
+  pre_tasks:
+    - name: "Import pre_tasks: reboot-required.yml"
+      import_tasks: "include/reboot-required.yml"
+      tags: [always]
+    - name: "Import pre_task etckeeper"
+      import_tasks: "include/etckeeper_pre.yml"
+      tags: [always]
+  roles:
+    # General
+    - { name: ff.networkd, tags: networkd, become: true }
+    - { name: ff.bind, tags: bind}
+  post_tasks:
+    - name: "Import post_task etckeeper"
+      import_tasks: "include/etckeeper_post.yml"
+      tags: [always]
