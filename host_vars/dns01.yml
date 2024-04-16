@@ -12,3 +12,11 @@ networkd_configures:
     dns_server:
       - 9.9.9.9
       - '2a03:2260:3006::53'
+
+dns_v4_listen_addrs:
+  - 127.0.0.1
+  - 5.145.135.158
+
+dns_v6_listen_addrs:
+  - '::1'
+  - '2a00:fe0:43::158'

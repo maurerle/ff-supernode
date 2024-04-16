@@ -11,7 +11,7 @@
   roles:
     # General
     - { name: ff.networkd, tags: networkd, become: true }
-    - { name: ff.bind, tags: bind}
+    - { name: ff.bind, tags: bind, become: true}
   post_tasks:
     - name: "Import post_task etckeeper"
       import_tasks: "include/etckeeper_post.yml"
