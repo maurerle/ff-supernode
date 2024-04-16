@@ -16,6 +16,10 @@ all:
       ansible_host: build.freifunk-aachen.de
       ansible_user: ffac
 
+    dns01:
+      ansible_host: 5.145.135.158
+      ansible_user: ffac
+
 supernodes:
   hosts:
     sn01:
@@ -24,3 +28,7 @@ supernodes:
 monitoring:
   hosts:
     monitor:
+
+dns:
+  hosts:
+    dns01:
