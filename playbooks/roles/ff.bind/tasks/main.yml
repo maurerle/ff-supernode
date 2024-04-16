@@ -1,13 +1,13 @@
 ---
 
-- name: Install bind9 and bind9-dnsutils 
+- name: Install bind9 and bind9-dnsutils
   apt:
     update_cache: yes
     name: "{{ packages }}"
   vars:
     packages:
     - bind9
-    - bind9-dnsutils 
+    - bind9-dnsutils
 
 - name: Install named.conf.options
   template:
@@ -23,9 +23,9 @@
 
 - name: Install zone key
   copy:
-    content: "{{ dns_zone_key }}" 
+    content: "{{ dns_zone_key }}"
     dest: /etc/bind/rndc.key
-    mode: "0640" 
+    mode: "0640"
     owner: "bind"
     group: "bind"
 
@@ -42,6 +42,22 @@
     enabled: yes
     state: started
 
+- name: update root.hints
+  get_url:
+    url: 'https://www.internic.net/domain/named.root'
+    dest: '/usr/share/dns/root.hints'
+    mode: 0644
+    backup: true
+
+- name: update root.hints.sig
+  get_url:
+    url: 'https://www.internic.net/domain/named.root.sig'
+    dest: '/usr/share/dns/root.hints.sig'
+    mode: 0644
+    backup: true
+
 - name: reload bind9
   raw: /usr/sbin/rndc reload
   when: bind9options.changed or bind9local.changed
+
+
