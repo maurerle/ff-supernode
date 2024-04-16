@@ -1,0 +1,124 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+include "/etc/bind/rndc.key";
+
+// acl trusted {
+//	127.0.0.1;	# localhost;
+// };
+
+// controls {
+// 	inet * allow { trusted; } keys { "rndc-key"; };
+// };
+
+statistics-channels {
+	inet 127.0.0.1 port 8053 allow { 127.0.0.1/32; };
+//	inet xxx.xxx.xxx.xxx port 8053 allow { 192.168.9.0/24; };
+};
+
+// http://zytrax.xom/books/dns/ch7/logging.html
+logging {
+	channel named_log {
+		file "/var/log/named/named.log" versions 5 size 50M;
+		print-time yes;
+		print-severity yes;
+		print-category yes;
+	};
+
+	channel query_log {
+		file "/var/log/named/query.log" versions 5 size 50M;
+		print-time yes;
+		print-severity yes;
+		print-category yes;
+	};
+
+	category client			{ default_syslog; };
+	category config			{ default_syslog; };
+	category database		{ default_syslog; };
+	category default		{ named_log; };
+	category delegation-only	{ default_syslog; };
+	category dispatch		{ default_syslog; };
+	category dnssec			{ default_syslog; };
+	category general		{ default_syslog; };
+	category lame-servers		{ null; };
+	category network		{ default_syslog; };
+	category notify			{ default_syslog; };
+	category queries		{ query_log; };
+	category resolver		{ default_syslog; };
+	category security		{ default_syslog; };
+	category unmatched		{ default_syslog; };
+	category update			{ default_syslog; };
+	category update-security	{ default_syslog; };
+	category xfer-in		{ default_syslog; };
+	category xfer-out		{ default_syslog; };
+};
+
+
+zone "ffac" IN {
+	type slave;
+	file "/var/cache/bind/ffac.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "nodes.ffac" IN {
+	type forward;
+	forwarders {
+		2a03:2260:114::101;
+		10.5.0.101;
+	};
+};
+
+zone "5.10.in-addr.arpa." IN {
+	type slave;
+	file "/var/cache/bind/ffac-rev.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "0.64.100.in-addr.arpa." IN {
+	type slave;
+	file "/var/cache/bind/ffbb-rev.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "65.100.in-addr.arpa." IN {
+	type slave;
+	file "/var/cache/bind/ffacbb-rev.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "4.1.1.0.0.6.2.2.3.0.a.2.ip6.arpa" IN {
+	type slave;
+	file "/var/cache/bind/ffac-rev6-0114.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "6.0.0.3.0.6.2.2.3.0.a.2.ip6.arpa" IN {
+	type slave;
+	file "/var/cache/bind/ffac-rev6-3006.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "1.0.c.a.4.1.1.0.0.6.2.2.3.0.a.2.ip6.arpa" IN {
+	type forward;
+	forwarders {
+		2a03:2260:114::b0b;
+		10.5.0.100;
+	};
+};

@@ -1,0 +1,96 @@
+acl "xfer" {
+	/* Deny transfers by default except for the listed hosts.
+	 * If we have other name servers, place them here.
+	 */
+	none;
+};
+
+
+acl recursive_clients {
+	127.0.0.1/32;
+	::1/128;
+	10.5.0.0/16;
+	10.145.0.0/16;
+	fe80::/64;
+	fda0:747e:ab29:acac::/64;
+	2a03:2260:114::/48;
+	2a03:2260:3006::/48;
+	2a03:2260:40:0::/64;
+	2a00:fe0:43::/48;
+	5.145.135.128/27;
+};
+
+options {
+	directory "/var/cache/bind";
+	statistics-file "/var/log/named/named.stats";
+
+
+	// If there is a firewall between you and nameservers you want
+	// to talk to, you may need to fix the firewall to allow multiple
+	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+	// If your ISP provided one or more IP addresses for stable 
+	// nameservers, you probably want to use them as forwarders.  
+	// Uncomment the following block, and insert the addresses replacing 
+	// the all-0's placeholder.
+
+	// forwarders {
+	// 	10.5.0.2;
+	// };
+
+	listen-on {
+{% for listen_addr in dns_v4_listen_addrs | default( [] ) %}
+		{{ listen_addr }} ;
+{% endfor %}
+	};
+
+	listen-on-v6 { 
+{% for listen_addr in dns_v6_listen_addrs | default( [] ) %}
+		{{ listen_addr }} ;
+{% endfor %}
+	};
+
+	// 2a03:2260:114::53; 2a03:2260:114::1; 2a03:2260:114:ac01::1; 2a03:2260:3006::53; 2a03:2260:3006::1; 
+
+//	notify-source 5.61.84.134;
+//	notify-source-v6 2a00:5f40:1001:ffac::babe;
+
+	//========================================================================
+	// If BIND logs error messages about the root key being expired,
+	// you will need to update your keys.  See https://www.isc.org/bind-keys
+	//========================================================================
+
+#	dnssec-validation auto;
+#	dnssec-lookaside auto;
+	dnssec-validation no;
+
+	empty-zones-enable no;
+
+	querylog no;
+
+	auth-nxdomain no;    # conform to RFC1035
+
+	recursive-clients 2000;
+	max-cache-size 350M;
+	
+	allow-query {
+		recursive_clients;
+	};
+
+	allow-query-cache {
+		recursive_clients;
+	};
+
+	allow-recursion {
+		recursive_clients;
+	};
+
+	allow-transfer {
+		none;
+	};
+
+	allow-update {
+		none;
+	};
+
+};
