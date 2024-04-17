@@ -56,6 +56,36 @@
     mode: 0644
     backup: true
 
+- name: Create a directory ff-icvpn
+  ansible.builtin.file:
+    path: /opt/ff-icvpn
+    state: directory
+    mode: '0755'
+
+- name: Install ff-icvpn git-pull-hourly.sh
+  template:
+    src: git-pull-hourly.sh
+    dest: /opt/ff-icvpn/git-pull-hourly.sh
+    mode: '0777'
+
+- name: icvpn-cron
+  ansible.builtin.cron:
+    name: "icvpn update"
+    minute: "2"
+    job: "/opt/ff-icvpn/git-pull-hourly.sh"
+
+- name: icvpn-meta
+  ansible.builtin.git:
+    repo: 'https://github.com/freifunk/icvpn-meta'
+    dest: /opt/ff-icvpn/icvpn-meta
+    update: yes
+
+- name: icvpn-scripts
+  ansible.builtin.git:
+    repo: 'https://github.com/freifunk/icvpn-scripts'
+    dest: /opt/ff-icvpn/icvpn-scripts
+    update: yes
+
 - name: reload bind9
   raw: /usr/sbin/rndc reload
   when: bind9options.changed or bind9local.changed
