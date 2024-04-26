@@ -65,24 +65,30 @@
   register: enableresolved
   template:
     src: 1x-iface.network.j2
-    dest: /etc/systemd/network/10-{{ item.1.iface }}.network
-  with_indexed_items: "{{ networkd_configures }}"
+    dest: /etc/systemd/network/10-{{ interface.name }}.network
+  loop: "{{ networkd_interfaces }}"
+  loop_control:
+    loop_var: interface
 
 - name: Install iface link config
   register: enableresolved
   template:
     src: 1x-iface.link.j2
-    dest: /etc/systemd/network/10-{{ item.1.iface }}.link
-  with_indexed_items: "{{ networkd_configures }}"
-  when: item.1.fixed_mac | default(false)
+    dest: /etc/systemd/network/10-{{ interface.name }}.link
+  loop: "{{ networkd_interfaces }}"
+  loop_control:
+    loop_var: interface
+  when: not interface.fixed_mac | default(true)
 
 - name: Remove fixed mac config
   register: enableresolved
   file:
-    path: "/etc/systemd/network/10-{{ item.1.iface }}.link"
+    path: "/etc/systemd/network/10-{{ interface.name }}.link"
     state: "absent"
-  with_indexed_items: "{{ networkd_configures }}"
-  when: not item.1.fixed_mac | default(true)
+  loop: "{{ networkd_interfaces }}"
+  loop_control:
+    loop_var: interface
+  when: not interface.fixed_mac | default(true)
 
 - name: Directly restart networkd
   service:
