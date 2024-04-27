@@ -1,0 +1,28 @@
+---
+
+- name: Ensure Bird2 is installed
+  apt:
+    name: bird2
+    update_cache: true
+
+- name: Start Bird
+  service:
+    name: bird
+    enabled: true
+    state: started
+
+- name: Install Bird Conf
+  register: restartbird
+  template:
+    src: bird.conf.j2
+    dest: /etc/bird/bird.conf
+
+- name: Install Bird Peerings
+  register: restartbird
+  template:
+    src: ebgp.conf.j2
+    dest: /etc/bird/ebgp.conf
+
+- name: Restart bird gracefully
+  shell: birdc graceful restart
+  when: restartbird

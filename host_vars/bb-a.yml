@@ -91,3 +91,92 @@ gretunnel_configures:
       - address: 2a03:2260:0:2f5::2/64
       - address: fe80::591:878d/64
         scope: local
+
+bird:
+  router_id: 5.145.135.141
+  ospf:
+    name: IGP
+    area:
+      - id: 0
+        interfaces:
+          - name: lo
+            stub: yes
+          - name: eth1
+            cost: 100
+            type: pointtopoint
+            hello: 5
+            retransmit: 2
+            wait: 10
+            dead: 20
+            check: link
+            authentication: "none"
+  staticroutes:
+    - name: uplink_hostroute
+      rules:
+        - "route 185.66.193.46/32 via 100.64.17.157"
+  filter:
+    - name: hostroute
+      blacklist: no
+      rules:
+        - "if net ~ 185.66.193.46/32 then accept"
+
+  templates:
+    - name: ffrl_exit
+      protocol: bgp
+      imports:
+        - "all"
+      exports:
+        - "filter hostroute"
+        - 'where proto = "uplink_hostroute"'
+      next_hop: yes
+      multihop: 64
+  
+  peerings:
+    - name: bb_ber_a
+      protocol: bgp
+      templates:
+        - ffrl_exit
+      description: "FFRL bb-a.ak.ber"
+      neighbor: 100.64.5.230
+      remote_as: 201701
+      source_address: 100.64.5.231
+    - name: bb_ber_b
+      protocol: bgp
+      templates:
+        - ffrl_exit
+      description: "FFRL bb-b.ak.ber"
+      neighbor: 100.64.5.236
+      remote_as: 201701
+      source_address: 100.64.5.237
+    - name: bb_dus_a
+      protocol: bgp
+      templates:
+        - ffrl_exit
+      description: "FFRL bb-a.ix.dus"
+      neighbor: 100.64.5.234
+      remote_as: 201701
+      source_address: 100.64.5.235
+    - name: bb_dus_b
+      protocol: bgp
+      templates:
+        - ffrl_exit
+      description: "FFRL bb-b.ix.dus"
+      neighbor: 100.64.5.240
+      remote_as: 201701
+      source_address: 100.64.5.241
+    - name: bb_fra_a
+      protocol: bgp
+      templates:
+        - ffrl_exit
+      description: "FFRL bb-a.fra3.fra"
+      neighbor: 100.64.5.232
+      remote_as: 201701
+      source_address: 100.64.5.233
+    - name: bb_ber_a
+      protocol: bgp
+      templates:
+        - ffrl_exit
+      description: "FFRL bb-b.fra3.fra"
+      neighbor: 100.64.5.238
+      remote_as: 201701
+      source_address: 100.64.5.239
