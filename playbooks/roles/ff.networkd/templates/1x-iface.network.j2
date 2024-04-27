@@ -1,33 +1,33 @@
 [Match]
-Name={{ item.1.iface }}
+Name={{ item.iface }}
 
 [Network]
-{% if item.1.addresses is defined %}
-{% for addr in item.1.addresses %}
+{% if item.addresses is defined %}
+{% for addr in item.addresses %}
 Address={{ addr }}
 {% endfor %}
 {% endif %}
-{% if item.1.gateway4 is defined %}
-Gateway={{ item.1.gateway4 }}
+{% if item.gateway4 is defined %}
+Gateway={{ item.gateway4 }}
 {% endif %}
-{% if item.1.gateway6 is defined %}
-Gateway={{ item.1.gateway6 }}
+{% if item.gateway6 is defined %}
+Gateway={{ item.gateway6 }}
 {% endif %}
-{% if item.1.dns_server is defined %}
-{% for dns_server in item.1.dns_server %}
+{% if item.dns_server is defined %}
+{% for dns_server in item.dns_server %}
 DNS={{ dns_server }}
 {% endfor %}
 {% endif %}
 Domains={{ dns_searchdomains | default('.local') }}
-{% if item.1.dhcp is defined and item.1.dhcp %}
+{% if item.dhcp is defined and item.dhcp %}
 DHCP=ipv4
 {% endif %}
-{% if item.1.no_radv_accept is defined and item.1.no_radv_accept %}
+{% if item.no_radv_accept is defined and item.no_radv_accept %}
 IPv6AcceptRouterAdvertisements=false
 {% endif %}
 {% if networkd_vlans is defined %}
 {% for vlan in networkd_vlans %}
-{% if vlan.iface == item.1.iface %}
+{% if vlan.iface == item.iface %}
 VLAN=vlan{{ vlan.id }}
 {% endif %}
 {% endfor %}
@@ -36,17 +36,16 @@ VLAN=vlan{{ vlan.id }}
 {% for domain in domains | default( [] ) %}
 VXLAN=vx-{{ domain.id }}-server
 {% endfor %}
-{% endif %}
-{% if item.1.dhcp is defined and item.1.dhcp %}
+{% if item.dhcp is defined and item.dhcp %}
 [DHCPv4]
 UseDNS=true
 UseDomains=false
 {% endif %}
-{% if item.1.macaddress is defined %}
+{% if item.macaddress is defined %}
 [Link]
-MACAddress={{ item.1.macaddress }}
+MACAddress={{ item.macaddress }}
 {% endif %}
-{% for route in item.1.static_routes | default([]) %}
+{% for route in item.static_routes | default([]) %}
 [Route]
 {% if route.gw is defined %}
 Gateway={{ route.gw }}
@@ -66,7 +65,7 @@ PreferredSource={{ route.pref_src }}
 {% endif %}
 {% endfor %}
 
-{% if item.1.additional_config is defined -%}
-{{ item.1.additional_config }}
+{% if item.additional_config is defined -%}
+{{ item.additional_config }}
 {% endif %}
 
