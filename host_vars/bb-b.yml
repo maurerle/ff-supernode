@@ -1,0 +1,93 @@
+---
+servername: bb-b
+
+# cloud-init config
+networkd_configures:
+  - iface: eth1
+    addresses:
+      - 100.64.17.142/24
+    additional_config: |
+      [Route]
+      Destination=185.66.193.46 
+      Gateway=100.64.17.157
+
+      [RoutingPolicyRule]
+      From=185.66.193.40/29
+      Table=42
+  - iface: eth0
+    addresses:
+      - 5.145.135.142/27
+      - 2a00:fe0:43::bb:2/64
+    gateway4: 5.145.135.129
+    gateway6: 2a00:fe0:43::1
+    dns_server:
+      - 9.9.9.9
+      - '2a03:2260:3006::53'
+    additional_config: |      
+      Tunnel=bb-ber-a
+      Tunnel=bb-ber-b
+      Tunnel=bb-dus-a
+      Tunnel=bb-dus-b
+      Tunnel=bb-fra-a
+      Tunnel=bb-fra-b
+
+      [Route]
+      Destination=2a03:2260:3006:100::/56
+      Gateway=2a00:fe0:43::201
+
+      [Route]
+      Destination=2a03:2260:3006:100::/56
+      Gateway=2a00:fe0:43::201
+      Table=42
+
+      [Route]
+      Destination=2a03:2260:3006:200::/56
+      Gateway=2a00:fe0:43::202
+
+      [Route]
+      Destination=2a03:2260:3006:200::/56
+      Gateway=2a00:fe0:43::202
+      Table=42
+
+      [RoutingPolicyRule]
+      From=2a03:2260:3006:100::/56
+      Table=42
+
+      [RoutingPolicyRule]
+      From=2a03:2260:3006:200::/56
+      Table=42
+
+gretunnel_configures:
+  - netdev: bb-ber-a
+    mtu_bytes: 1400
+    local_address: 5.145.135.142
+    remote_address: 185.66.195.0
+    independent: yes
+    ttl: 64
+    networks:
+      - address: 100.64.5.231/31
+      - address: 2a03:2260:0:2f4::2/64
+      - address: fe80::591:878d/64
+        scope: local
+  - netdev: bb-dus-a
+    mtu_bytes: 1400
+    local_address: 5.145.135.142
+    remote_address: 185.66.193.0
+    independent: yes
+    ttl: 64
+    networks:
+      - address: 100.64.5.235/31
+      - address: 2a03:2260:0:2f6::2/64
+      - address: fe80::591:878d/64
+        scope: local
+  - netdev: bb-fra-a
+    mtu_bytes: 1400
+    local_address: 5.145.135.142
+    remote_address: 185.66.194.0
+    independent: yes
+    ttl: 64
+    networks:
+      - address: 100.64.5.233/31
+      - address: 2a03:2260:0:2f5::2/64
+      - address: fe80::591:878d/64
+        scope: local
