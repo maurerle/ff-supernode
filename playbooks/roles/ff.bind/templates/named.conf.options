@@ -29,9 +29,9 @@ options {
 	// to talk to, you may need to fix the firewall to allow multiple
 	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
 
-	// If your ISP provided one or more IP addresses for stable 
-	// nameservers, you probably want to use them as forwarders.  
-	// Uncomment the following block, and insert the addresses replacing 
+	// If your ISP provided one or more IP addresses for stable
+	// nameservers, you probably want to use them as forwarders.
+	// Uncomment the following block, and insert the addresses replacing
 	// the all-0's placeholder.
 
 	// forwarders {
@@ -44,13 +44,13 @@ options {
 {% endfor %}
 	};
 
-	listen-on-v6 { 
+	listen-on-v6 {
 {% for listen_addr in dns_v6_listen_addrs | default( [] ) %}
 		{{ listen_addr }} ;
 {% endfor %}
 	};
 
-	// 2a03:2260:114::53; 2a03:2260:114::1; 2a03:2260:114:ac01::1; 2a03:2260:3006::53; 2a03:2260:3006::1; 
+	// 2a03:2260:114::53; 2a03:2260:114::1; 2a03:2260:114:ac01::1; 2a03:2260:3006::53; 2a03:2260:3006::1;
 
 //	notify-source 5.61.84.134;
 //	notify-source-v6 2a00:5f40:1001:ffac::babe;
@@ -59,6 +59,8 @@ options {
 	// If BIND logs error messages about the root key being expired,
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
+
+	version "unknown";
 
 #	dnssec-validation auto;
 #	dnssec-lookaside auto;
