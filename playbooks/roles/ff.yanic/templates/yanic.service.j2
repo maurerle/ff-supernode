@@ -1,5 +1,6 @@
 [Unit]
 Description=yanic
+Requires=network-online.target
 
 [Service]
 Type=simple
@@ -11,4 +12,3 @@ Environment=PATH=/usr/bin:/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
-Requires=network-online.target
