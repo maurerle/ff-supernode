@@ -21,7 +21,9 @@ interface bat{{ domain.id }}
  };
  route {{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::{{ "%x" | format(sn) }}001/128 {};
  RDNSS {{ client_dns_server_v6 }} {};
+{% if dhcp_domain_name %}
  DNSSL {{dhcp_domain_name}} {};
+{% endif %}
 };
 
 {% endfor %}

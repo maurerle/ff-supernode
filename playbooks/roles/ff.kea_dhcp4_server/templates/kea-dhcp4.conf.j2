@@ -61,10 +61,12 @@
 		],
 
 		"option-data": [
+{% if dhcp_domain_name %}
 			{
 				"name": "domain-name",
 				"data": "{{ dhcp_domain_name }}"
 			},
+{% endif %}
 			{
 				"name": "interface-mtu",
 				"data": "1280"
