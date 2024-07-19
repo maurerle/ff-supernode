@@ -51,7 +51,7 @@ MACAddress={{ interface.macaddress }}
 {% if route.gw is defined %}
 Gateway={{ route.gw }}
 {% endif %}
-Destination={{ route.dest }}
+Destination={{ route.destination }}
 {% if route.src is defined %}
 Source={{ route.src }}
 {% endif %}
@@ -67,10 +67,12 @@ PreferredSource={{ route.pref_src }}
 {% for mpr in route.multipathroutes | default([]) %}
 MultiPathRoute={{ mpr }}
 {% endfor %}
+
 {% endfor %}
 
-{% for policy_rule in routing_policies | default([]) %}
+{% for policy_rule in interface.routing_policies | default([]) %}
 [RoutingPolicyRule]
 From={{ policy_rule.from }}
 Table={{ policy_rule.table }}
+
 {% endfor %}
