@@ -10,8 +10,17 @@ networkd_interfaces:
     addresses:
       - "{{ public_ffrl_ipv4 }}"
       - "{{ public_ffrl_ipv6 }}"
+    routing_policies:
+      # rule for ipv4 ffrl
+      - from: "{{ public_ffrl_ipv4 }}"
+        table: 42
+      # rule for ipv4 client network
+      - from: "10.0.0.0/11"
+        table: 42
+      - from: "{{ public_ffrl_ipv6 }}"
+        table: 42
   - name: eth0
-    fixed_mac: bc:24:11:cb:d3:58
+    fixed_mac: bc:24:11:cb:d3 :58
     addresses:
       - 5.145.135.153/27
       - 2a00:fe0:43::203/64
@@ -22,6 +31,11 @@ networkd_interfaces:
       - "2a03:2260:3006::53"
     nat4: False
     nat6: False
+    static_routes:
+      - destination: "5.145.135.128/27"
+        table: 42
+      - destination: "2a00:fe0:43::/64"
+        table: 42
     routing_policies:
       - from: "2a03:2260:3006:100::/56"
         table: 42
@@ -113,7 +127,7 @@ bird:
       default_accept: yes
       rules:
         - "if net ~ [100.64.17.0/24+, 5.145.135.128/27+, 10.0.0.0/8+] then reject;"
-        - "krt_prefsrc={{ public_ffrl_ipv4 }};"
+        - "krt_prefsrc={{ public_ffrl_ipv4.split('/') | first }};"
     - name: filter_kernel_v6
       default_accept: yes
       rules:

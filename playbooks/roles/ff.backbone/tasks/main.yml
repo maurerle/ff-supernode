@@ -11,6 +11,14 @@
     enabled: true
     state: started
 
+- name: Ensure Log Directory exists
+  ansible.builtin.file:
+    path: /var/log/bird/
+    state: directory
+    mode: "u=rwx,g=rx,o=rx"
+    owner: bird
+    group: bird
+
 - name: Install Bird Conf
   register: restartbird
   template:
