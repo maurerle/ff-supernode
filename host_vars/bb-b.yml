@@ -1,20 +1,16 @@
 ---
 servername: bb-b
 
+public_ffrl_ffac_prefix: 185.66.193.40/29
 # cloud-init config
-networkd_configures:
-  - iface: eth1
+networkd_interfaces:
+  - name: eth1
     addresses:
       - 100.64.17.142/24
-    additional_config: |
-      [Route]
-      Destination=185.66.193.46 
-      Gateway=100.64.17.157
-
-      [RoutingPolicyRule]
-      From=185.66.193.40/29
-      Table=42
-  - iface: eth0
+    routing_policies:
+      - from: "{{ public_ffrl_ffac_prefix }}"
+        table: 42
+  - name: eth0
     addresses:
       - 5.145.135.142/27
       - 2a00:fe0:43::bb:2/64
@@ -30,32 +26,22 @@ networkd_configures:
       Tunnel=bb-dus-b
       Tunnel=bb-fra-a
       Tunnel=bb-fra-b
-
-      [Route]
-      Destination=2a03:2260:3006:100::/56
-      Gateway=2a00:fe0:43::201
-
-      [Route]
-      Destination=2a03:2260:3006:100::/56
-      Gateway=2a00:fe0:43::201
-      Table=42
-
-      [Route]
-      Destination=2a03:2260:3006:200::/56
-      Gateway=2a00:fe0:43::202
-
-      [Route]
-      Destination=2a03:2260:3006:200::/56
-      Gateway=2a00:fe0:43::202
-      Table=42
-
-      [RoutingPolicyRule]
-      From=2a03:2260:3006:100::/56
-      Table=42
-
-      [RoutingPolicyRule]
-      From=2a03:2260:3006:200::/56
-      Table=42
+    static_routes:
+      - destination: 2a03:2260:3006:100::/56
+        gateway: 2a00:fe0:43::201
+      - destination: 2a03:2260:3006:100::/56
+        gateway: 2a00:fe0:43::201
+        table: 42
+      - destination: 2a03:2260:3006:200::/56
+        gateway: 2a00:fe0:43::202
+      - destination: 2a03:2260:3006:200::/56
+        gateway: 2a00:fe0:43::202
+        table: 42
+    routing_policies:
+      - from: 2a03:2260:3006:100::/56
+        table: 42
+      - from: 2a03:2260:3006:200::/56
+        table: 42
 
 gretunnel_configures:
   - netdev: bb-ber-a

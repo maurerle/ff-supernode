@@ -2,8 +2,8 @@
 servername: buildserver
 
 # cloud-init config
-networkd_configures:
-  - iface: eth0
+networkd_interfaces:
+  - name: eth0
     addresses:
       - 5.145.135.138/27
       - 2a00:fe0:43::ffac:b0/64
