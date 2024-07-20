@@ -38,8 +38,8 @@
   changed_when: false
 
 - name: Install /etc/systemd/networkd.conf
-  ansible.builtin.notify: Restart networkd
-  template:
+  notify: Restart networkd
+  ansible.builtin.template:
     dest: /etc/systemd/networkd.conf
     src: networkd.conf.j2
 
