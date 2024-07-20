@@ -1,0 +1,36 @@
+---
+
+- name: Ensure Bird2 is installed
+  apt:
+    name: bird2
+    update_cache: true
+
+- name: Start Bird
+  service:
+    name: bird
+    enabled: true
+    state: started
+
+- name: Ensure Log Directory exists
+  ansible.builtin.file:
+    path: /var/log/bird/
+    state: directory
+    mode: "u=rwx,g=rx,o=rx"
+    owner: bird
+    group: bird
+
+- name: Install Bird Conf
+  register: restartbird
+  template:
+    src: bird2.conf.j2
+    dest: /etc/bird/bird.conf
+
+- name: Bird Check
+  command: birdc configure check
+  register: bird_health
+  failed_when: bird_health.rc != 0
+  changed_when: false
+
+- name: Reload Bird Configuration
+  command: birdc configure
+  when: restartbird.changed

@@ -1,0 +1,15 @@
+[Match]
+Name={{ item.name}}
+
+[Network]
+# for networkd >= 244 KeepConfiguration stops networkd from
+# removing routes on this interface when restarting
+KeepConfiguration=yes
+
+{% for network in item.networks %}
+[Address]
+Address={{ network.address }}
+{% if network.scope is defined %}
+Scope={{ network.scope }}
+{% endif %}
+{% endfor %}

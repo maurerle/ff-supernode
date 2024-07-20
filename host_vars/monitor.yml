@@ -2,8 +2,8 @@
 servername: monitor
 
 # cloud-init config
-networkd_configures:
-  - iface: ens18
+networkd_interfaces:
+  - name: ens18
     addresses:
       - 5.145.135.151/27
       - 2a00:fe0:43::201/64

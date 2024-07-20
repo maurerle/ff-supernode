@@ -1,69 +1,69 @@
 ---
 
 - name: Install systemd-resolved
-  apt:
-    update_cache: yes
+  ansible.builtin.apt:
+    update_cache: true
     name: "systemd-resolved"
 
 - name: "sysctl: net.ipv6.conf.all.disable_ipv6 to 0"
-  sysctl:
+  ansible.builtin.sysctl:
     name: net.ipv6.conf.all.disable_ipv6
     value: "0"
     sysctl_file: /etc/sysctl.d/10-ipv6.conf
-    reload: yes
+    reload: true
 
 - name: "sysctl: net.ipv6.conf.default.disable_ipv6 to 0"
-  sysctl:
+  ansible.builtin.sysctl:
     name: net.ipv6.conf.default.disable_ipv6
     value: "0"
     sysctl_file: /etc/sysctl.d/10-ipv6.conf
-    reload: yes
+    reload: true
 
 - name: Obtain systemd version
-  shell: "systemd --version | head -n 1 | cut -d ' ' -f 2"
+  ansible.builtin.shell: "systemd --version | head -n 1 | cut -d ' ' -f 2"
   register: systemd_version
-  check_mode: no
+  check_mode: false
   changed_when: false
 
 - name: Print systemd version
-  debug:
+  ansible.builtin.debug:
     msg: 'Systemd version is {{ systemd_version.stdout }}'
 
 # Disabling ManageForeignRoutes is only possible in systemd 247 and above.
 - name: Ensure systemd version >= 247 for ManageForeignRoutes=no feature
-  command: /bin/true
+  ansible.builtin.command: /bin/true
   when: not networkd_manage_foreign_routes
   failed_when: (systemd_version.stdout | int) < 247
-  check_mode: no
+  check_mode: false
   changed_when: false
 
 - name: Install /etc/systemd/networkd.conf
   notify: Restart networkd
-  template:
+  ansible.builtin.template:
     dest: /etc/systemd/networkd.conf
     src: networkd.conf.j2
 
 - name: Enable systemd-networkd
-  service:
+  ansible.builtin.service:
     name: systemd-networkd
-    enabled: yes
+    enabled: true
     state: started
   # networkd does not remove any existing network configuration,
   # so this should be safe.
 
 - name: Enable systemd-resolved
-  service:
+  ansible.builtin.service:
     name: systemd-resolved
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Enable dns resolving with systemd-resolved
-  register: enableresolved
-  file: src=/run/systemd/resolve/resolv.conf dest=/etc/resolv.conf state=link force=yes
+  register: restartresolved
+  ansible.builtin.file: src=/run/systemd/resolve/resolv.conf dest=/etc/resolv.conf state=link force=yes
 
 - name: Install iface configs
-  register: enableresolved
-  template:
+  register: restartnetworkd
+  ansible.builtin.template:
     src: 1x-iface.network.j2
     dest: /etc/systemd/network/10-{{ interface.name }}.network
   loop: "{{ networkd_interfaces }}"
@@ -71,33 +71,33 @@
     loop_var: interface
 
 - name: Install iface link config
-  register: enableresolved
-  template:
+  register: restartnetworkd
+  ansible.builtin.template:
     src: 1x-iface.link.j2
     dest: /etc/systemd/network/10-{{ interface.name }}.link
   loop: "{{ networkd_interfaces }}"
   loop_control:
     loop_var: interface
-  when: not interface.fixed_mac | default(true)
+  when: item.fixed_mac | default(false)
 
 - name: Remove fixed mac config
-  register: enableresolved
-  file:
+  register: restartnetworkd
+  ansible.builtin.file:
     path: "/etc/systemd/network/10-{{ interface.name }}.link"
     state: "absent"
   loop: "{{ networkd_interfaces }}"
   loop_control:
     loop_var: interface
-  when: not interface.fixed_mac | default(true)
+  when: not item.fixed_mac | default(true)
 
 - name: Directly restart networkd
-  service:
+  ansible.builtin.service:
     name: systemd-networkd
     state: restarted
-  when: enableresolved is changed
+  when: restartnetworkd is changed
 
 - name: Directly restart resolved
-  service:
+  ansible.builtin.service:
     name: systemd-resolved
     state: restarted
-  when: enableresolved is changed
+  when: restartresolved is changed

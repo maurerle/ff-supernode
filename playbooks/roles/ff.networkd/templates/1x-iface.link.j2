@@ -1,8 +1,8 @@
 [Match]
 # Match card's MAC address
-PermanentMACAddress={{ item.1.fixed_mac }}
+PermanentMACAddress={{ interface.fixed_mac }}
 
 [Link]
-Description={{ item.1.iface }}
+Description={{ interface.name }}
 # Rename interface with given MAC
-Name={{ item.1.iface }}
+Name={{ interface.name }}
