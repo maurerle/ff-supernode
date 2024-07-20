@@ -13,6 +13,7 @@
     - { name: ff.mesh_batman, tags: mesh_batman, become: true }
     - { name: ff.ipforward, tags: ipforward, become: true }
     - { name: ff.networkd, tags: networkd, become: true }
+    - { role: ff.backbone, tags: backbone, become: true }
     - { name: ff.mesh_wireguard, tags: mesh_wireguard, become: true }
     - { name: ff.mesh_wireguard_remotes_peers_git, tags: mesh_wireguard_remotes_peers_git, become: true }
     - { name: ff.radv_server, tags: radv_server, become: true }

@@ -7,7 +7,7 @@ all:
       ansible_user: ffac
     sn02:
       ansible_host: 02.wg-node.freifunk-aachen.de
-      ansible_user: debian
+      ansible_user: ffac
     monitor:
       ansible_host: monitor.freifunk-aachen.de
       ansible_user: ffac

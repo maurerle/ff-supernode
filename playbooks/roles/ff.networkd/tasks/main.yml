@@ -20,7 +20,7 @@
     reload: true
 
 - name: Obtain systemd version
-  ansible.builtin.command: "systemd --version | head -n 1 | cut -d ' ' -f 2"
+  ansible.builtin.shell: "systemd --version | head -n 1 | cut -d ' ' -f 2"
   register: systemd_version
   check_mode: false
   changed_when: false
