@@ -7,11 +7,14 @@ acl "xfer" {
 
 
 acl recursive_clients {
+	0.0.0.0/0;
+        ::/0;
 	127.0.0.1/32;
 	::1/128;
 	10.5.0.0/16;
 	10.145.0.0/16;
 	fe80::/64;
+	fdac::/64;
 	fda0:747e:ab29:acac::/64;
 	2a03:2260:114::/48;
 	2a03:2260:3006::/48;
@@ -51,7 +54,6 @@ options {
 {% endfor %}
 	};
 
-	// 2a03:2260:114::53; 2a03:2260:114::1; 2a03:2260:114:ac01::1; 2a03:2260:3006::53; 2a03:2260:3006::1;
 
 //	notify-source 5.61.84.134;
 //	notify-source-v6 2a00:5f40:1001:ffac::babe;
@@ -73,7 +75,8 @@ options {
 
 	auth-nxdomain no;    # conform to RFC1035
 
-	recursive-clients 2000;
+	recursive-clients 10000;
+	tcp-clients 1000;
 	max-cache-size 350M;
 	
 	allow-query {
