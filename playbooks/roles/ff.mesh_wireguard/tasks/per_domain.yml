@@ -56,7 +56,7 @@
 - name: "Generate networkd vxlan-server network (dom {{ domain.id }})"
   notify: Restart networkd
   template:
-    src: vxlan.conf.j2
+    src: vxlan-server.conf.j2
     dest: "/etc/systemd/network/30-{{ vxlan_iface_prefix }}-{{ domain.id }}-server.network"
 
 #### batman on top

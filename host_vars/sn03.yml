@@ -1,9 +1,9 @@
 ---
-servername: sn02
-sn: 02
+servername: sn03
+sn: 01
 
-public_ffrl_ipv4: "185.66.193.42/32"
-public_ffrl_ipv6: "2a03:2260:3006:200::/56"
+public_ffrl_ipv4: "185.66.193.45/32"
+public_ffrl_ipv6: "2a03:2260:3006:300::/56"
 # cloud-init config
 networkd_interfaces:
   - name: lo
@@ -20,10 +20,10 @@ networkd_interfaces:
       - from: "{{ public_ffrl_ipv6 }}"
         table: 42
   - name: eth0
-    fixed_mac: ee:fa:5b:e2:b4:68
+    fixed_mac: bc:24:11:cb:d3 :58
     addresses:
-      - 5.145.135.152/27
-      - 2a00:fe0:43::202/64
+      - 5.145.135.153/27
+      - 2a00:fe0:43::203/64
     gateway4: 5.145.135.129
     gateway6: 2a00:fe0:43::1
     dns_server:
@@ -52,7 +52,7 @@ networkd_interfaces:
       - 100.64.17.153/24
 
 bird:
-  router_id: 5.145.135.152
+  router_id: 5.145.135.153
   kernel:
     - is_ipv6: no
       ip_table: 42
@@ -118,7 +118,7 @@ bird:
     - name: reject_internal_prefixes_v6
       default_accept: yes
       rules:
-        - "if net ~ [2a00:fe0:43::/48+, 2a03:2260:3006:200::/56] then reject;"
+        - "if net ~ [2a00:fe0:43::/48+, 2a03:2260:3006:300::/56] then reject;"
     - name: accept_public_prefix_v6
       default_accept: no
       rules:
@@ -131,7 +131,7 @@ bird:
     - name: filter_kernel_v6
       default_accept: yes
       rules:
-        - "if net ~ [2a00:fe0:43::/48+, 2a03:2260:3006:200::/56{56,64}] then reject;"
+        - "if net ~ [2a00:fe0:43::/48+, 2a03:2260:3006:300::/56{56,64}] then reject;"
 
 client_dns_server_v4: 5.145.135.158
 client_dns_server_v6: 2a00:fe0:43::158
@@ -140,6 +140,6 @@ client_dns_server_v6: 2a00:fe0:43::158
 mesh_prefix: "2a03:2260:3006"
 radv_announce_default: true
 
-local_vxlan_supernode: 2a00:fe0:43::202
-remote_vxlan_supernode: 2a00:fe0:43::201
+#local_vxlan_supernode: 2a00:fe0:43::201
+#remote_vxlan_supernode: 2a00:fe0:43::202
 yanic_central: "true"

@@ -13,7 +13,6 @@
     mode: "0644"
     owner: "root"
     group: "root"
-  with_indexed_items: "{{ networkd_configures }}"
 
 - name: Start and enable iptables-forward service
   systemd:

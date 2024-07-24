@@ -48,23 +48,25 @@
 		"match-client-id": false,
 
 		"loggers": [
-		  {
-			"name": "kea-dhcp4",
-			"output_options": [{ "output": "syslog:dhcpd" }],
-			"severity": "WARN"
-		  },
-		  {
-			"name": "kea-dhcp4.packets",
-			"output_options": [{ "output": "/dev/null" }],
-			"severity": "WARN"
-		  }
+			{
+				"name": "kea-dhcp4",
+				"output_options": [{ "output": "syslog:dhcpd" }],
+				"severity": "WARN"
+			},
+			{
+				"name": "kea-dhcp4.packets",
+				"output_options": [{ "output": "/dev/null" }],
+				"severity": "WARN"
+			}
 		],
 
 		"option-data": [
+{% if dhcp_domain_name %}
 			{
 				"name": "domain-name",
 				"data": "{{ dhcp_domain_name }}"
 			},
+{% endif %}
 			{
 				"name": "interface-mtu",
 				"data": "1280"
@@ -75,6 +77,7 @@
 {% for domain in domains | default( [] ) %}
 			{
 				"interface": "bat{{ domain.id }}",
+				"id": {{sn}}{{domain.id}},
 				"subnet": "10.{{ domain.id }}.0.0/16",
 				"pools": [{ "pool":  "10.{{ domain.id }}.{{ (sn-1)*mesh_pool_size }}.20 - 10.{{ domain.id }}.{{ (sn*mesh_pool_size)-1 }}.254" }],
 				"option-data": [
