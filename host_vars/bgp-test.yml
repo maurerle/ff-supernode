@@ -107,3 +107,11 @@ bird:
       rules:
         - "if net ~ [2a00:fe0:43::/48+] then reject;"
         - "krt_prefsrc={{ public_ffrl_ipv6.split('/') | first }};"
+
+dns_v4_listen_addrs:
+  - 127.0.0.1
+  - 185.66.193.46
+
+dns_v6_listen_addrs:
+  - '::1'
+  - '2a03:2260:3006:a157::'

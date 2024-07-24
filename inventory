@@ -54,3 +54,4 @@ backbone:
 dns:
   hosts:
     dns01:
+    bgp-test:

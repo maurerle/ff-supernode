@@ -36,12 +36,6 @@
     owner: "bind"
     group: "bind"
 
-- name: enable bind9 service
-  systemd:
-    name: bind9.service
-    enabled: yes
-    state: started
-
 - name: update root.hints
   get_url:
     url: 'https://www.internic.net/domain/named.root'
@@ -85,6 +79,12 @@
     repo: 'https://github.com/freifunk/icvpn-scripts'
     dest: /opt/ff-icvpn/icvpn-scripts
     update: yes
+
+- name: enable bind9 service
+  systemd:
+    name: bind9.service
+    enabled: yes
+    state: started
 
 - name: reload bind9
   raw: /usr/sbin/rndc reload
