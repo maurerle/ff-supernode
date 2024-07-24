@@ -29,7 +29,6 @@ bird:
   router_id: 100.64.17.157
   kernel:
     - is_ipv6: no
-      ip_table: 42
       exports:
         - "filter filter_kernel_v4"
     - is_ipv6: yes
