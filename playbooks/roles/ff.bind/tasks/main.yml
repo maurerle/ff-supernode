@@ -9,6 +9,12 @@
     - bind9
     - bind9-dnsutils
 
+- name: Install named.conf
+  template:
+    src: named.conf
+    dest: /etc/bind/named.conf
+  register: bind9options
+
 - name: Install named.conf.options
   template:
     src: named.conf.options
@@ -19,6 +25,12 @@
   template:
     src: named.conf.local
     dest: /etc/bind/named.conf.local
+  register: bind9local
+
+- name: Install named.conf.zones
+  template:
+    src: named.conf.zones
+    dest: /etc/bind/named.conf.zones
   register: bind9local
 
 - name: Install zone key

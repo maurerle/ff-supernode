@@ -5,10 +5,7 @@ acl "xfer" {
 	none;
 };
 
-
-acl recursive_clients {
-	0.0.0.0/0;
-	::/0;
+acl recursive_internal {
 	127.0.0.1/32;
 	::1/128;
 	10.5.0.0/16;
@@ -23,6 +20,78 @@ acl recursive_clients {
 	5.145.135.128/27;
 	185.66.193.40/29;
 };
+
+acl recursive_external {
+	0.0.0.0/0;
+    ::/0;
+};
+
+view "internal" {
+    match-clients { recursive_internal; };
+
+	allow-query {
+		recursive_internal;
+	};
+
+	allow-query-cache {
+		recursive_internal;
+	};
+
+	allow-recursion {
+		recursive_internal;
+	};
+
+	allow-transfer {
+		none;
+	};
+
+	allow-update {
+		none;
+	};
+
+//    include "/etc/bind/named.conf.local";
+    include "/etc/bind/named.conf.default-zones";
+    include "/etc/bind/named.conf.zones";
+    include "/etc/bind/zones.rfc1918";
+};
+
+view "external" {
+    match-clients { recursive_external; };
+
+    rate-limit {
+        responses-per-second 5;
+        window 5;
+        slip 2;
+        max-table-size 200000;
+    };
+
+	allow-query {
+		recursive_external;
+	};
+
+	allow-query-cache {
+		recursive_external;
+	};
+
+	allow-recursion {
+		recursive_external;
+	};
+
+	allow-transfer {
+		none;
+	};
+
+	allow-update {
+		none;
+	};
+
+
+//    include "/etc/bind/named.conf.local";
+    include "/etc/bind/named.conf.default-zones";
+//    include "/etc/bind/named.conf.zones";
+    include "/etc/bind/zones.rfc1918";
+};
+
 
 options {
 	directory "/var/cache/bind";
@@ -79,24 +148,5 @@ options {
 	tcp-clients 1000;
 	max-cache-size 350M;
 	
-	allow-query {
-		recursive_clients;
-	};
-
-	allow-query-cache {
-		recursive_clients;
-	};
-
-	allow-recursion {
-		recursive_clients;
-	};
-
-	allow-transfer {
-		none;
-	};
-
-	allow-update {
-		none;
-	};
 
 };
