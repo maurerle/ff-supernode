@@ -98,6 +98,25 @@
     dest: /opt/ff-icvpn/icvpn-scripts
     update: yes
 
+- name: Install iptables.sh
+  template:
+    src: iptables.sh
+    dest: /usr/local/sbin/iptables.sh
+    mode: '0755'
+
+- name: Install iptables.sh.service
+  template:
+    src: iptables.sh.service
+    dest: /etc/systemd/system/iptables.sh.service
+    notify:
+      - reload systemctl
+
+- name: Enable iptables.sh.service
+  service:
+    name: iptables.sh.service
+    state: started
+    enabled: yes
+
 - name: reload bind9
   raw: /usr/sbin/rndc reload
   when: bind9options.changed or bind9local.changed
