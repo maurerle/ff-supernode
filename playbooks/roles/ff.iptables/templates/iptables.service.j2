@@ -6,7 +6,14 @@ After=network-online.target
 Type=oneshot
 
 ExecStart=echo "configuring NAT if needed"
+{% if bat_clamp_mss | default(False) %}
+ExecStart=iptables -A FORWARD -i bat+ -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1240
+ExecStart=ip6tables -A FORWARD -i bat+ -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1220
+{% endif %}
 {% for interface in networkd_interfaces | default([]) %}
+{% if interface.nat4_bgp | default(False) %}
+ExecStart=iptables -t nat -A POSTROUTING -s 10.0.0.0/8 -o {{ interface.name }} -j SNAT --to-source {{ public_ffrl_ipv4.split('/') | first }}
+{% endif %}
 {% if interface.nat4 | default(False) %}
 ExecStart=iptables -A POSTROUTING -o {{ interface.name }} -j MASQUERADE -t nat
 {% endif %}

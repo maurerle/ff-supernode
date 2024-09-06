@@ -2,7 +2,7 @@
 servername: sn02
 sn: 02
 
-public_ffrl_ipv4: "185.66.193.42/32"
+public_ffrl_ipv4: "185.66.193.44/32"
 public_ffrl_ipv6: "2a03:2260:3006:200::/56"
 # cloud-init config
 networkd_interfaces:
@@ -29,6 +29,7 @@ networkd_interfaces:
     dns_server:
       - 9.9.9.9
       - "2a03:2260:3006::53"
+    nat4_bgp: True
     nat4: False
     nat6: False
     static_routes:
@@ -48,8 +49,10 @@ networkd_interfaces:
       - from: "10.0.0.0/11"
         table: 42
   - name: ens19
+    nat4_bgp: True
     addresses:
-      - 100.64.17.153/24
+      - 100.64.17.152/24
+bat_clamp_mss: True
 
 bird:
   router_id: 5.145.135.152
