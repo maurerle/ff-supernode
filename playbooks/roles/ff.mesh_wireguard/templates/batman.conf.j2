@@ -21,7 +21,5 @@ Table=42
 Destination=fdac::/64
 Table=42
 [Route]
-# hop limit reached
-#Destination={{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::/64
-Destination={{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}00::/56
+Destination={{ mesh_prefix }}:{% if radv_sn_ipv6 %}{{sn}}{% else %}1{% endif %}{{ domain.id }}::/64
 Table=42
