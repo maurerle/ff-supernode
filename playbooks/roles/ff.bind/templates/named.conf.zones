@@ -1,0 +1,63 @@
+zone "ffac" IN {
+	type slave;
+	file "/var/cache/bind/ffac.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "nodes.ffac" IN {
+	type forward;
+	forwarders {
+		2a03:2260:114::101;
+		10.5.0.101;
+	};
+};
+
+zone "5.10.in-addr.arpa." IN {
+	type slave;
+	file "/var/cache/bind/ffac-rev.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "0.64.100.in-addr.arpa." IN {
+	type slave;
+	file "/var/cache/bind/ffbb-rev.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "65.100.in-addr.arpa." IN {
+	type slave;
+	file "/var/cache/bind/ffacbb-rev.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "4.1.1.0.0.6.2.2.3.0.a.2.ip6.arpa" IN {
+	type slave;
+	file "/var/cache/bind/ffac-rev6-0114.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "6.0.0.3.0.6.2.2.3.0.a.2.ip6.arpa" IN {
+	type slave;
+	file "/var/cache/bind/ffac-rev6-3006.zone";
+	masters { 
+		2001:470:746c:f102::53;
+	};
+};
+
+zone "1.0.c.a.4.1.1.0.0.6.2.2.3.0.a.2.ip6.arpa" IN {
+	type forward;
+	forwarders {
+		2a03:2260:114::b0b;
+		10.5.0.100;
+	};
+};

@@ -1,0 +1,124 @@
+---
+
+- name: Install bind9 and bind9-dnsutils
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - bind9
+    - bind9-dnsutils
+
+- name: Install named.conf
+  template:
+    src: named.conf
+    dest: /etc/bind/named.conf
+  register: bind9options
+
+- name: Install named.conf.options
+  template:
+    src: named.conf.options
+    dest: /etc/bind/named.conf.options
+  register: bind9options
+
+- name: Install named.conf.local
+  template:
+    src: named.conf.local
+    dest: /etc/bind/named.conf.local
+  register: bind9local
+
+- name: Install named.conf.zones
+  template:
+    src: named.conf.zones
+    dest: /etc/bind/named.conf.zones
+  register: bind9local
+
+- name: Install zone key
+  copy:
+    content: "{{ dns_zone_key }}"
+    dest: /etc/bind/rndc.key
+    mode: "0640"
+    owner: "bind"
+    group: "bind"
+
+- name: Ensure logging folder
+  file:
+    path: /var/log/named
+    state: directory
+    owner: "bind"
+    group: "bind"
+
+- name: enable bind9 service
+  systemd:
+    name: bind9.service
+    enabled: yes
+    state: started
+
+- name: update root.hints
+  get_url:
+    url: 'https://www.internic.net/domain/named.root'
+    dest: '/usr/share/dns/root.hints'
+    mode: 0644
+    backup: true
+
+- name: update root.hints.sig
+  get_url:
+    url: 'https://www.internic.net/domain/named.root.sig'
+    dest: '/usr/share/dns/root.hints.sig'
+    mode: 0644
+    backup: true
+
+- name: Create a directory ff-icvpn
+  ansible.builtin.file:
+    path: /opt/ff-icvpn
+    state: directory
+    mode: '0755'
+
+- name: Install ff-icvpn git-pull-hourly.sh
+  template:
+    src: git-pull-hourly.sh
+    dest: /opt/ff-icvpn/git-pull-hourly.sh
+    mode: '0777'
+
+- name: icvpn-cron
+  ansible.builtin.cron:
+    name: "icvpn update"
+    minute: "2"
+    job: "/opt/ff-icvpn/git-pull-hourly.sh"
+
+- name: icvpn-meta
+  ansible.builtin.git:
+    repo: 'https://github.com/freifunk/icvpn-meta'
+    dest: /opt/ff-icvpn/icvpn-meta
+    update: yes
+
+- name: icvpn-scripts
+  ansible.builtin.git:
+    repo: 'https://github.com/freifunk/icvpn-scripts'
+    dest: /opt/ff-icvpn/icvpn-scripts
+    update: yes
+
+- name: Install iptables.sh
+  template:
+    src: iptables.sh
+    dest: /usr/local/sbin/iptables.sh
+    mode: '0755'
+
+- name: Install iptables.sh.service
+  template:
+    src: iptables.sh.service
+    dest: /etc/systemd/system/iptables.sh.service
+    notify:
+      - reload systemctl
+
+- name: Enable iptables.sh.service
+  service:
+    name: iptables.sh.service
+    state: started
+    enabled: yes
+
+- name: reload bind9
+  raw: /usr/sbin/rndc reload
+  when: bind9options.changed or bind9local.changed
+
+

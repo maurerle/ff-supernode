@@ -26,6 +26,9 @@ all:
     bgp-test:
       ansible_host: 2a00:fe0:43::157
       ansible_user: ffac
+    dns01:
+      ansible_host: 5.145.135.158
+      ansible_user: ffac
 
 supernodes:
   hosts:
@@ -46,3 +49,7 @@ backbone:
     bb-b:
   children:
     bgp_clients:
+
+dns:
+  hosts:
+    dns01:
