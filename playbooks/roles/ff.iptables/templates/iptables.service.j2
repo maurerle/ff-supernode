@@ -7,8 +7,8 @@ Type=oneshot
 
 ExecStart=echo "configuring NAT if needed"
 {% if bat_clamp_mss | default(False) %}
-ExecStart=iptables -A FORWARD -i bat+ -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1240
-ExecStart=ip6tables -A FORWARD -i bat+ -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1220
+ExecStart=iptables -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1240
+ExecStart=ip6tables -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1220
 {% endif %}
 {% for interface in networkd_interfaces | default([]) %}
 {% if interface.nat4_bgp | default(False) %}
