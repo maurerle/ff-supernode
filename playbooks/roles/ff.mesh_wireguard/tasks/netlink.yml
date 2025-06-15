@@ -4,6 +4,9 @@
   file:
     path: /etc/wireguard
     state: directory
+    mode: "0650" 
+    owner: "root"
+    group: "systemd-network"    
 
 - name: Place netlink config
   template:

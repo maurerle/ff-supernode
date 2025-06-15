@@ -1,17 +1,17 @@
 ---
 
-- name: Allow other users to read /etc/wireguard
+- name: Ensure wireguard config directory
   file:
-    dest: /etc/wireguard
+    path: /etc/wireguard
     state: directory
-    owner: root
-    group: root
     mode: u=rwx,g=rx,o=rx
+    owner: "root"
+    group: "systemd-network" 
 
 - name: Create the peers directory
   file:
     state: directory
-    dest: /etc/wireguard/peers-wg
+    path: /etc/wireguard/peers-wg
     owner: auto
 
 - name: Clone the peers git
@@ -30,11 +30,6 @@
     mode:  u=rwx,g=r,o=r
     owner: auto
     group: auto
-
-# - name: Allow reloading the wireguard instance for user auto
-#   template:
-#     src: user-auto-reload-wireguard
-#     dest: /etc/sudoers.d/user-auto-reload-wireguard
 
 - name: Set git config regarding pull strategy for auto user
   git_config:

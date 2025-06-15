@@ -13,6 +13,14 @@
     update_cache: yes
     cache_valid_time: 3600
 
+- name: Ensure wireguard config directory
+  file:
+    path: /etc/wireguard
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: "root"
+    group: "systemd-network" 
+
 - name: Domain configs (supernode)
   include_tasks: per_domain.yml
   with_items: "{{domains}}"
