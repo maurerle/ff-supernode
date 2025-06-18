@@ -1,15 +1,15 @@
 ---
 
-- name: "Add ISC Kea repository key"
-  ansible.builtin.get_url:
-    url: https://dl.cloudsmith.io/public/isc/kea-2-6/gpg.63D408891D8B8D01.key
-    dest: /etc/apt/keyrings/isc-kea-cloudsmith.asc
-
-- name: "Add ISC Kea repository"
-  register: "iscrepositoryadded"
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/isc-kea-cloudsmith.asc] https://dl.cloudsmith.io/public/isc/kea-2-6/deb/debian {{ ansible_distribution_release }} main"
-    state: present
+- name: Add isc_kea repository to apt
+  deb822_repository:
+    name: isc_kea
+    types: deb
+    uris: https://dl.cloudsmith.io/public/isc/kea-2-6/deb/debian
+    suites: "{{ ansible_distribution_release }}"
+    components: main
+    architectures: amd64
+    signed_by: "https://dl.cloudsmith.io/public/isc/kea-2-6/gpg.63D408891D8B8D01.key"
+  register: iscrepositoryadded
 
 - name: "Update apt chache to get isc packages"
   apt:
