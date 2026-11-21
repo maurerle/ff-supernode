@@ -66,8 +66,11 @@
   register: device_pictures_clone
 
 - name: "Convert device pictures"
-  ansible.builtin.raw: "cd {{ device_pictures_source_dir }} && ./conversion-script.sh && rm -r /var/www/html/pictures-* && cp -rp pictures-* /var/www/html/"
+  ansible.builtin.shell:
+    cmd: ./conversion-script.sh && rm -rf /var/www/html/pictures-* && cp -rp pictures-* /var/www/html/
+    chdir: "{{ device_pictures_source_dir }}"
   when: device_pictures_clone is changed
+  changed_when: true
 
 - name: Create data directory
   ansible.builtin.file:
