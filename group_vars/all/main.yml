@@ -28,8 +28,64 @@ community_prefix: "gluon-ffac-"
 
 # meshviewer
 deprecation_enabled: true
-deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB Flash/32MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/\">dieser Post</a>'
-eol_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (8MB Flash/64MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://gluon.readthedocs.io/en/latest/releases/v2023.2.html#removed-hardware-support/\">dieser Post</a>'
+deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB Flash/32MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href="https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/">dieser Post</a>'
+eol_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (8MB Flash/64MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href="https://gluon.readthedocs.io/en/latest/releases/v2023.2.html#removed-hardware-support/">dieser Post</a>'
+
+# The meshviewer draws these charts itself from Grafana's HTTP API (faster and
+# sharper than the rendered images, and no load on the image renderer).
+# The queries are the ones behind the panels of the "Node" dashboard (uid
+# 000000002); the browser reaches the API through /_grafana on the map host.
+# uid of the influxdb datasource; ff.grafana provisions it with this uid, the
+# charts below query it
+grafana_datasource_uid: "d53caf40-22d6-44e3-a044-43f44f176b05"
+meshviewer_grafana_charts:
+  - name: Traffic
+    datasourceUid: "{{ grafana_datasource_uid }}"
+    datasourceType: influxdb
+    query: >-
+      SELECT non_negative_derivative(max("traffic.rx.bytes"), 1s) * 8 AS down,
+      non_negative_derivative(max("traffic.tx.bytes"), 1s) * 8 AS up
+      FROM "node" WHERE "nodeid" =~ /^$node$/ AND $timeFilter
+      GROUP BY time($interval) fill(null)
+    unitSuffix: "B/s"
+    href: "{{ grafana_url }}/d/000000002/node?var-node=$node&from=$from&to=$to"
+    series:
+      - { name: down, color: "#73BF69" }
+      - { name: up, color: "#F2495C", negate: true }
+  - name: Clients
+    datasourceUid: "{{ grafana_datasource_uid }}"
+    datasourceType: influxdb
+    query: >-
+      SELECT max("clients.total") AS Clients, max("clients.wifi24") AS "2.4 GHz",
+      max("clients.wifi5") AS "5 GHz"
+      FROM "node" WHERE "nodeid" =~ /^$node$/ AND $timeFilter
+      GROUP BY time($interval) fill(null)
+    href: "{{ grafana_url }}/d/000000002/node?var-node=$node&from=$from&to=$to"
+    series:
+      - { name: Clients, color: "#73BF69" }
+      - { name: "2.4 GHz", color: "#5794F2" }
+      - { name: "5 GHz", color: "#B877D9" }
+  - name: Airtime
+    datasourceUid: "{{ grafana_datasource_uid }}"
+    datasourceType: influxdb
+    query: >-
+      SELECT mean("airtime11g.chan_util") AS "2.4 GHz", mean("airtime11a.chan_util") AS "5 GHz"
+      FROM "node" WHERE "nodeid" =~ /^$node$/ AND $timeFilter
+      GROUP BY time($interval) fill(null)
+    unitSuffix: "%"
+    href: "{{ grafana_url }}/d/000000002/node?var-node=$node&from=$from&to=$to"
+    series:
+      - { name: "2.4 GHz", color: "#5794F2" }
+      - { name: "5 GHz", color: "#B877D9" }
+  - name: Uptime
+    datasourceUid: "{{ grafana_datasource_uid }}"
+    datasourceType: influxdb
+    query: 'SELECT mean("time.up")/86400 AS "Uptime (days)" FROM "node" WHERE "nodeid" =~ /^$node$/ AND $timeFilter GROUP BY time($interval) fill(null)'
+    format: ".1f"
+    unitSuffix: " d"
+    href: "{{ grafana_url }}/d/000000002/node?var-node=$node&from=$from&to=$to"
+    series:
+      - { name: "Uptime (days)", color: "#FF9830" }
 
 # vxlan ids may be generated using vx.py in scripts
 # ids are segment/domain

@@ -1,55 +1,67 @@
 ---
-- name: Clone meshviewer sources
-  ansible.builtin.git:
-    repo: https://github.com/freifunk/meshviewer
-    dest: "{{ meshviewer_source_dir }}"
-    version: "main"
-    accept_hostkey: true
-  register: repo_clone
-  failed_when:
-    - repo_clone.failed
-    - not 'Local modifications exist in the destination' in repo_clone.msg
-
-- name: Install dev dependencies of meshviewer
+- name: Ensure unzip
   ansible.builtin.apt:
     update_cache: true
-    name: "npm"
+    cache_valid_time: 3600
+    state: present
+    name: "unzip"
 
-- name: Check for package.json
-  ansible.builtin.stat:
-    path: "{{ meshviewer_source_dir }}/package.json"
-  register: packagejson
+- name: Read the installed meshviewer version
+  ansible.builtin.slurp:
+    src: "{{ meshviewer_download_dir }}/installed-version"
+  register: meshviewer_installed
+  failed_when: false
 
-- name: Create node_modules directory
-  ansible.builtin.file:
-    state: directory
-    dest: "{{ meshviewer_source_dir }}/node_modules"
+- name: Install the meshviewer release {{ meshviewer_version }}
+  when: >-
+    meshviewer_installed.content is not defined
+    or (meshviewer_installed.content | b64decode | trim) != meshviewer_version
+  block:
+    - name: Create meshviewer download directory
+      ansible.builtin.file:
+        state: directory
+        dest: "{{ meshviewer_download_dir }}"
+        mode: "0755"
 
-- name: Install meshviewer packages based on package.json with npm.
-  ansible.builtin.command: npm install
-  args:
-    chdir: "{{ meshviewer_source_dir }}"
-  when: packagejson.stat.exists
+    - name: Download meshviewer release {{ meshviewer_version }}
+      ansible.builtin.get_url:
+        url: "{{ meshviewer_release_url }}"
+        dest: "{{ meshviewer_download_dir }}/meshviewer-{{ meshviewer_version }}.zip"
+        checksum: "{{ meshviewer_checksum }}"
+        mode: "0644"
 
-- name: Run npm build
-  ansible.builtin.command: npm run build
-  args:
-    chdir: "{{ meshviewer_source_dir }}"
-  when: packagejson.stat.exists
-- name: "Copy build dir"
-  ansible.builtin.copy:
-    src: "{{ meshviewer_source_dir }}/build/"
-    dest: "/var/www/html/meshviewer"
-    remote_src: true
-    owner: "yanic"
-    group: "www-data"
+    - name: Remove the hashed assets of the previous build
+      ansible.builtin.file:
+        path: "{{ meshviewer_webroot }}/assets"
+        state: absent
+
+    - name: Unpack the meshviewer release build
+      ansible.builtin.unarchive:
+        src: "{{ meshviewer_download_dir }}/meshviewer-{{ meshviewer_version }}.zip"
+        dest: "{{ meshviewer_webroot }}"
+        remote_src: true
+
+    - name: Record the installed meshviewer version
+      ansible.builtin.copy:
+        content: "{{ meshviewer_version }}\n"
+        dest: "{{ meshviewer_download_dir }}/installed-version"
+        mode: "0644"
 
 - name: "Copy meshviewer config"
   ansible.builtin.template:
     src: "meshviewer_config.json.j2"
-    dest: "/var/www/html/meshviewer/config.json"
+    dest: "{{ meshviewer_webroot }}/config.json"
     owner: "www-data"
     group: "www-data"
+    mode: "0644"
+    # a config.json that does not parse leaves the map empty
+    validate: python3 -m json.tool %s
+
+- name: Deploy the map overlays
+  ansible.builtin.copy:
+    src: "geo/"
+    dest: "{{ meshviewer_webroot }}/geo/"
+    mode: "0644"
 
 - name: Clone picture sources
   ansible.builtin.git:
@@ -60,29 +72,62 @@
   register: device_pictures_clone
 
 - name: "Convert device pictures"
-  ansible.builtin.raw: "cd {{ device_pictures_source_dir }} && ./conversion-script.sh && rm -r /var/www/html/pictures-* && cp -rp pictures-* /var/www/html/"
+  ansible.builtin.shell:
+    cmd: ./conversion-script.sh && rm -rf /var/www/html/pictures-* && cp -rp pictures-* /var/www/html/
+    chdir: "{{ device_pictures_source_dir }}"
   when: device_pictures_clone is changed
+  changed_when: true
 
 - name: Create data directory
   ansible.builtin.file:
     state: directory
-    dest: "/var/www/html/meshviewer/data"
+    dest: "{{ meshviewer_webroot }}/data"
     owner: "yanic"
     group: "www-data"
 
-- name: "Copy graveyard script"
-  ansible.builtin.template:
-    src: "update-graveyard.sh"
-    dest: "/var/www/html/graveyard/update-graveyard.sh"
+- name: "Create the graveyard directory"
+  ansible.builtin.file:
+    path: "/var/www/html/graveyard"
+    state: directory
     owner: "www-data"
     group: "www-data"
+    mode: "0755"
 
-# TODO as user ffac
+- name: "Install the tools the graveyard script uses"
+  ansible.builtin.apt:
+    name:
+      - jq
+      - wget
+    state: present
+
+# outside the webroot: /graveyard/data serves /var/www/html/graveyard
+- name: "Copy graveyard script"
+  ansible.builtin.copy:
+    src: "update-graveyard.sh"
+    dest: "/usr/local/bin/update-graveyard.sh"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: "Remove the graveyard script from the webroot"
+  ansible.builtin.file:
+    path: "/var/www/html/graveyard/update-graveyard.sh"
+    state: absent
+
+- name: "Create an empty remove list if there is none"
+  ansible.builtin.copy:
+    content: "[]\n"
+    dest: "/home/ffac/removelist"
+    owner: "ffac"
+    group: "ffac"
+    mode: "0644"
+    force: false
+
 - name: Setup cronjob for graveyard update
   ansible.builtin.cron:
     name: graveyard
     user: "ffac"
-    job: "cd /home/ffac && ./update-graveyard.sh"
+    job: "cd /home/ffac && /usr/local/bin/update-graveyard.sh"
     minute: "0"
     hour: "5"
 
@@ -91,3 +136,5 @@
     src: /home/ffac/graveyard.json
     dest: /var/www/html/graveyard/meshviewer.json
     state: link
+    # the file is written by the cron job, so it does not exist on the first run
+    force: true
