@@ -139,7 +139,7 @@
     "devicePictures": "{{ device_pictures_url }}",
     "devicePicturesSource": "<a href='https://github.com/freifunk/device-pictures'>https://github.com/freifunk/device-pictures</a>",
     "devicePicturesLicense": "CC-BY-NC-SA 4.0",
-    "geo": {{ meshviewer_geo }},
+    "geo": {{ meshviewer_geo | to_json }},
     "linkList": [
     {
       "title": "Impressum & Datenschutz",

@@ -57,6 +57,12 @@
     # a config.json that does not parse leaves the map empty
     validate: python3 -m json.tool %s
 
+- name: Deploy the map overlays
+  ansible.builtin.copy:
+    src: "geo/"
+    dest: "{{ meshviewer_webroot }}/geo/"
+    mode: "0644"
+
 - name: Clone picture sources
   ansible.builtin.git:
     repo: https://github.com/freifunk/device-pictures

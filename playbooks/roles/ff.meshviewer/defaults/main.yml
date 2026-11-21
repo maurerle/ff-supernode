@@ -16,7 +16,8 @@ device_pictures_source_dir: "/home/{{ ansible_user }}/device-pictures"
 # served by the /pictures-svg location of ff.nginx from the converted pictures
 device_pictures_url: "/pictures-svg/{MODEL_NORMALIZED}.svg"
 
-meshviewer_geo: "[]"
+# list of overlay layers, rendered to json (see README)
+meshviewer_geo: []
 # group_vars swaps the two texts in the template on purpose: the upstream EOL
 # list holds the 4MB/32MB devices and the deprecation list the 8MB/64MB ones.
 deprecation_text: ""
