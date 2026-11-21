@@ -21,3 +21,14 @@ meshviewer_geo: "[]"
 # list holds the 4MB/32MB devices and the deprecation list the 8MB/64MB ones.
 deprecation_text: ""
 eol_text: ""
+
+# Client side charts read their values from Grafana's HTTP API instead of the
+# image renderer (faster and sharper, less load on Grafana). ff.nginx proxies
+# that API under /_grafana on the map host, so the requests stay same-origin and
+# need neither CORS on Grafana nor a connect-src entry (see proxy.conf). Links
+# into Grafana keep the absolute grafana_url.
+meshviewer_grafana_browser_url: "/_grafana"
+meshviewer_grafana_org_id: 1
+# Entries are passed to the config as "nodeCharts"; the list for this site lives
+# in group_vars. An empty list keeps only the rendered images.
+meshviewer_grafana_charts: []

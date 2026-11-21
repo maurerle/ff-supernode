@@ -11,6 +11,9 @@ deleteDatasources:
 datasources:
   # <string, required> name of the datasource. Required
 - name: ff
+  # pinned, so the uid the meshviewer config refers to survives a rebuilt
+  # instance; Grafana would otherwise invent a new one per database
+  uid: "{{ grafana_datasource_uid }}"
   type: influxdb
   url: "localhost{{ influxdb_bind_address }}"
   user: "{{ influxdb_username }}"

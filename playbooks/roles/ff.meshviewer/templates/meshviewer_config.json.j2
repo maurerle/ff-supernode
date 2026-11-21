@@ -107,34 +107,10 @@
     },
     "nodeInfos": [
       {
-        "name": "Clientstatistik",
-        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
-        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=1&var-node={NODE_ID}&var-nodetolink=&var-hostname=&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} - weitere Statistiken"
-      },
-      {
-        "name": "Trafficstatistik",
-        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
-        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=2&var-node={NODE_ID}&var-nodetolink=&var-hostname=&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} - weitere Statistiken"
-      },
-      {
-        "name": "Airtime",
-        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
-        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=5&var-node={NODE_ID}&var-nodetolink=&var-hostname=&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} - weitere Statistiken"
-      },
-      {
         "name": "Traffic Volume",
         "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
-        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=15&var-node={NODE_ID}&var-nodetolink=&var-hostname=&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} - weitere Statistiken"
-      },
-      {
-        "name": "Uptime",
-        "href": "{{ grafana_url }}/d/000000002/node?refresh=1m&orgId=1&var-node={NODE_ID}",
-        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=12&var-node={NODE_ID}&var-nodetolink=&var-hostname=&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
-        "title": "Knoten {NODE_ID} - weitere Statistiken"
+        "image": "{{ grafana_url }}/render/d-solo/000000002/node?panelId=22&var-node={NODE_ID}&var-nodetolink=&var-hostname=&from=now-7d&width=650&height=350&theme=light&_t={TIME}",
+        "title": "Knoten {NODE_ID} - Traffic pro Tag"
       }
     ],
     "linkInfos": [
@@ -155,7 +131,7 @@
     ],
 {% if meshviewer_grafana_charts | default([]) %}
     "grafana": {
-      "url": "{{ grafana_url }}",
+      "url": "{{ meshviewer_grafana_browser_url }}",
       "orgId": {{ meshviewer_grafana_org_id }}
     },
     "nodeCharts": {{ meshviewer_grafana_charts | to_nice_json(indent=4, sort_keys=false) }},
