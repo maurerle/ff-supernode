@@ -28,6 +28,13 @@
     dest: /etc/nginx/sites-available/proxy.conf
   notify: Reload nginx
 
+- name: Nginx proxy header snippet
+  ansible.builtin.template:
+    src: proxy-headers.conf
+    dest: /etc/nginx/snippets/proxy-headers.conf
+    mode: "0644"
+  notify: Reload nginx
+
 - name: Enable nginx sites config
   ansible.builtin.file:
     src: /etc/nginx/sites-available/proxy.conf
