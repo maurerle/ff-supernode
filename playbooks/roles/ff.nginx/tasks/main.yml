@@ -19,13 +19,13 @@
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
-  register: nginxconfig
+  notify: Reload nginx
 
 - name: Nginx sites config
   ansible.builtin.template:
     src: proxy.conf
     dest: /etc/nginx/sites-available/proxy.conf
-  register: nginxconfig
+  notify: Reload nginx
 
 - name: Enable nginx sites config
   ansible.builtin.file:
@@ -45,13 +45,13 @@
   become: true
   ansible.builtin.raw: make-ssl-cert generate-default-snakeoil # --force-overwrite
 
+# a failing test stops the play before the reload, so the running server keeps
+# its last good config
 - name: Test nginx config
-  become: true
-  ansible.builtin.raw: nginx -t
+  ansible.builtin.command: nginx -t
+  changed_when: false
 
-- name: Restart Nginx
-  ansible.builtin.systemd:
-    name: nginx.service
-    state: restarted
-    enabled: true
-  when: nginxconfig.changed
+# reload now, so the running server picks the config up even when a later role
+# in the play fails before the handlers would run
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

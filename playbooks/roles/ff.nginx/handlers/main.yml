@@ -1,0 +1,9 @@
+---
+
+# a reload keeps serving with the old config if the new one does not load;
+# the module starts nginx when it is not running
+- name: Reload nginx
+  ansible.builtin.systemd:
+    name: nginx.service
+    state: reloaded
+    enabled: true
