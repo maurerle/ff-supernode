@@ -85,19 +85,49 @@
     owner: "yanic"
     group: "www-data"
 
-- name: "Copy graveyard script"
-  ansible.builtin.template:
-    src: "update-graveyard.sh"
-    dest: "/var/www/html/graveyard/update-graveyard.sh"
+- name: "Create the graveyard directory"
+  ansible.builtin.file:
+    path: "/var/www/html/graveyard"
+    state: directory
     owner: "www-data"
     group: "www-data"
+    mode: "0755"
 
-# TODO as user ffac
+- name: "Install the tools the graveyard script uses"
+  ansible.builtin.apt:
+    name:
+      - jq
+      - wget
+    state: present
+
+# outside the webroot: /graveyard/data serves /var/www/html/graveyard
+- name: "Copy graveyard script"
+  ansible.builtin.copy:
+    src: "update-graveyard.sh"
+    dest: "/usr/local/bin/update-graveyard.sh"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: "Remove the graveyard script from the webroot"
+  ansible.builtin.file:
+    path: "/var/www/html/graveyard/update-graveyard.sh"
+    state: absent
+
+- name: "Create an empty remove list if there is none"
+  ansible.builtin.copy:
+    content: "[]\n"
+    dest: "/home/ffac/removelist"
+    owner: "ffac"
+    group: "ffac"
+    mode: "0644"
+    force: false
+
 - name: Setup cronjob for graveyard update
   ansible.builtin.cron:
     name: graveyard
     user: "ffac"
-    job: "cd /home/ffac && ./update-graveyard.sh"
+    job: "cd /home/ffac && /usr/local/bin/update-graveyard.sh"
     minute: "0"
     hour: "5"
 
@@ -106,3 +136,5 @@
     src: /home/ffac/graveyard.json
     dest: /var/www/html/graveyard/meshviewer.json
     state: link
+    # the file is written by the cron job, so it does not exist on the first run
+    force: true
