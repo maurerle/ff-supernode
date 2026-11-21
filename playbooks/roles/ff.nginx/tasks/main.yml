@@ -12,7 +12,8 @@
   vars:
     packages:
       - nginx-full
-      #      - nginx-extras
+      # the directory listings of the device pictures (fancyindex in proxy.conf)
+      - libnginx-mod-http-fancyindex
       - ssl-cert
 
 - name: Nginx config
