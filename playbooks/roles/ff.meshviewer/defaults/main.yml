@@ -1,5 +1,4 @@
 ---
-grafana_url: "https://stats.{{ dns_searchdomains }}"
 yanic_url: "./data/"
 
 # meshviewer is installed from the build artifact of an upstream release

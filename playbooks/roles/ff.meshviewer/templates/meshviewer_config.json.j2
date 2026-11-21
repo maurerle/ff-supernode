@@ -12,7 +12,8 @@
         "config": {
           "type": "osm",
           "maxZoom": 19,
-          "attribution": "<a href='https://github.com/freifunk/meshviewer/issues' target='_blank'>Report Bug</a> | Map data &copy; <a href\"http://openstreetmap.org\">OpenStreetMap</a> contributor",
+          "invertInDarkMode": true,
+          "attribution": "<a href='https://github.com/freifunk/meshviewer/issues' target='_blank'>Report Bug</a> | Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributor",
           "start": 10
         }
       },
@@ -22,7 +23,6 @@
         "config": {
           "maxZoom": 19,
           "start": 30,
-          "mode": "night",
           "attribution": "<a href=\"http://arcgis.com/\" target=\"_blank\">&copy; ArcGIS-Satellite</a> <a href=\"http://arcgis.com/about/\" target=\"_blank\">&copy; ArcGIS</a>"
         }
       },
@@ -31,6 +31,7 @@
         "url": "https://sgx.geodatenzentrum.de/gdz_basemapworld_vektor/styles/bm_web_wld_col.json",
         "type": "vector",
         "config": {
+          "invertInDarkMode": true,
           "attribution": "&copy; basemap.de / <a href='https://www.bkg.bund.de'>BKG</a> (2025) <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>; Datenquellen: &copy; GeoBasis-DE / <a href='https://www.bkg.bund.de'>BKG</a> (2025) <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>; außerhalb Deutschlands: &copy; <a href='https://www.openstreetmap.org/copyright'>Open Street Map Mitwirkende ODbL v. 1.0</a> ; © <a href='https://openmaptiles.org/'>OpenMapTiles</a>"
         }
       }
@@ -44,10 +45,6 @@
         50.7282,
         6.2164
       ]
-    ],
-    "siteNames": [
-      { "site": "Segment01", "name": "{{ freifunk_site }}" } ,
-      { "site": "site_default", "name": "Default" }
     ],
     "domainNames": [
       {
@@ -156,11 +153,16 @@
         "title": "Bild der Wochenstatistik"
       }
     ],
-    "hwImg": [
-    { "thumbnail": "https://map.aachen.freifunk.net/router-images/{MODEL_NORMALIZED}.svg",
-      "caption": "Knoten {MODEL_NORMALIZED}"
-    }
-    ],
+{% if meshviewer_grafana_charts | default([]) %}
+    "grafana": {
+      "url": "{{ grafana_url }}",
+      "orgId": {{ meshviewer_grafana_org_id }}
+    },
+    "nodeCharts": {{ meshviewer_grafana_charts | to_nice_json(indent=4, sort_keys=false) }},
+{% endif %}
+    "devicePictures": "{{ device_pictures_url }}",
+    "devicePicturesSource": "<a href='https://github.com/freifunk/device-pictures'>https://github.com/freifunk/device-pictures</a>",
+    "devicePicturesLicense": "CC-BY-NC-SA 4.0",
     "geo": {{ meshviewer_geo }},
     "linkList": [
     {

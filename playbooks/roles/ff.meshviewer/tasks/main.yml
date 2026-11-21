@@ -53,6 +53,9 @@
     dest: "{{ meshviewer_webroot }}/config.json"
     owner: "www-data"
     group: "www-data"
+    mode: "0644"
+    # a config.json that does not parse leaves the map empty
+    validate: python3 -m json.tool %s
 
 - name: Clone picture sources
   ansible.builtin.git:
