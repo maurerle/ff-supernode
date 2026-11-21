@@ -43,8 +43,9 @@
     - /etc/nginx/sites-available/default
 
 - name: Create Selfsigned-certs
-  become: true
-  ansible.builtin.raw: make-ssl-cert generate-default-snakeoil # --force-overwrite
+  ansible.builtin.command: make-ssl-cert generate-default-snakeoil
+  args:
+    creates: /etc/ssl/certs/ssl-cert-snakeoil.pem
 
 # a failing test stops the play before the reload, so the running server keeps
 # its last good config
