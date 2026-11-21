@@ -147,7 +147,7 @@
     }
     ],
 
-    "eol_text": "{{ deprecation_text }}",
-    "deprecation_text": "{{ eol_text }}",
-    "deprecation_enabled": {% if deprecation_enabled != "" %}true{% else %}false{% endif %}
+    "eol_text": {{ deprecation_text | to_json }},
+    "deprecation_text": {{ eol_text | to_json }},
+    "deprecation_enabled": {{ deprecation_enabled | bool | to_json }}
   }

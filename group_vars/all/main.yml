@@ -28,8 +28,8 @@ community_prefix: "gluon-ffac-"
 
 # meshviewer
 deprecation_enabled: true
-deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB Flash/32MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/\">dieser Post</a>'
-eol_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (8MB Flash/64MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href=\"https://gluon.readthedocs.io/en/latest/releases/v2023.2.html#removed-hardware-support/\">dieser Post</a>'
+deprecation_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (4MB Flash/32MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href="https://freifunk-aachen.de/2022/11/23/ausmusterung-altgeraete/">dieser Post</a>'
+eol_text: 'Dieses Gerät ist veraltet und wird nicht mehr lange unterstützt (8MB Flash/64MB RAM). Bitte erneuere dieses Gerät.</br>Weitere Infos beschreibt <a href="https://gluon.readthedocs.io/en/latest/releases/v2023.2.html#removed-hardware-support/">dieser Post</a>'
 
 # The meshviewer draws these charts itself from Grafana's HTTP API (faster and
 # sharper than the rendered images, and no load on the image renderer).

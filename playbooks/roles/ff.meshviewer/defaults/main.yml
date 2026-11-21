@@ -20,6 +20,7 @@ device_pictures_url: "/pictures-svg/{MODEL_NORMALIZED}.svg"
 meshviewer_geo: []
 # group_vars swaps the two texts in the template on purpose: the upstream EOL
 # list holds the 4MB/32MB devices and the deprecation list the 8MB/64MB ones.
+deprecation_enabled: false
 deprecation_text: ""
 eol_text: ""
 
